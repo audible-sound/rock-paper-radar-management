@@ -1,8 +1,10 @@
-# React + Vite
+# Rock Paper Radar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Please install node.js and npm [here](stalling-node-js-and-npm)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Running It
+```bash
+git clone https://github.com/TalonExe/rock-paper-radar
+cd rock-paper-radar
+npm run dev
+```
