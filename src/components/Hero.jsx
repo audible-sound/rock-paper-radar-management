@@ -7,7 +7,7 @@ import Posts from './Posts'
 
 const Hero = () => {
     return (
-        <div>
+        <div className='h-screen w-screen'>
             <Header
                 title={"Community"}
             />

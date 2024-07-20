@@ -5,7 +5,7 @@ import Hero from '../components/Hero'
 
 const PostsPage = () => {
     return (
-        <div className='flex flex-row w-screen h-screen' data-theme="light">
+        <div className='flex flex-row w-screen h-screen'>
             <Navbar />
             <Hero />
         </div>
