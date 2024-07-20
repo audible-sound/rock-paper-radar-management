@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from './ui/Header'
 import UtilsBar from './ui/UtilsBar'
-import Posts from './Posts'
+import Posts from './Posts/Posts'
 
 
 const Hero = () => {

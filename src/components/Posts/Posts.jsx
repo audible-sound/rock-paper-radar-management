@@ -1,5 +1,5 @@
 import React from 'react'
-import AuthorCard from './ui/AuthorCard'
+import AuthorCard from '../ui/AuthorCard'
 
 const Posts = () => {
     return (

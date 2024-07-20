@@ -2,11 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 import App from './App.jsx'
-import './index.css'
+import './assets/styles/index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import ErrorPage from './components/ErrorPage.jsx'
-import PostsPage from './pages/PostsPage.jsx'
+import ErrorPage from './components/Errors/ErrorPage.jsx'
+import PostsPage from './pages/PostsPage/PostsPage.jsx'
 
 const router = createBrowserRouter([
   {
