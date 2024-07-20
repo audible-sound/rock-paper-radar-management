@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const Navbar = () => {
     return (
-        <ul className="menu bg-base-100 rounded-box p-4">
+        <ul className="menu bg-base-100 rounded-box p-2">
             <li>
                 <a className="tooltip tooltip-right" data-tip="Home">
                     <svg
