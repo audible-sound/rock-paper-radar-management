@@ -1,16 +1,11 @@
-
-import Footer from "./components/Footer"
 import Hero from "./components/Hero"
 import Navbar from "./components/Navbar"
-import AuthorCard from "./components/ui/AuthorCard"
 
 function App() {
   return (
-    <main>
+    <main className="flex flex-row w-screen h-screen" data-theme="light">
       <Navbar />
       <Hero />
-      <Footer />
-      <AuthorCard />
     </main>
   )
 }
