@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Header = () => {
+const Header = ({ title }) => {
     return (
-        <div className='w-screen border-solid border-2 p-4 '>
-            <span>Content title</span>
+        <div className='w-screen border-solid border-2 p-6 '>
+            <span className='text-2xl'><b>{title}</b></span>
         </div>
     )
 }

@@ -8,7 +8,9 @@ import Posts from './Posts'
 const Hero = () => {
     return (
         <div>
-            <Header />
+            <Header
+                title={"Community"}
+            />
             <UtilsBar />
             <Posts />
         </div>
