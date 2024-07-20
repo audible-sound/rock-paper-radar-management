@@ -1,14 +1,14 @@
 import Navbar from '../Navbar'
 import ContentLayout from './ContentLayout'
 
-const UserLayout = ({ children, title }) => {
+const UserLayout = ({ children }) => {
     return (
-        <>
+        <div className="flex flex-row w-screen h-screen">
             <Navbar />
-            <ContentLayout title={title}>
+            <ContentLayout>
                 {children}
             </ContentLayout>
-        </>
+        </div>
 
     )
 }

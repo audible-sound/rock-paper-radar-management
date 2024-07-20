@@ -7,6 +7,7 @@ import './assets/styles/index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './components/Errors/ErrorPage.jsx'
 import PostsPage from './pages/PostsPage/PostsPage.jsx'
+import PersonalProfile from './pages/ProfilePage/PersonalProfile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
   {
     path: "/posts",
     element: <PostsPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/profile",
+    element: <PersonalProfile />,
     errorElement: <ErrorPage />
   }
 ])

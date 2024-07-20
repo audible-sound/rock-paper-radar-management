@@ -1,10 +1,8 @@
 import React from 'react'
-import Header from '../ui/Header'
 
-const ContentLayout = ({ children, title }) => {
+const ContentLayout = ({ children }) => {
     return (
-        <div>
-            <Header title={title} />
+        <div className='flex flex-col h-screen'>
             {children}
         </div>
     )
