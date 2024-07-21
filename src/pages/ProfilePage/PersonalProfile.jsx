@@ -7,6 +7,7 @@ const PersonalProfile = () => {
         <ProfileLayout>
             <Posts />
         </ProfileLayout>
+
     )
 }
 
