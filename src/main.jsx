@@ -5,10 +5,12 @@ import App from './App.jsx'
 import './assets/styles/index.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+
 import ErrorPage from './components/Errors/ErrorPage.jsx'
 import PostsPage from './pages/PostsPage/PostsPage.jsx'
 import PersonalProfile from './pages/ProfilePage/PersonalProfile.jsx'
 import PublicProfile from './pages/ProfilePage/PublicProfile.jsx'
+import WritePostPage from './pages/PostsPage/WritePostPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,8 +29,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/publicprofile",
+    path: "/profile-public",
     element: <PublicProfile />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/posts-create",
+    element: <WritePostPage />,
     errorElement: <ErrorPage />
   }
 ])

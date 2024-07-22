@@ -1,5 +1,6 @@
 import face from "../../assets/images/Lucas.jpg"
 import DotMenu from "../../assets/images/DotMenu.svg"
+import Badge from "./Badge";
 
 const AuthorCard = () => {
     return (
@@ -30,8 +31,8 @@ const AuthorCard = () => {
                     <img src={DotMenu} alt="" className="w-8" />
                 </div>
                 <div className="card-actions justify-start">
-                    <div className="badge badge-outline bg-[#EDE8F5] text-[#7091E6]">Fashion</div>
-                    <div className="badge badge-outline">Products</div>
+                    <Badge category="Fashion" />
+                    <Badge category="Polish" />
                 </div>
             </div>
         </div>
