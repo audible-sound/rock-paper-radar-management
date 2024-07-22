@@ -1,56 +1,32 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
+import Mapicon from '../assets/images/MapIcon.svg'
+import CalendarIcon from '../assets/images/CalendarIcon.svg'
+import face from "../assets/images/Lucas.jpg"
+
 
 const Navbar = () => {
     return (
-        <ul className="menu bg-base-100 rounded-box p-2">
+        <ul className="menu bg-base-100 rounded-box p-0 pt-8">
             <li>
-                <a className="tooltip tooltip-right" data-tip="Home">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                    </svg>
-                </a>
+                <Link to="/profile" className='tooltip tooltip-right pt-4 pb-4 ' data-tip="Profile">
+                    <div className='avatar'>
+                        <div className='ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2'>
+                            <img src={face} alt="" />
+                        </div>
+                    </div>
+                </Link>
             </li>
             <li>
-                <a className="tooltip tooltip-right" data-tip="Details">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </a>
+                <Link to="/posts" className="tooltip tooltip-right pt-2 pb-2" data-tip="Posts">
+                    <img src={Mapicon} alt="" className='w-8' />
+                </Link>
             </li>
             <li>
-                <a className="tooltip tooltip-right" data-tip="Stats">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                </a>
+                <Link className="tooltip tooltip-right pt-2 pb-2" data-tip="Calendar">
+                    <img src={CalendarIcon} alt="" className='w-10' />
+                </Link>
             </li>
         </ul>
     )
