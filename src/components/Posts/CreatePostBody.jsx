@@ -7,8 +7,6 @@ import Badge from '../ui/Badge'
 
 import Lucas from '../../assets/images/Lucas.jpg'
 
-//spit into 3 component
-
 const CreatePostBody = () => {
     return (
         <div className='flex flex-col w-full h-full'>

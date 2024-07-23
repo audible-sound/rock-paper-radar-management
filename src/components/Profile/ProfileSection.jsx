@@ -6,7 +6,7 @@ import EditLogo from "../../assets/images/EditLogo.svg"
 
 const ProfileSection = () => {
     return (
-        <div className='flex flex-col bg-white w-[94.3]'>
+        <div className='flex flex-col bg-white w-full'>
             <img src={profimg} alt="" className='object-cover h-32 min-w-0' />
             <div className='flex flex-row items-center justify-between p-4'>
                 <div className='flex flex-row items-center'>
