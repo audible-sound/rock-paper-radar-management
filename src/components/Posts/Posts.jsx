@@ -7,7 +7,7 @@ const Posts = () => {
     return (
         <div>
             <UtilsBar />
-            <div className='flex flex-wrap justify-items-start p-4 bg-[#EDE8F5] bg-opacity-50 w-full h-screen'>
+            <div className='grid grid-cols-4 bg-opacity-50 '>
                 <AuthorCard />
                 <AuthorCard />
                 <AuthorCard />

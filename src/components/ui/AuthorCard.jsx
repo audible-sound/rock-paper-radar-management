@@ -4,7 +4,7 @@ import Badge from "./Badge";
 
 const AuthorCard = () => {
     return (
-        <div className="card bg-base-100 w-[22.7rem] m-2 shadow-xl h-fit ">
+        <div className="card bg-base-100 mx-8 mt-4 shadow-xl h-fit ">
             <figure>
                 <img
                     src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
