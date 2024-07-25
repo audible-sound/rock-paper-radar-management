@@ -32,7 +32,7 @@ const Navbar = () => {
             </ul>
             <ul className='menu bg-base-100 rounded-box p-0'>
                 <li>
-                    <Link to="/signup" className='tooltip tooltip-right pt-2 pb-2 mb-8' data-tip="Log Out">
+                    <Link to="/signin" className='tooltip tooltip-right pt-2 pb-2 mb-8' data-tip="Log Out">
                         <img src={logoutIcon} alt="" className='w-10' />
                     </Link>
                 </li>
