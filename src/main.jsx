@@ -13,6 +13,7 @@ import PublicProfile from './pages/ProfilePage/PublicProfile.jsx'
 import WritePostPage from './pages/PostsPage/WritePostPage.jsx'
 import SignInPage from './pages/SignInPage/SignInPage.jsx'
 import SignUpPage from './pages/SignInPage/SignUpPage.jsx'
+import ViewPostPage from './pages/PostsPage/ViewPostPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignUpPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/post-view",
+    element: <ViewPostPage />,
     errorElement: <ErrorPage />
   }
 ])

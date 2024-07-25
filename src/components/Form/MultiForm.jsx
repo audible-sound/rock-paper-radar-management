@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SignInForm from './SignInForm'
 import PersonalForm from './PersonalForm'
 import { Link } from 'react-router-dom'
@@ -6,12 +6,13 @@ import { Link } from 'react-router-dom'
 const MultiForm = () => {
     const [page, setPage] = useState(0)
     const [formData, setFormData] = useState({
-        email: "",
+        username: "",
         password: "",
-        confirmPassword: "",
-        firstName: "",
-        lastName: "",
-        username: ""
+        email: "",
+        birthDate: "",
+        gender: "",
+        country: "",
+        phoneNumber: ""
     });
 
     const FormTitles = ["Sign Up", "Personal Information"]
@@ -56,7 +57,7 @@ const MultiForm = () => {
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </Link>
                 </div>
-                <div className="w-full flex flex-col items-center my-6">
+                <div className="max-w-[300px] w-full flex flex-col items-center my-6">
 
                     <div className="w-full flex items-center justify-center py-2 my-4">
                         <div className="w-full h-[1px] bg-black/40"></div>
@@ -65,7 +66,7 @@ const MultiForm = () => {
                         </p>
                     </div>
 
-                    <Link to="/signin" className="w-fit text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center flex items-center justify-center">
+                    <Link to="/signin" className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center flex items-center justify-center">
                         Sign In
                     </Link>
 

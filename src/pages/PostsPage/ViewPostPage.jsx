@@ -1,10 +1,14 @@
 import React from 'react'
+import ViewPostBody from '../../components/Posts/ViewPostBody'
+import UserLayout from '../../components/Layouts/UserLayout'
+import Header from '../../components/ui/Header'
 
 const ViewPostPage = () => {
   return (
-    <div>
-
-    </div>
+    <UserLayout>
+      <Header title="Post" />
+      <ViewPostBody />
+    </UserLayout>
   )
 }
 
