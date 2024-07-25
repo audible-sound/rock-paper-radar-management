@@ -11,6 +11,8 @@ import PostsPage from './pages/PostsPage/PostsPage.jsx'
 import PersonalProfile from './pages/ProfilePage/PersonalProfile.jsx'
 import PublicProfile from './pages/ProfilePage/PublicProfile.jsx'
 import WritePostPage from './pages/PostsPage/WritePostPage.jsx'
+import SignInPage from './pages/SignInPage/SignInPage.jsx'
+import SignUpPage from './pages/SignInPage/SignUpPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,16 @@ const router = createBrowserRouter([
   {
     path: "/posts-create",
     element: <WritePostPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/signin",
+    element: <SignInPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/signup",
+    element: <SignUpPage />,
     errorElement: <ErrorPage />
   }
 ])

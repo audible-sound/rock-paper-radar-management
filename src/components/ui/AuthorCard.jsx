@@ -2,19 +2,19 @@ import face from "../../assets/images/Lucas.jpg"
 import DotMenu from "../../assets/images/DotMenu.svg"
 import Badge from "./Badge";
 
-const AuthorCard = () => {
+const AuthorCard = ({ image, title, description, username, date, tags }) => {
     return (
         <div className="card bg-base-100 mx-8 mt-4 shadow-xl h-fit ">
             <figure>
                 <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                    src={image}
                     alt="Shoes" />
             </figure>
             <div className="card-body">
                 <h2 className="card-title">
-                    Shoes!
+                    {title}
                 </h2>
-                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <p>{description}</p>
                 <div className="flex flex-row justify-between items-center">
                     <div className="flex flex-row items-center">
                         <div className='avatar'>
@@ -23,16 +23,18 @@ const AuthorCard = () => {
                             </div>
                         </div>
                         <div className="flex flex-col">
-                            <span className="text-sm ">Name</span>
-                            <span className="text-sm text-[#ABABAB]">Date of post</span>
+                            <span className="text-sm ">{username}</span>
+                            <span className="text-sm text-[#ABABAB]">{date}</span>
                         </div>
                     </div>
 
                     <img src={DotMenu} alt="" className="w-8" />
                 </div>
                 <div className="card-actions justify-start">
-                    <Badge category="Fashion" />
-                    <Badge category="Polish" />
+                    {tags.map((tag) => {
+                        return <Badge category={tag} />
+                    }
+                    )}
                 </div>
             </div>
         </div>
