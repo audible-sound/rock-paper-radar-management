@@ -29,6 +29,7 @@ const MultiForm = () => {
             <div className='mb-20'>
                 <ul className="steps">
                     {FormTitles.map((title) => {
+
                         return <li className="step step-primary text-wrap">{title}</li>
                     }
                     )}
@@ -55,16 +56,16 @@ const MultiForm = () => {
                         {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </Link>
                 </div>
-                <div className="w-full flex flex-col my-6">
+                <div className="w-full flex flex-col items-center my-6">
 
                     <div className="w-full flex items-center justify-center py-2 my-4">
                         <div className="w-full h-[1px] bg-black/40"></div>
-                        <p className="text-xs absolute text-black/80 bg-white px-2">
+                        <p className="text-xs absolute text-black/80 bg-[#f5f5f5] px-2">
                             Already Have An Account?
                         </p>
                     </div>
 
-                    <Link to="/signin" className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center fle x items-center justify-center">
+                    <Link to="/signin" className="w-fit text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center flex items-center justify-center">
                         Sign In
                     </Link>
 
