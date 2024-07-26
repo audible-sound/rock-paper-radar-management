@@ -2,11 +2,12 @@ import face from "../../assets/images/Lucas.jpg"
 import DotMenu from "../../assets/images/DotMenu.svg"
 import Badge from "./Badge";
 import { Link } from "react-router-dom";
+import ReadMore from "./ReadMore";
 
 const AuthorCard = ({ image, title, description, username, date, tags }) => {
     return (
         <Link to="/post-view">
-            <div className="card bg-base-100 mx-8 mt-4 shadow-xl h-fit">
+            <div className="card bg-base-100 mx-8 mt-4 shadow-xl max-h-[500px]">
                 <figure>
                     <img
                         src={image}
@@ -16,7 +17,7 @@ const AuthorCard = ({ image, title, description, username, date, tags }) => {
                     <h2 className="card-title">
                         {title}
                     </h2>
-                    <p>{description}</p>
+                    <ReadMore>{description}</ReadMore>
                     <div className="flex flex-row justify-between items-center">
                         <div className="flex flex-row items-center">
                             <div className='avatar'>

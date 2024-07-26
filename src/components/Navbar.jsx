@@ -7,17 +7,6 @@ import face from "../assets/images/Lucas.jpg"
 import logoutIcon from '../assets/images/LogoutIcon.svg'
 
 const Navbar = () => {
-    const [scroll, setScroll] = useState(0)
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll)
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
-
-    const handleScroll = () => {
-        setScroll(window.scrollY)
-    }
-
 
     return (
         <div className='flex flex-col h-full'>

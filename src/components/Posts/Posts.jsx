@@ -14,7 +14,24 @@ const Posts = () => {
         date: "12/3/2028",
         tags: ["Fashion", "Bitcoin", "Macademia", "Sunshine", "Rainbows"],
         link: ""
-    }]
+    }, {
+        image: bg,
+        title: "the walk of faith",
+        description: "lorem ipsum dfe efsfdafasfa sdfas fsafsdfas dssdfsf",
+        username: "Lucas Monroe",
+        date: "12/3/2028",
+        tags: ["Fashion", "Bitcoin", "Macademia", "Sunshine", "Rainbows"],
+        link: ""
+    }, {
+        image: bg,
+        title: "the walk of faith",
+        description: "lorem ipsum dfe efsfdafasfa sdfas fsafsdfas dssdfsf",
+        username: "Lucas Monroe",
+        date: "12/3/2028",
+        tags: ["Fashion", "Bitcoin", "Macademia", "Sunshine", "Rainbows"],
+        link: ""
+    },
+    ]
 
 
     return (
