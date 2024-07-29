@@ -15,27 +15,27 @@ import TravelItenary from "./pages/TravelPage/TravelItenary.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
+    path: "/user",
+    element: <SignInPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/posts",
+    path: "/user/posts",
     element: <PostsPage />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/profile",
+    path: "/user/profile",
     element: <PersonalProfile />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/profile-public",
+    path: "/user/profile-public",
     element: <PublicProfile />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/posts-create",
+    path: "/user/post-create",
     element: <WritePostPage />,
     errorElement: <ErrorPage />,
   },

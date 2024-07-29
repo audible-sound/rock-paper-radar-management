@@ -15,15 +15,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      animation: {
-        move: "move 5s linear infinite",
-      },
-      keyframes: {
-        move: {
-          "0%": { transform: "translateX(-200px)" },
-          "100%": { transform: "translateX(200px)" },
-        },
-      },
+      backgroundImage: {
+        'sign-in-bg': "url('/src/assets/images/signInBg.jpg')",
+      }
     },
   },
   plugins: [
