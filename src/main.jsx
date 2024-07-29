@@ -15,6 +15,7 @@ import SignUpPage from './pages/User/SignInPage/SignUpPage.jsx'
 import ViewPostPage from './pages/User/PostsPage/ViewPostPage.jsx'
 import BlogPage from './pages/Admin/BlogPage/BlogPage.jsx'
 import WriteBlogPage from './pages/Admin/BlogPage/WriteBlogPage.jsx'
+import MapPage from './pages/User/TravelPage/MapPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "/user/posts-create",
+    path: "/user/post-create",
     element: <WritePostPage />,
     errorElement: <ErrorPage />
   },
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/user/map-view",
-    element: <ViewPostPage />,
+    element: <MapPage />,
     errorElement: <ErrorPage />
   },
   {
