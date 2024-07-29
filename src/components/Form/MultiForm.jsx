@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -11,7 +11,6 @@ const MultiForm = () => {
         console.log(data);
     }
     const [page, setPage] = useState(0)
-    const [signState, setSignState] = useState(false)
 
     const FormTitles = ["Sign Up", "Personal Information"]
 
@@ -30,7 +29,7 @@ const MultiForm = () => {
                     <ul className="steps">
                         {FormTitles.map((title) => {
 
-                            return <li className="step step-primary text-wrap">{title}</li>
+                            return <li key={title} className="step step-primary text-wrap">{title}</li>
                         }
                         )}
                     </ul>
@@ -57,7 +56,7 @@ const MultiForm = () => {
                                     className='btn max-w-28'
                                     onClick={() => {
                                         if (page == 0) {
-                                            signInForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setSignState(res))
+                                            signInForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1 ) : setPage(page))
                                         }
                                     }}
                                     value={page == FormTitles.length - 1 ? "Submit" : "Next"} /> :
@@ -66,15 +65,13 @@ const MultiForm = () => {
                                     className='btn min-w-28'
                                     onClick={() => {
                                         if (page == 0) {
-                                            signInForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setSignState(res))
-                                        }
+                                            signInForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setPage(page))
+                                    }
                                     }
                                     }
                                 >{page == FormTitles.length - 1 ? "Submit" : "Next"}</a>
 
                         }
-
-
                     </div>
                     <div className="max-w-[300px] w-full flex flex-col items-center my-6">
 

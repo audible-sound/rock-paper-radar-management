@@ -6,7 +6,7 @@ import ReadMore from "./ReadMore";
 
 const AuthorCard = ({ image, title, description, username, date, tags }) => {
     return (
-        <Link to="/post-view">
+        <Link to="/user/post-view">
             <div className="card bg-base-100 mx-8 mt-4 shadow-xl max-h-[500px]">
                 <figure>
                     <img
@@ -35,7 +35,7 @@ const AuthorCard = ({ image, title, description, username, date, tags }) => {
                     </div>
                     <div className="card-actions justify-start">
                         {tags.map((tag) => {
-                            return <Badge category={tag} />
+                            return <Badge category={tag} key={tag} />
                         }
                         )}
                     </div>

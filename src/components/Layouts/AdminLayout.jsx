@@ -1,10 +1,10 @@
-import Navbar from '../Navigation/Navbar'
+import AdminNavbar from '../Navigation/AdminNavbar'
 import ContentLayout from './ContentLayout'
 
-const UserLayout = ({ children }) => {
+const AdminLayout = ({ children }) => {
     return (
         <div className="flex flex-row w-full h-dvh scrollbar-hidden ">
-            <Navbar />
+            <AdminNavbar />
             <ContentLayout>
                 {children}
             </ContentLayout>
@@ -13,4 +13,4 @@ const UserLayout = ({ children }) => {
     )
 }
 
-export default UserLayout
+export default AdminLayout

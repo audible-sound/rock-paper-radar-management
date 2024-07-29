@@ -1,4 +1,3 @@
-import React from 'react'
 import Lucas from '../../assets/images/Lucas.jpg'
 import Wavy from '../../assets/images/Wavy-pic.jpg'
 import Badge from '../ui/Badge'
@@ -7,7 +6,7 @@ import DotMenu from "../../assets/images/DotMenu.svg"
 
 const ViewPostBody = () => {
     return (
-        <div className='flex flex-col w-full h-full'>
+        <div className='flex flex-col w-full h-full bg-white'>
             <div className='flex flex-row items-center border-solid border-2 px-8 py-2'>
                 <div className="avatar">
                     <div className="ring-primary ring-offset-base-100 w-14 h-14 rounded-full ring ring-offset-2">

@@ -1,4 +1,3 @@
-import React from 'react'
 import profimg from "../../assets/images/Wavy-pic.jpg"
 import face from "../../assets/images/Lucas.jpg"
 import DotMenu from "../../assets/images/DotMenu.svg"

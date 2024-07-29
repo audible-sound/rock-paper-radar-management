@@ -1,11 +1,4 @@
-import React from "react";
 import { Link } from 'react-router-dom'
-
-const colors = {
-  primary: "#060606",
-  background: "#f5f5f5",
-  disbaled: "#D9D9D9",
-};
 
 const SignInPage = () => {
   return (
@@ -46,17 +39,17 @@ const SignInPage = () => {
           </div>
 
           <div className="w-full flex flex-col my-6">
-            <Link to="/profile" className="w-full text-white my-2 bg-[#7091E6] font-semibold rounded-md p-2 text-center fle x items-center justify-center cursor-pointer hover:bg-[#7091E6] active:bg-violet-700 focus:outline-none">
+            <Link to="/user/profile" className="w-full text-white my-2 bg-[#7091E6] font-semibold rounded-md p-2 text-center fle x items-center justify-center cursor-pointer hover:bg-[#7091E6] active:bg-violet-700 focus:outline-none">
               Sign In
             </Link>
             <div className="w-full flex items-center justify-center py-2 my-4">
               <div className="w-full h-[1px] bg-black/40"></div>
               <p className="text-xs absolute text-black/80 bg-white px-2">
-                Don't Have An Account?
+                {"Don't Have An Account?"}
               </p>
             </div>
 
-            <Link to="/signup" className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center fle x items-center justify-center">
+            <Link to="/user/signup" className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center fle x items-center justify-center">
               Sign Up
             </Link>
           </div>

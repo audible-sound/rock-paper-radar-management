@@ -1,12 +1,5 @@
-import React from "react";
-import { Link } from 'react-router-dom'
-import MultiForm from "../../components/Form/MultiForm";
 
-const colors = {
-  primary: "#060606",
-  background: "#f5f5f5",
-  disbaled: "#D9D9D9",
-};
+import MultiForm from "../../../components/Form/MultiForm";
 
 const SignUpPage = () => {
   return (

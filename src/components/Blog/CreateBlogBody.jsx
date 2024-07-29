@@ -1,12 +1,12 @@
-import Input from '../ui/Input'
-import SearchInput from '../ui/SearchInput'
-import FileInput from '../ui/FileInput'
-import Select from '../ui/Select'
-import Badge from '../ui/Badge'
-
+import Badge from "../ui/Badge"
+import FileInput from "../ui/FileInput"
+import Input from "../ui/Input"
+import SearchInput from "../ui/SearchInput"
+import Select from "../ui/Select"
 import Lucas from '../../assets/images/Lucas.jpg'
 
-const CreatePostBody = () => {
+
+const CreateBlogBody = () => {
     return (
         <div className='flex flex-col w-full h-full'>
             <div className='flex flex-row justify-between items-center bg-white border-solid border-2 px-8 py-2'>
@@ -68,4 +68,4 @@ const CreatePostBody = () => {
     )
 }
 
-export default CreatePostBody
+export default CreateBlogBody

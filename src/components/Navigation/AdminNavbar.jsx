@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import Mapicon from '../assets/images/MapIcon.svg'
-import CalendarIcon from '../assets/images/CalendarIcon.svg'
-import face from "../assets/images/Lucas.jpg"
-import logoutIcon from '../assets/images/LogoutIcon.svg'
+import Mapicon from '../../assets/images/MapIcon.svg'
+import CalendarIcon from '../../assets/images/CalendarIcon.svg'
+import face from "../../assets/images/Lucas.jpg"
+import logoutIcon from '../../assets/images/LogoutIcon.svg'
 
 const Navbar = () => {
 
