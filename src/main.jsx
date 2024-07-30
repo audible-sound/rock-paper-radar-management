@@ -53,6 +53,94 @@ const router = createBrowserRouter([
     element: <TravelItenary />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/user/signin",
+    element: <SignInPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/user/signup",
+    element: <SignUpPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/user/post-view",
+    element: <ViewPostPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/user/map-view",
+    element: <MapPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin",
+    element: <SignInPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/dashboard",
+    element: <PostsPage />,
+    errorElement: <ErrorPage />
+  },{
+    path: "/admin/dashboard-users",
+    element: <PostsPage />,
+    errorElement: <ErrorPage />
+  },{
+    path: "/admin/dashboard-bans",
+    element: <PostsPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/dashboard-accounts",
+    element: <PostsPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/dashboard-posts",
+    element: <PostsPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/blogs",
+    element: <BlogPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/blog-view",
+    element: <PublicProfile />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/blog-create",
+    element: <WriteBlogPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/signin",
+    element: <SignInPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/staff-view",
+    element: <SignUpPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/staff-create",
+    element: <ViewPostPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/user-guide",
+    element: <SignUpPage />,
+    errorElement: <ErrorPage />
+  },
+  {
+    path: "/admin/user-guide-create",
+    element: <ViewPostPage />,
+    errorElement: <ErrorPage />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
