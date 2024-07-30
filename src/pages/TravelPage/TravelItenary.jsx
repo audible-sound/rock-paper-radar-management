@@ -1,17 +1,16 @@
 import React from "react";
-import AuthorCard from "../../components/ui/AuthorCard";
 import Header from "../../components/ui/Header";
-import UtilsBar from "../../components/ui/UtilsBar";
+import UserLayout from "../../components/Layouts/UserLayout";
+import TravelList from "../../components/Travel/TravelList";
 
 const TravelItenary = () => {
   return (
-    <div>
-      <UtilsBar />
-      <Header />
-      <div className="grid grid-cols-4 bg-opacity-50 ">
-        <AuthorCard />
-      </div>
-    </div>
+    <UserLayout>
+            <Header>
+                <span className='text-2xl'><b>Posts</b></span>
+            </Header>
+            <TravelList />
+        </UserLayout>
   );
 };
 
