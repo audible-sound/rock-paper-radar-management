@@ -47,7 +47,7 @@ const MultiForm = () => {
                                     className='btn max-w-28'
                                     onClick={() => {
                                         if (page == 0) {
-                                            signUpForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setPage(page))
+                                            signUpForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1 ) : setPage(page))
                                         }
                                     }}
                                     value={page == FormTitles.length - 1 ? "Submit" : "Next"} /> :
@@ -57,7 +57,7 @@ const MultiForm = () => {
                                     onClick={() => {
                                         if (page == 0) {
                                             signUpForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setPage(page))
-                                        }
+                                    }
                                     }
                                     }
                                 >{page == FormTitles.length - 1 ? "Submit" : "Next"}</a>

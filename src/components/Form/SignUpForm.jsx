@@ -1,10 +1,9 @@
-import React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 
 
 const SignUpForm = () => {
-  const { register, formState: { errors }, handleSubmit } = useFormContext()
+  const { register, formState: { errors } } = useFormContext()
   return (
     <div className="w-full flex flex-col max-w-[300px] justify-center items-center">
       <div className="w-full flex flex-col">
