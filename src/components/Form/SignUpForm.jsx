@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 
 
-const SignInForm = () => {
+const SignUpForm = () => {
   const { register, formState: { errors }, handleSubmit } = useFormContext()
   return (
     <div className="w-full flex flex-col max-w-[300px] justify-center items-center">
@@ -40,4 +40,4 @@ const SignInForm = () => {
   )
 }
 
-export default SignInForm
+export default SignUpForm

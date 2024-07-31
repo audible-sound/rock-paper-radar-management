@@ -2,11 +2,11 @@ import  { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import SignInForm from './SignInForm'
+import SignUpForm from './SignUpForm'
 import PersonalForm from './PersonalForm'
 
 const MultiForm = () => {
-    const signInForm = useForm()
+    const signUpForm = useForm()
     const onSubmit = (data) => {
         console.log(data);
     }
@@ -16,24 +16,15 @@ const MultiForm = () => {
 
     const PageDisplay = () => {
         if (page === 0) {
-            return <SignInForm />;
+            return <SignUpForm />;
         } else if (page === 1) {
             return <PersonalForm />;
         }
     }
 
     return (
-        <FormProvider {...signInForm}>
-            <form className='w-2/3 h-full bg-[#f5f5f5] flex flex-col p-20 justify-center items-center' onSubmit={signInForm.handleSubmit(onSubmit)}>
-                <div className='mb-20'>
-                    <ul className="steps">
-                        {FormTitles.map((title) => {
-
-                            return <li key={title} className="step step-primary text-wrap">{title}</li>
-                        }
-                        )}
-                    </ul>
-                </div>
+        <FormProvider {...signUpForm}>
+            <form className='w-[45%] h-full bg-[#f5f5f5]' onSubmit={signUpForm.handleSubmit(onSubmit)}>
                 <div className='flex flex-col justify-center items-center w-full'>
                     <div className="w-full flex flex-col justify-center items-center mb-2">
                         <h3 className="text-center text-5xl font-bold mb-4">{FormTitles[page]}</h3>
