@@ -1,43 +1,38 @@
-import Map from 'react-map-gl/maplibre';
+import Map, {Marker} from 'react-map-gl/maplibre';
 import UserLayout from '../../../components/Layouts/UserLayout';
 import Header from '../../../components/ui/Header';
-import { useState } from 'react';
+import Pin from '../../../components/Travel/Pin';
 
 const MapPage = () => {
-    const [click, setClick] = useState()
-    const [markers, setMarkers] = useState([
-      {lat:0, long:0}
-    ])
+  
 
-    const handleClick = (e) => {
-      setClick(e.lngLat)
-      console.log(click);
-
-    }
-    
-    return (
-        <UserLayout>
-            <Header>
-            <span className='text-2xl'><b>Map View</b></span>
-            </Header>
-            <div className='h-full w-full flex flex-row justify-center items-center'>
-            <Map
-      initialViewState={{
-        longitude: -122.4,
-        latitude: 37.8,
-        zoom: 14,
-      }}
-      onMouseDown={handleClick}
-      style={{width: "100%", height: "100%"}}
-      mapStyle="https://api.maptiler.com/maps/streets/style.json?key=OBjixdwcNKPy2XkgqySd"
-    />
-
-            </div>
-             
-        </UserLayout>
-
-       
-      );
+  return (
+    <UserLayout>
+      <Header>
+        <span>Map View</span>
+      </Header>
+      <Map
+        initialViewState={{
+          longitude: -122.48,
+          latitude: 37.78,
+          zoom: 15.5,
+          bearing: 0,
+          pitch: 0,
+        }}
+        style={{width: "100%", height: "100%"}}
+        mapStyle="https://api.maptiler.com/maps/streets/style.json?key=OBjixdwcNKPy2XkgqySd"
+      
+      >
+        <Marker
+          latitude= {40}
+          longitude= {-30}
+          anchor='bottom'
+        >
+          <Pin/>
+        </Marker>
+      </Map>
+    </UserLayout>
+  );
 }
 
 export default MapPage
