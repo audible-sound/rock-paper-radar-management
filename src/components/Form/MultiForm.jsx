@@ -24,9 +24,9 @@ const MultiForm = () => {
 
     return (
         <FormProvider {...signUpForm}>
-            <form className='w-[45%] h-full bg-[#f5f5f5]' onSubmit={signUpForm.handleSubmit(onSubmit)}>
-                <div className='flex flex-col justify-center items-center w-full'>
-                    <div className="w-full flex flex-col justify-center items-center mb-2">
+            <form className='w-[45%] h-fit p-20' onSubmit={signUpForm.handleSubmit(onSubmit)}>
+                <div className='flex flex-col justify-center items-center w-full bg-white rounded'>
+                    <div className="w-full flex flex-col justify-center items-center mb-2 pt-6">
                         <h3 className="text-center text-5xl font-bold mb-4">{FormTitles[page]}</h3>
                         <p className="text-base font-light mt-1 mb-2">Step {page + 1} of {FormTitles.length}</p>
                     </div>
@@ -68,7 +68,7 @@ const MultiForm = () => {
 
                         <div className="w-full flex items-center justify-center py-2 my-4">
                             <div className="w-full h-[1px] bg-black/40"></div>
-                            <p className="text-xs absolute text-black/80 bg-[#f5f5f5] px-2">
+                            <p className="text-xs absolute text-black/80 bg-white px-2">
                                 Already Have An Account?
                             </p>
                         </div>
