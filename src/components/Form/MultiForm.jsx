@@ -1,4 +1,4 @@
-import  { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 
@@ -47,7 +47,7 @@ const MultiForm = () => {
                                     className='btn max-w-28'
                                     onClick={() => {
                                         if (page == 0) {
-                                            signInForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1 ) : setPage(page))
+                                            signUpForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setPage(page))
                                         }
                                     }}
                                     value={page == FormTitles.length - 1 ? "Submit" : "Next"} /> :
@@ -56,8 +56,8 @@ const MultiForm = () => {
                                     className='btn min-w-28'
                                     onClick={() => {
                                         if (page == 0) {
-                                            signInForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setPage(page))
-                                    }
+                                            signUpForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setPage(page))
+                                        }
                                     }
                                     }
                                 >{page == FormTitles.length - 1 ? "Submit" : "Next"}</a>
