@@ -73,7 +73,7 @@ const MultiForm = () => {
                             </p>
                         </div>
 
-                        <Link to='/signin' className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center flex items-center justify-center">
+                        <Link to='/user/signin' className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center flex items-center justify-center">
                             Sign In
                         </Link>
                     </div>
