@@ -2,11 +2,11 @@ import  { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import SignInForm from './SignInForm'
+import SignUpForm from './SignUpForm'
 import PersonalForm from './PersonalForm'
 
 const MultiForm = () => {
-    const signInForm = useForm()
+    const signUpForm = useForm()
     const onSubmit = (data) => {
         console.log(data);
     }
@@ -16,26 +16,17 @@ const MultiForm = () => {
 
     const PageDisplay = () => {
         if (page === 0) {
-            return <SignInForm />;
+            return <SignUpForm />;
         } else if (page === 1) {
             return <PersonalForm />;
         }
     }
 
     return (
-        <FormProvider {...signInForm}>
-            <form className='w-2/3 h-full bg-[#f5f5f5] flex flex-col p-20 justify-center items-center' onSubmit={signInForm.handleSubmit(onSubmit)}>
-                <div className='mb-20'>
-                    <ul className="steps">
-                        {FormTitles.map((title) => {
-
-                            return <li key={title} className="step step-primary text-wrap">{title}</li>
-                        }
-                        )}
-                    </ul>
-                </div>
-                <div className='flex flex-col justify-center items-center w-full'>
-                    <div className="w-full flex flex-col justify-center items-center mb-2">
+        <FormProvider {...signUpForm}>
+            <form className='w-[45%] h-fit p-20' onSubmit={signUpForm.handleSubmit(onSubmit)}>
+                <div className='flex flex-col justify-center items-center w-full bg-white rounded'>
+                    <div className="w-full flex flex-col justify-center items-center mb-2 pt-6">
                         <h3 className="text-center text-5xl font-bold mb-4">{FormTitles[page]}</h3>
                         <p className="text-base font-light mt-1 mb-2">Step {page + 1} of {FormTitles.length}</p>
                     </div>
@@ -77,7 +68,7 @@ const MultiForm = () => {
 
                         <div className="w-full flex items-center justify-center py-2 my-4">
                             <div className="w-full h-[1px] bg-black/40"></div>
-                            <p className="text-xs absolute text-black/80 bg-[#f5f5f5] px-2">
+                            <p className="text-xs absolute text-black/80 bg-white px-2">
                                 Already Have An Account?
                             </p>
                         </div>
