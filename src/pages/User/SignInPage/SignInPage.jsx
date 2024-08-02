@@ -38,7 +38,7 @@ const SignInPage = () => {
               type="password"
               placeholder="Enter Password"
               className="pl-2 w-full h-10 text-black py-2 my-2 bg-[#EDE8F5] rounded-md border border-[#7091E6] outline-none focus:border-2"
-              {...signInForm.register("email", { required: "This is required" })}
+              {...signInForm.register("password", { required: "This is required" })}
             />
           </div>
 
