@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FormProvider, useForm } from 'react-hook-form'
+import mainAxios from '../../../api/mainAxios';
 
 
 const SignInPage = () => {
@@ -7,6 +8,7 @@ const SignInPage = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    // mainAxios.post('/auth/login', data)
   }
 
   return (
@@ -16,7 +18,6 @@ const SignInPage = () => {
       <div className="relative w-full h-full flex flex-col ">
         <div className="bg-sign-in-bg w-full h-full bg-cover bg-no-repeat"></div>
       </div>
-
       {/* login form */}
       <FormProvider {...signInForm}>
       <form className="w-1/2 h-full bg-white flex flex-col p-20 justify-center items-center"  onSubmit={signInForm.handleSubmit(onSubmit)}>
@@ -25,7 +26,6 @@ const SignInPage = () => {
             <h3 className="text-5xl font-bold mb-4">Welcome</h3>
             <p className="text-base mb-2">Sign into your account</p>
           </div>
-
           <div className="w-full flex flex-col">
             <input
               type="email"
@@ -33,7 +33,6 @@ const SignInPage = () => {
               className="pl-2 w-full h-10 text-black py-2 my-2 bg-[#EDE8F5] rounded-md border border-[#7091E6] outline-none focus:border-2"
               {...signInForm.register("email", { required: "This is required" })}
             />
-
             <input
               type="password"
               placeholder="Enter Password"
@@ -48,7 +47,6 @@ const SignInPage = () => {
               Forgot Password?
             </p>
           </div>
-
           <div className="w-full flex flex-col my-6">
             <button type='submit' className="w-full text-white my-2 bg-[#7091E6] font-semibold rounded-md p-2 text-center fle x items-center justify-center cursor-pointer hover:bg-[#7091E6] active:bg-violet-700 focus:outline-none">
               Sign In
@@ -59,7 +57,6 @@ const SignInPage = () => {
                 {"Don't Have An Account?"}
               </p>
             </div>
-
             <Link to="/user/signup" className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center fle x items-center justify-center">
               Sign Up
             </Link>
