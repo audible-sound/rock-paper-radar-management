@@ -64,10 +64,10 @@ const MapPage = () => {
         <button className={`${addGarbage ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
         onClick={() => setGarbage((d) => !d)}
         ><GarbageIcon size={40}/></button>
-        <button className={`${addGarbage ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
+        <button className={`${addTraffic ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
         onClick={() => setTraffic((d) => !d)}
         ><CongestedIcon size={40}/></button>
-        <button className={`${addGarbage ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
+        <button className={`${addSmtg ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
         onClick={() => setSmtg((d) => !d)}
         ><GarbageIcon size={40}/></button>
         <button className='min-w-28 text-white my-2 bg-[#7091E6] font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer hover:bg-[#7091E6] active:bg-violet-700 focus:outline-none'

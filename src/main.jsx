@@ -16,6 +16,7 @@ import BlogPage from './pages/Admin/BlogPage/BlogPage.jsx'
 import WriteBlogPage from './pages/Admin/BlogPage/WriteBlogPage.jsx'
 import MapPage from './pages/User/TravelPage/MapPage.jsx'
 import TravelItenary from "./pages/TravelPage/TravelItenary.jsx";
+import ViewStaffPage from "./pages/Admin/StaffPage/ViewStaffPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -123,7 +124,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/staff-view",
-    element: <SignUpPage />,
+    element: <ViewStaffPage />,
     errorElement: <ErrorPage />
   },
   {
