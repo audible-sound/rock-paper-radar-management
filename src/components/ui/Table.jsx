@@ -1,8 +1,8 @@
 
 const Table = () => {
   return (
-    <div className="overflow-x-auto">
-  <table className="table">
+    <div className="overflow-x-auto bg-white h-full flex flex-col justify-start items-center">
+  <table className="table w-10/12 my-12  ">
     {/* head */}
     <thead>
       <tr>
