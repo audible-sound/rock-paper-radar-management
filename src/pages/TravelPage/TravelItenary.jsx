@@ -1,7 +1,7 @@
-import React from "react";
 import Header from "../../components/ui/Header";
 import UserLayout from "../../components/Layouts/UserLayout";
 import TravelList from "../../components/Travel/TravelList";
+import { Link } from "react-router-dom";
 
 const TravelItenary = () => {
   return (
@@ -11,12 +11,12 @@ const TravelItenary = () => {
           <b>Posts</b>
         </span>
 
-        <button
-          type="button"
+        <Link
+          to="/user/map-view"
           className="bg-[#7091E6] hover:opacity-80 p-2 rounded-md text-white float-right"
         >
           + Add Location
-        </button>
+        </Link>
       </Header>
       <TravelList />
     </UserLayout>

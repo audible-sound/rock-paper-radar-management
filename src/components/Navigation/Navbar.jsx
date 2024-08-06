@@ -26,7 +26,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/user/map-view" className="tooltip tooltip-right pt-2 pb-2" data-tip="Travel Plan">
+                        <Link to="/user/travel-itenary" className="tooltip tooltip-right pt-2 pb-2" data-tip="Travel Plan">
                             <img src={CalendarIcon} alt="" className='w-10' />
                         </Link>
                     </li>

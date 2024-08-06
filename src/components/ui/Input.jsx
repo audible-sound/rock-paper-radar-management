@@ -1,15 +1,18 @@
-import React from 'react'
+import { useFormContext } from "react-hook-form"
+import { ErrorMessage } from '@hookform/error-message'
 
-const Input = ({ right, left, rightB, leftB, placeholder }) => {
+const Input = ({ right, left, rightB, placeholder, registerinput="", required={}}) => {
+    const { register, formState:{errors}} = useFormContext()
+
     return (
-        <label className="form-control w-full max-w-xs">
+        <label className="form-control w-full max-w-md">
             <div className="label">
                 <span className="label-text">{left}</span>
                 <span className="label-text-alt">{right}</span>
             </div>
-            <input type="text" placeholder={placeholder} className="input input-bordered w-full max-w-xs" />
+            <input type="text" placeholder={placeholder} className="input input-bordered w-full max-w-md" {...registerinput ? register(registerinput, {required: required}) : ""} />
             <div className="label">
-                <span className="label-text-alt">{leftB}</span>
+            {<ErrorMessage errors={errors} name={registerinput} as="p" />}
                 <span className="label-text-alt">{rightB}</span>
             </div>
         </label>
