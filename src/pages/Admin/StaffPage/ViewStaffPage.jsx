@@ -5,7 +5,10 @@ import Table from "../../../components/ui/Table"
 const ViewStaffPage = () =>{
   return (
     <AdminLayout>
-        <Header>Staff Account List</Header>
+        <Header className={"flex flex-row justify-between items-center"}>
+          <span>Staff Accounts</span>
+          <button className="btn btn-primary ml-5">Add Account</button>
+        </Header>
         {/* util bar here */}
         <Table></Table>
     </AdminLayout>
