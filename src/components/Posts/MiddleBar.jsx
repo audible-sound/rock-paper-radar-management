@@ -1,17 +1,21 @@
 import FileInput from "../ui/FileInput"
-import Select from "../ui/Select"
+import Select from "../ui/BadgeSelect"
 import Badge from "../ui/Badge"
 import Lucas from "../../assets/images/Lucas.jpg"
 import { useState } from "react"
+import { useFormContext } from "react-hook-form"
+import { ErrorMessage } from '@hookform/error-message'
 
 const MiddleBar = () => {
     const [badges, setBadges] = useState([])
+    const {register, formState:{errors}} = useFormContext()
 
-  return (
+    return (
     <div className='flex flex-row border-solid border-2'>
                 <div className='flex flex-col bg-white items-center px-8 py-4 border-solid border-r-2'>
                     <span className="text-lg mb-8">Add Pictures</span>
                     <FileInput />
+                    <ErrorMessage errors={errors} name="birthDate" as="p" className="text-red-600" />
                 </div>
                 <div className='flex flex-col w-full bg-white items-start px-8 py-4 border-solid border-r-2'>
                     <span className="text-lg mb-8">Upload Pictures</span>
@@ -35,10 +39,7 @@ const MiddleBar = () => {
                     <div className="px-8 py-4">
                         {
                             badges.map((categories) => {
-                                if (!(badges.includes(categories))){
-                                    return <Badge key={categories} category={categories} />
-                                }
-                                
+                                return <Badge key={categories} category={categories} />
                             })
                         }
                         
