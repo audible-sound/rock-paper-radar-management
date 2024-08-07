@@ -1,8 +1,7 @@
 import { useFormContext } from "react-hook-form"
-import { ErrorMessage } from '@hookform/error-message'
 
 const FileInput = () => {
-    const {register, formState:{errors}} = useFormContext()
+    const {register} = useFormContext()
     return (
         <div className="flex items-center justify-center">
             <label htmlFor="dropzone-file" className="flex flex-col items-center justify-center w-32 h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 ">

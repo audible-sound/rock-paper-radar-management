@@ -1,9 +1,18 @@
+import { useFieldArray, useFormContext } from "react-hook-form"
 
 const Select = ({badges,setBadges}) => {
+    
+    const {register} = useFormContext()
+    const {append} = useFieldArray({name:"categories"})
+    register("categories")
+    
+
+
     return (
         <select className="select select-bordered w-full max-w-xs" onChange={(e) =>{ 
             if (!badges.includes(e.target.value)){
                 setBadges([...badges,e.target.value])
+                append(e.target.value)
             }  
             }}>
             <option disabled selected>Pick your favorite Simpson</option>

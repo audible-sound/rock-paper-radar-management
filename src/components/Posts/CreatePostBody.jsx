@@ -4,11 +4,24 @@ import MiddleBar from './MiddleBar'
 import BottomBar from './BottomBar'
 
 const CreatePostBody = () => {
-    const writePostForm = useForm()
+    const writePostForm = useForm({
+        defaultValues:{
+            postTitle:"",
+            location:"",
+            postPic:"",
+            categories:[],
+            description:""
+        }
+    })
+
+    const onSubmit = (data)=>{
+        console.log(data);
+        
+    }
 
     return (
-        <FormProvider {...writePostForm}>
-            <form className='flex flex-col w-full h-full'>           
+        <FormProvider {...writePostForm}  >
+            <form className='flex flex-col w-full h-full' onSubmit={writePostForm.handleSubmit(onSubmit)}>           
                 <TopBar/>
                 <MiddleBar/>
                 <BottomBar/>

@@ -1,9 +1,8 @@
 import Input from '../ui/Input'
 import SearchInput from '../ui/SearchInput'
-import { useFormContext } from "react-hook-form"
-import { ErrorMessage } from '@hookform/error-message'
 
 const TopBar = () => {
+
   return (
     <div className='flex flex-row justify-between items-center bg-white border-solid border-2 px-8 py-2'>
                 <Input 
