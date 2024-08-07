@@ -15,7 +15,6 @@ const UserProtectedRoute = ({ children }) => {
   const [pathnameState] = useState(pathname);
   useEffect(() => {
     const authPath = ['/', '/user', '/user/signin'];
-    console.log(pathnameState);
     if (authPath.includes(pathnameState)) {
       if (isLogin) {
         navigate('/user/profile', 'replace');
