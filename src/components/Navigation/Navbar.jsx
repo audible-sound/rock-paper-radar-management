@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie'
 import userStore from '../../stores/userStore'
 
 import Mapicon from '../../assets/images/MapIcon.svg'
 import CalendarIcon from '../../assets/images/CalendarIcon.svg'
-import face from "../../assets/images/Lucas.jpg"
 import logoutIcon from '../../assets/images/LogoutIcon.svg'
 
 const Navbar = () => {
@@ -26,7 +25,7 @@ const Navbar = () => {
                         <Link to="/user/profile" className='tooltip tooltip-right pt-4 pb-4 ' data-tip="Profile">
                             <div className='avatar'>
                                 <div className='ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2'>
-                                    <img src={face} alt="" />
+                                    <img src={Cookies.get('profilePictureUrl')} alt="" />
                                 </div>
                             </div>
                         </Link>
