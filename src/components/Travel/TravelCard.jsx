@@ -14,7 +14,7 @@ const TravelCard = ({ image, title, location, duration, tags }) => {
           <div>
             <h2 className="card-title">
               {title}
-              <div className="font-normal text-base mt-2">
+              <div className="font-normal text-base 2xl:m-4 2xl:pt-3 md:pt-3 m-4">
                 <img src={Marker} alt="" className="w-8 h-8 float-left mb-1" />
                 {location}
               </div>

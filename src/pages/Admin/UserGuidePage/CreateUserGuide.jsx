@@ -1,24 +1,27 @@
-import React from 'react'
+import React from "react";
 import Header from "../../../components/ui/Header";
 import UserLayout from "../../../components/Layouts/UserLayout";
-import UserGuideExample from '../../../components/UserGuide/UserGuideExample';
-import BackButton from '../../../assets/images/BackButton.svg';
 import TitleBar from "../../../components/UserGuide/TitleBar";
+import { FormProvider, useForm } from "react-hook-form";
+import BackButton from "../../../components/ui/BackButton";
 
-function CreateUserGuide () {
+function CreateUserGuide() {
+  const userGuideForm = useForm();
   return (
-    <UserLayout>
-      <Header>
-        <span className="text-2xl flex flex-row">
-            <img src={BackButton} className='w-5 h-5 m-2 mr-4' />
-          <b>Write User Guide</b>
-        </span>
-      </Header>
-      <div className="flex flex-row">
-        <TitleBar />
-      </div>
-    </UserLayout>
-  )
+    <FormProvider {...userGuideForm}>
+      <UserLayout>
+        <Header>
+          <span className="px-1 text-2xl flex flex-row">
+            <BackButton to="/admin/user-guide" />
+            <b className="mx-3">Write User Guide</b>
+          </span>
+        </Header>
+        <div className="flex flex-row">
+          <TitleBar />
+        </div>
+      </UserLayout>
+    </FormProvider>
+  );
 }
 
 export default CreateUserGuide;
