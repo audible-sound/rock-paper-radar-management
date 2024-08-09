@@ -83,8 +83,8 @@ const MultiForm = () => {
     }
     return (
         <FormProvider {...signUpForm}>
-            <form className='w-[45%] h-full p-20' onSubmit={signUpForm.handleSubmit(onSubmit)}>
-                <div className='flex flex-col justify-center items-center w-full bg-white rounded-md'>
+            <form className='w-full h-full p-20 flex flex-col justify-center items-center' onSubmit={signUpForm.handleSubmit(onSubmit)}>
+                <div className='flex flex-col justify-center items-center w-fit bg-white rounded-md p-12'>
                     <div className="w-full flex flex-col justify-center items-center mb-2 pt-6">
                         <h3 className="text-center text-4xl font-bold mb-4">{FormTitles[page - 1]}</h3>
                         <p className="text-base font-light mt-1 mb-2">Step {page} of {FormTitles.length}</p>
