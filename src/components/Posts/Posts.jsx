@@ -1,6 +1,5 @@
 import AuthorCard from '../ui/AuthorCard'
 import UtilsBar from '../ui/UtilsBar'
-
 import bg from "../../assets/images/Wavy-pic.jpg"
 
 const Posts = () => {
