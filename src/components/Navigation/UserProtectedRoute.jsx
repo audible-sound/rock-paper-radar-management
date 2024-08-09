@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import userStore from '../../stores/userStore';
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const UserProtectedRoute = ({ children }) => {
   const checkLogin = userStore(state => state.checkLogin);
@@ -12,20 +12,18 @@ const UserProtectedRoute = ({ children }) => {
   if (pathname[pathname.length - 1] === '/') {
     pathname = pathname.slice(0, -1);
   }
-  const [pathnameState] = useState(pathname);
   useEffect(() => {
-    const authPath = ['/', '/user', '/user/signin'];
-    if (authPath.includes(pathnameState)) {
-      if (isLogin) {
+    const authPath = ['/', '/user', '/user/signin', '/user/signup'];
+    if (authPath.includes(pathname)) {
+      if (isLogin === true) {
         navigate('/user/profile', 'replace');
       }
     } else {
       if (isLogin === false) {
-        navigate('/', 'replace')
-        console.log("something wrong");
+        navigate('/', 'replace');
       }
     }
-    }, [pathnameState, isLogin]);
+    }, [isLogin]);
   return children;
 };
 

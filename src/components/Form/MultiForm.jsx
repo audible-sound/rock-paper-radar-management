@@ -55,9 +55,9 @@ const MultiForm = () => {
                         profilePictureUrl: imageUrl
                     });
                     const { data, accessToken } = response.data;
-                    Cookies.set('token', accessToken, { expires: 30, path: '/auth' });
-                    Cookies.set('username', data.username, { expires: 30, path: '/profile' });
-                    Cookies.set('profilePictureUrl', data.profilePictureUrl, { expires: 30, path: '/profile' });
+                    Cookies.set('token', accessToken, { expires: 30, path: '/' });
+                    Cookies.set('username', data.username, { expires: 30, path: '/' });
+                    Cookies.set('profilePictureUrl', data.profilePictureUrl, { expires: 30, path: '/' });
                     navigate('/user/profile');
 
                 } catch (error) {
@@ -95,7 +95,7 @@ const MultiForm = () => {
                     <div className='w-full flex flex-row justify-center gap-20'>
                         <Link className='btn min-w-28' onClick={() => {
                             setPage((currPage) => currPage - 1)
-                        }} disabled={page === 0}>
+                        }} disabled={page === 1}>
                             Previous
                         </Link>
                         {

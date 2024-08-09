@@ -20,9 +20,6 @@ const CreatePostBody = () => {
                 </div>
 
             </div>
-
-
-
             <div className='flex flex-row border-solid border-2'>
                 <div className='flex flex-col bg-white items-center px-8 py-4 border-solid border-r-2'>
                     <span className="text-lg mb-8">Add Pictures</span>
@@ -54,9 +51,6 @@ const CreatePostBody = () => {
                     </div>
                 </div>
             </div>
-
-
-
             <div className='flex flex-col bg-white justify-start border-solid border-2 h-full pt-4'>
                 <div className='flex flex-row justify-between items-center px-8'>
                     <span className="text-xl">Description</span>
