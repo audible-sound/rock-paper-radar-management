@@ -1,13 +1,15 @@
 
-const Select = () => {
+const Select = ({options, defaultChoice}) => {
+    
     return (
         <select className="select select-bordered w-full max-w-xs">
-            <option disabled selected>Pick your favorite Simpson</option>
-            <option>Homer</option>
-            <option>Marge</option>
-            <option>Bart</option>
-            <option>Lisa</option>
-            <option>Maggie</option>
+            <option disabled selected>{defaultChoice}</option>
+            {
+                options.map((value)=>{
+                    return <option key={value} value={value}>{value}</option>
+                })
+            }
+            
         </select>
     )
 }

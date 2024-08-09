@@ -24,7 +24,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <SignInPage />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorPage />
   },
   {
     path: "/user",

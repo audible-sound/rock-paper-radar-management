@@ -2,7 +2,7 @@ import React from 'react'
 
 const UtilsBar = () => {
     return (
-        <div className='flex flex-row bg-white border-solid border-2 p-4'>
+        <div className='flex flex-row bg-white border-solid border-y-2 p-4'>
             <div className="form-control">
                 <input type="text" placeholder="Search Post" className="input input-bordered w-24 md:w-auto pl-12  mr-10 border-primary" />
                 <div className="search-icon relative bottom-12">
@@ -37,7 +37,7 @@ const UtilsBar = () => {
                 <option>Test3</option>
                 <option>Test4</option>
             </select>
-            <button className="btn btn-primary ml-5">Filter</button>
+            <button className="btn bg-[#7091E6] text-white ml-5">Filter</button>
 
         </div>
 
