@@ -48,8 +48,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/user/profile-public",
+    path: "/user/profile-public/:userId",
     element: <PublicProfile />,
+    loader: null, //load data before page render
+    action: null, // mutation whatever that is
     errorElement: <ErrorPage />,
   },
   {
@@ -73,8 +75,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/user/post-view",
+    path: "/user/post-view/:postId",
     element: <ViewPostPage />,
+    loader: null, //load data before page render
+    action: null, // mutation whatever that is
     errorElement: <ErrorPage />,
   },
   {
