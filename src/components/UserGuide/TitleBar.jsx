@@ -1,23 +1,28 @@
 import Badge from "../ui/Badge";
 import Input from "../ui/Input";
 import SearchInput from "../ui/SearchInput";
-import Select from "../ui/Select";
+import UserGuideSelect from "../ui/UserGuideSelect";
+import PlusSign from "../../assets/images/PlusSign.svg";
+import { Link } from "react-router-dom";
 
 const TitleBar = () => {
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="flex flex-row justify-between items-center bg-white border-solid border-2 px-8 py-2 ">
+      <div className="flex flex-row justify-between items-center bg-white border-solid border-2 px-6 py-4">
         <div className="w-1/3 px-2">
           <Input left="Title" placeholder="Enter a Title" />
         </div>
 
-        <div className=" flex flex-col bg-white w-full">
-          <div className="flex flex-row px-8 py-4 items-end">
-            <Select />
-            <button className="btn ml-4 text-white bg-[#7091E6]">
-              Add Section
-            </button>
-          </div>
+        <div className="flex flex-row pl-7 pr-2 place-content-end pb-2">
+          <UserGuideSelect defaultChoice="Choose Section" />
+
+          <button className="btn ml-4 mt-7 text-white bg-[#7091E6]">
+            <img
+              src={PlusSign}
+              className="w-6 h-10 float-left mt-1 fill-white"
+            />
+            Add Section
+          </button>
         </div>
       </div>
 
