@@ -82,6 +82,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: "/user/post-view",
+    element: <ViewPostPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/user/map-view",
     element: <MapPage />,
     errorElement: <ErrorPage />,
