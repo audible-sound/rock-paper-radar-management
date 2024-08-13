@@ -10,19 +10,13 @@ import { useState } from "react";
 const AuthorCard = ({ id, image, title, description, username, date, tags }) => {
     const [currTitle, setCurrTitle] = useState(title)
     const [currDescription, setCurrDescription] = useState(description)
-
-    console.log(id);
     
     const manageList = [
         {
             label: "Edit Post",
             action: () => {
-                document.getElementById('editPost').showModal()
-                console.log(title);
-                
-                setCurrTitle(title)  
-                console.log(currTitle);
-                
+                document.getElementById(`editPost${id}`).showModal()                
+                setCurrTitle(title)                  
                 setCurrDescription(description)             
             },
             modal: <EditPostModal
