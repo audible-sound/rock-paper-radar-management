@@ -1,7 +1,7 @@
 import { Marker } from "react-map-gl/dist/esm/exports-maplibre"
-import CongestedIcon from "./CongestedIcon"
+import PhotogenicIcon from "./PhotogenicIcon"
 
-const CongestedMarker = ({size=20, length, lat, lng}) => {
+const PhotogenicMarker = ({size=20, length, lat, lng}) => {
   return (
     <Marker
       key={length}
@@ -9,9 +9,9 @@ const CongestedMarker = ({size=20, length, lat, lng}) => {
       longitude= {lng}
       anchor='bottom'
     >
-      <CongestedIcon size={`${size}px`}/>
+      <PhotogenicIcon size={`${size}px`}/>
     </Marker>
   )
 }
 
-export default CongestedMarker
+export default PhotogenicMarker

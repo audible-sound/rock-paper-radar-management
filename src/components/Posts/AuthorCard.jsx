@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import ReadMore from "../ui/ReadMore";
 import Dropdown from "../ui/Dropdown";
 import EditPostModal from "./EditPostModal";
-import DeleteModal from "./DeleteModal";
 import { useState } from "react";
+import DeletePostModal from "./DeletePostModal";
 
 const AuthorCard = ({ id, image, title, description, username, date, tags }) => {
     const [currTitle, setCurrTitle] = useState(title)
@@ -28,8 +28,8 @@ const AuthorCard = ({ id, image, title, description, username, date, tags }) => 
         },
         {
             label: "Delete Post",
-            action: () => document.getElementById('deleteModal').showModal(),
-            modal: <DeleteModal
+            action: () => document.getElementById(`deleteModal${id}`).showModal(),
+            modal: <DeletePostModal
                 key={id}
             /> ,
         },

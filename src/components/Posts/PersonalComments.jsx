@@ -1,13 +1,19 @@
 import Lucas from '../../assets/images/Lucas.jpg'
 import Dropdown from '../ui/Dropdown'
+import DeleteCommentModal from './DeleteCommentModal'
+import EditCommentModal from './EditCommentModal'
 
 const PersonalComments = () => {
     const manageComments = [
         {
-            label: "Edit Comments"
+            label: "Edit Comments",
+            action: () => document.getElementById(`editCommentModal`).showModal(),
+            modal: <EditCommentModal/>
         },
         {
-            label: "Delete Comments"
+            label: "Delete Comments",
+            action: () => document.getElementById(`deleteCommentModal`).showModal(),
+            modal: <DeleteCommentModal/>
         },
     ]
 

@@ -15,7 +15,6 @@ import ViewPostPage from "./pages/User/PostsPage/ViewPostPage.jsx";
 import BlogPage from "./pages/Admin/BlogPage/BlogPage.jsx";
 import WriteBlogPage from "./pages/Admin/BlogPage/WriteBlogPage.jsx";
 import MapPage from "./pages/User/TravelPage/MapPage.jsx";
-import TravelItenary from "./pages/TravelPage/TravelItenary.jsx";
 import ViewStaffPage from "./pages/Admin/StaffPage/ViewStaffPage.jsx";
 import ViewUserGuide from "./pages/Admin/UserGuidePage/ViewUserGuide.jsx";
 import CreateUserGuide from "./pages/Admin/UserGuidePage/CreateUserGuide.jsx";
@@ -25,6 +24,7 @@ import DashboardAccounts from "./pages/Admin/Dashboard/DashboardAccounts.jsx";
 import DashboardUsers from "./pages/Admin/Dashboard/DashboardUsers.jsx";
 import DashboardBans from "./pages/Admin/Dashboard/DashboardBans.jsx";
 import DashboardPosts from "./pages/Admin/Dashboard/DashboardPosts.jsx";
+import TravelItenary from "./pages/User/TravelPage/TravelItenary.jsx";
 
 const router = createBrowserRouter([
   {
