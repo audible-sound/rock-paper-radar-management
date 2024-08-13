@@ -7,16 +7,16 @@ const ReadMore = ({ children }) => {
         setIsReadMore(!isReadMore);
     };
     return (
-        <p className="text">
+        <div className="text">
             {isReadMore ? text.slice(0, 100) : text}
-            <a
+            <div
                 onClick={toggleReadMore}
                 className="read-or-hide"
                 style={{ color: "green" }}
             >
                 {isReadMore ? "...read more" : " show less"}
-            </a>
-        </p>
+            </div>
+        </div>
     );
 };
 

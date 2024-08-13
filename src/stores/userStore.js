@@ -2,11 +2,12 @@ import { create } from 'zustand'
 import Cookies from 'js-cookie'
 import mainAxios from '../api/mainAxios'
 
-const userStore = create((set, get) => ({
+const userStore = create((set) => ({
     isLogin: false,
     profilePictureUrl: Cookies.get('profilePictureUrl'),
     username: Cookies.get('username'),
     personalProfile: null,
+    userPosts: [],
     setLogin: (value) => set({ isLogin: value }),
     setProfilePictureUrl: (value) => set({ profilePictureUrl: value }),
     setUsername: (value) => set({ username: value }),
@@ -31,6 +32,13 @@ const userStore = create((set, get) => ({
             set({ personalProfile: {
                 joinedDate: `${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth() + 1).padStart(2, '0')}/${date.getFullYear()}`
             } });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getUserPosts: async (username) => {
+        try {
+            const response = await mainAxios.get();
         } catch (error) {
             console.log(error);
         }

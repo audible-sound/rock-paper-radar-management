@@ -1,6 +1,5 @@
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage';
-import dotenv from "dotenv"; // Import dotenv
 const apiKey = import.meta.env.apiKey;
 const authDomain = import.meta.env.authDomain;
 const projectId = import.meta.env.projectId;
