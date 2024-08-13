@@ -1,18 +1,49 @@
 import face from "../../assets/images/Lucas.jpg"
-import DotMenu from "../../assets/images/DotMenu.svg"
-import Badge from "./Badge";
+import Badge from "../ui/Badge";
 import { Link } from "react-router-dom";
-import ReadMore from "./ReadMore";
+import ReadMore from "../ui/ReadMore";
+import Dropdown from "../ui/Dropdown";
+import EditPostModal from "./EditPostModal";
+import DeleteModal from "./DeleteModal";
+import { useState } from "react";
 
-const AuthorCard = ({ image, title, description, username, date, tags }) => {
+const AuthorCard = ({ id, image, title, description, username, date, tags }) => {
+    const [currTitle, setCurrTitle] = useState(title)
+    const [currDescription, setCurrDescription] = useState(description)
+    
+    const manageList = [
+        {
+            label: "Edit Post",
+            action: () => {
+                document.getElementById(`editPost${id}`).showModal()                
+                setCurrTitle(title)                  
+                setCurrDescription(description)             
+            },
+            modal: <EditPostModal
+                key={id}
+                id={id}
+                title={currTitle}
+                description={currDescription}
+            /> ,
+        },
+        {
+            label: "Delete Post",
+            action: () => document.getElementById('deleteModal').showModal(),
+            modal: <DeleteModal
+                key={id}
+            /> ,
+        },
+    ]
+
     return (
-        <Link to="/user/post-view">
-            <div className="card bg-base-100 mx-8 mt-4 shadow-xl max-h-[500px]">
-                <figure>
+        
+            <div className="card bg-base-100 mx-8 mt-4 shadow-xl max-h-[700px]">
+                <Link to="/user/post-view"><figure>
                     <img
                         src={image}
                         alt="Shoes" />
                 </figure>
+                </Link>
                 <div className="card-body">
                     <h2 className="card-title">
                         {title}
@@ -31,7 +62,10 @@ const AuthorCard = ({ image, title, description, username, date, tags }) => {
                             </div>
                         </div>
 
-                        <img src={DotMenu} alt="" className="w-8" />
+                        <Dropdown
+                            key={id}
+                            items={manageList}
+                        />
                     </div>
                     <div className="card-actions justify-start">
                         {tags.map((tag) => {
@@ -41,7 +75,7 @@ const AuthorCard = ({ image, title, description, username, date, tags }) => {
                     </div>
                 </div>
             </div>
-        </Link>
+        
 
     );
 }

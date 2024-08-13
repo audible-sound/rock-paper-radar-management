@@ -1,4 +1,4 @@
-import AuthorCard from '../ui/AuthorCard'
+import AuthorCard from './AuthorCard'
 import UtilsBar from '../ui/UtilsBar'
 import bg from "../../assets/images/Wavy-pic.jpg"
 
@@ -42,6 +42,7 @@ const Posts = () => {
                 {dummyData.map(({ id, image, title, description, username, date, tags, link }) => {
                     return (<AuthorCard
                         key={id}
+                        id={id}
                         image={image}
                         title={title}
                         description={description}

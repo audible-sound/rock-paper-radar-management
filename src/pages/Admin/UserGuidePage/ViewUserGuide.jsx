@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../../components/ui/Header";
 import UserLayout from "../../../components/Layouts/UserLayout";
-import UserGuideList from "../../../components/UserGuide/UserGuideList";
-import UserGuideExample from "../../../components/UserGuide/UserGuideExample";
+import UserGuide from "../../../components/UserGuide/UserGuide";
+import UserGuideContent from "../../../components/UserGuide/UserGuideContent";
 
-function ViewUserGuide() {
+const ViewUserGuide = () => {
+  const [selectedContent, setSelectedContent] = useState([]);
+
   return (
     <UserLayout>
       <Header>
@@ -12,12 +14,31 @@ function ViewUserGuide() {
           <b>User Guide</b>
         </span>
       </Header>
-      <div className="flex flex-row">
-        <UserGuideList />
-        <UserGuideExample />
+      <div className="flex flex-row bg-white h-screen">
+        <UserGuide onSelect={setSelectedContent} />
+        {console.log("Selected Content in ViewUserGuide:", selectedContent)}
+        <UserGuideContent content={selectedContent || []} />
       </div>
     </UserLayout>
   );
-}
+};
+
+// function ViewUserGuide() {
+//   return (
+//     <UserLayout>
+//       <Header>
+//         <span className="text-2xl">
+//           <b>User Guide</b>
+//         </span>
+//       </Header>
+//       <div className="flex flex-row">
+//         <div className="flex flex-col h-screen bg-white">
+//           <UserGuide />
+//         </div>
+//         <UserGuideContent />
+//       </div>
+//     </UserLayout>
+//   );
+// }
 
 export default ViewUserGuide;
