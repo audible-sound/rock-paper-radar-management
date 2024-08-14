@@ -7,6 +7,7 @@ const EditProfileModal = () => {
   const onSubmit = (data) => {
     console.log(data)
   }
+
   return (
     <FormProvider {...profileForm}>
         <dialog id={`editProfile`}className="modal">
@@ -14,20 +15,50 @@ const EditProfileModal = () => {
                 <form method="dialog"> 
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
-                <form className='flex flex-col justify-center items-center' {...profileForm} onSubmit={profileForm.handleSubmit(onSubmit)}>
-                    <span className='text-2xl'>Edit Form</span>
+                <form className='flex flex-col justify-center items-center gap-4' {...profileForm} onSubmit={profileForm.handleSubmit(onSubmit)}>
+                    <span className='text-2xl'>Edit Profile</span>
                     <Input 
                         left={"Full Name"} 
-                        registerinput={"fullName"}
+                        placeholder={"Enter Full Name"}
+                        registerInput={"fullName"}
                         required={"This is required"}
-                        inputValue={"title"}
+                        inputValue={""}
                     />
-                    <div className='flex flex-col w-full p-2 mb-8'>
-                        <label htmlFor="description">Description</label>
-                        <textarea name="description" id="" className='textarea bg-[#E6E6E6] w-full' defaultValue={"description"}></textarea>
-                    </div>
+                    <Input 
+                        left={"Description"} 
+                        placeholder={"Enter Description"}
+                        registerInput={"description"}
+                        required={"This is required"}
+                        inputValue={""}
+                    />
+                    <Input 
+                        left={"Birth Date"} 
+                        registerInput={"birthDate"}
+                        required={"This is required"}
+                        inputValue={""}
+                        type={"date"}
+                    />
+                    <div className='flex flex-row gap-8 justify-center'>
+                    <span className='text-base mt-1'>Gender</span>    
+                    <div className="flex flex-row justify-start">
                     
-                    <button type='submit' className='btn w-full' onClick={() => profileForm.trigger()}>Submit</button>
+                        <label className="label justify-start gap-4 cursor-pointer">
+                            <input type="radio" name="radio-10" className="radio checked:bg-blue-500" defaultChecked value="male"
+                                {...profileForm.register("gender")}
+                            />
+                            <span className="label-text">Male</span>
+                        </label>
+                    </div>
+                    <div className="form-control">
+                        <label className="label justify-start gap-4 cursor-pointer">
+                            <input type="radio" name="radio-10" className="radio checked:bg-red-500" defaultChecked value="female"
+                                {...profileForm.register("gender")}
+                            />
+                            <span className="label-text">Female</span>
+                        </label>
+                    </div>
+                </div>
+                    <button type='submit' className='btn w-full mt-8' onClick={() => profileForm.trigger()}>Submit</button>
                 </form>
             </div>
         </dialog>
@@ -36,3 +67,4 @@ const EditProfileModal = () => {
 }
 
 export default EditProfileModal
+

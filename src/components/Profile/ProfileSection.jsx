@@ -39,7 +39,7 @@ const ProfileSection = () => {
             getPersonalProfile();
         }
         getBannerPic();
-    }, [usernameQuery, getPersonalProfile]);
+    }, []);
     return (
         <div className='flex flex-col bg-white w-full'>
             <img src={(bannerPic === '') ? profimg : bannerPic} alt="" className='object-cover h-32 min-w-0' />
