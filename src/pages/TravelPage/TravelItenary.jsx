@@ -9,14 +9,17 @@ function TravelItenary() {
     <UserLayout>
       <Header>
         <span className="text-2xl">
-          <b>Posts</b>
+          <b>Travel Itenary</b>
         </span>
 
         <Link
           to="/user/map-view"
           className="bg-[#7091E6] hover:opacity-80 py-1.5 px-3 rounded-md text-white float-right"
         >
-          <img src={PlusSign} className="w-6 h-10 float-left mt-1 mr-1 fill-white" />
+          <img
+            src={PlusSign}
+            className="w-6 h-6 float-left mt-1 mr-1 fill-white"
+          />
           Add Location
         </Link>
       </Header>
