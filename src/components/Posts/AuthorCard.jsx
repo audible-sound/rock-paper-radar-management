@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReadMore from "../ui/ReadMore";
 import Dropdown from "../ui/Dropdown";
 import EditPostModal from "./EditPostModal";
-import DeleteModal from "./DeleteModal";
+import DeletePostModal from "./DeletePostModal";
 
 const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags }) => {
     // const manageList = [

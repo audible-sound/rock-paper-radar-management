@@ -1,12 +1,21 @@
 import profimg from "../../assets/images/Wavy-pic.jpg"
-import DotMenu from "../../assets/images/DotMenu.svg"
 import Cookies from 'js-cookie'
 import userStore from "../../stores/userStore"
 import { useEffect, useState } from "react"
 import { useSearchParams } from 'react-router-dom';
 import unsplashApi from "../../api/unsplashApi"
+import Dropdown from "../ui/Dropdown"
+import EditProfileModal from "./EditProfileModal";
 
 const ProfileSection = () => {
+    const manageList = [
+        {
+            label: "Edit Profile",
+            action: () => document.getElementById('editProfile').showModal(),
+            modal: <EditProfileModal />
+        }
+    ]
+
     const [searchParams] = useSearchParams();
     const usernameQuery = searchParams.get('u');
     const profilePictureUrl = userStore(state => state.profilePictureUrl);
@@ -25,12 +34,12 @@ const ProfileSection = () => {
     }
     useEffect(() => {
         if (usernameQuery) {
-
+            return
         } else {
             getPersonalProfile();
         }
         getBannerPic();
-    }, []);
+    }, [usernameQuery, getPersonalProfile]);
     return (
         <div className='flex flex-col bg-white w-full'>
             <img src={(bannerPic === '') ? profimg : bannerPic} alt="" className='object-cover h-32 min-w-0' />
@@ -50,7 +59,9 @@ const ProfileSection = () => {
 
                 <div className='flex flex-row items-center w-fit'>
                     <span className='text-2xl mb-2'>{(personalProfile) ? ((personalProfile.totalPosts === 1) ? `${personalProfile.totalPosts} Post` : `${personalProfile.totalPosts} Posts`) : `0 Posts`}</span>
-                    <img src={DotMenu} alt="" className='w-12 ml-4' />
+                    <Dropdown 
+                        items={manageList}
+                    />
                 </div>
             </div>
         </div>
