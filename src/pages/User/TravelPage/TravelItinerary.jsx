@@ -4,7 +4,7 @@ import TravelList from "../../../components/Travel/TravelList";
 import { Link } from "react-router-dom";
 import PlusSign from '../../../assets/images/PlusSign.svg'
 
-function TravelItenary() {
+function TravelItinerary() {
   return (
     <UserLayout>
       <Header>
@@ -28,4 +28,4 @@ function TravelItenary() {
   );
 }
 
-export default TravelItenary;
+export default TravelItinerary;
