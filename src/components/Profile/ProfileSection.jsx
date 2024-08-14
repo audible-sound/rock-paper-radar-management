@@ -3,9 +3,12 @@ import DotMenu from "../../assets/images/DotMenu.svg"
 import Cookies from 'js-cookie'
 import userStore from "../../stores/userStore"
 import { useEffect, useState } from "react"
+import { useSearchParams } from 'react-router-dom';
 import unsplashApi from "../../api/unsplashApi"
 
 const ProfileSection = () => {
+    const [searchParams] = useSearchParams();
+    const usernameQuery = searchParams.get('u');
     const profilePictureUrl = userStore(state => state.profilePictureUrl);
     const username = userStore(state => state.username);
     const personalProfile = userStore(state => state.personalProfile);
@@ -21,7 +24,11 @@ const ProfileSection = () => {
         }
     }
     useEffect(() => {
-        getPersonalProfile();
+        if (usernameQuery) {
+
+        } else {
+            getPersonalProfile();
+        }
         getBannerPic();
     }, []);
     return (
@@ -42,7 +49,7 @@ const ProfileSection = () => {
                 </div>
 
                 <div className='flex flex-row items-center w-fit'>
-                    <span className='text-2xl mb-2'>100 Posts</span>
+                    <span className='text-2xl mb-2'>{(personalProfile) ? ((personalProfile.totalPosts === 1) ? `${personalProfile.totalPosts} Post` : `${personalProfile.totalPosts} Posts`) : `0 Posts`}</span>
                     <img src={DotMenu} alt="" className='w-12 ml-4' />
                 </div>
             </div>

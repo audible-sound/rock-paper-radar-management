@@ -12,7 +12,7 @@ const ReadMore = ({ children }) => {
             <div
                 onClick={toggleReadMore}
                 className="read-or-hide"
-                style={{ color: "green" }}
+                style={{ color: "green", display: (text.length > 100) ? 'initial' : 'none' }}
             >
                 {isReadMore ? "...read more" : " show less"}
             </div>

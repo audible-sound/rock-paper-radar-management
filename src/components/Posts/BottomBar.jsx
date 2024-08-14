@@ -3,7 +3,7 @@ import { ErrorMessage } from '@hookform/error-message'
 
 
 const BottomBar = () => {
-  const { register, formState: { errors } } = useFormContext()
+  const { register, formState: { errors } } = useFormContext();
   return (
     <div className='flex flex-col bg-white justify-start border-solid border-b-2 border-x-2 h-[100%] pt-4 items-stretch flex-grow'>
       <div className='flex flex-row justify-between items-center px-8'>

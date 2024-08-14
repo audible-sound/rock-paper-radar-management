@@ -75,13 +75,6 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/user/post-view/:postId",
-    element: <ViewPostPage />,
-    loader: null, //load data before page render
-    action: null, // mutation whatever that is
-    errorElement: <ErrorPage />,
-  },
-  {
     path: "/user/post-view",
     element: <ViewPostPage />,
     errorElement: <ErrorPage />,

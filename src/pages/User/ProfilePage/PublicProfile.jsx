@@ -4,11 +4,11 @@ import Posts from '../../../components/Posts/Posts'
 
 const PublicProfile = () => {
     return (
-        <div>
+        <UserProtectedRoute>
             <ProfileLayout>
-                <Posts />
+                {/* <Posts /> */}
             </ProfileLayout>
-        </div>
+        </UserProtectedRoute>
     )
 }
 
