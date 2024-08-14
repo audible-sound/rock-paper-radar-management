@@ -1,24 +1,16 @@
 import Input from '../ui/Input'
 import SearchInput from '../ui/SearchInput'
+import { useState } from 'react';
 
 const TopBar = () => {
-
+  const [location, setLocation] = useState('');
   return (
-    <div className='flex flex-row justify-between items-center bg-white border-solid border-2 px-8 py-2'>
-                <Input 
-                    left="Title" 
-                    placeholder="Enter a Title" 
-                    registerinput='postTitle'
-                    required={"This is required"}
-                />
-                <div className='flex flex-row items-center'>
-                    <div className='mr-8'>
-                        <img src="" alt="" />
-                        <span className="text-2xl "><b>Sandakan, Sabah, Malaysia</b></span>
-                    </div>
-                    <SearchInput />
-                </div>
-
+    <div className='flex flex-row justify-between bg-white border-solid border-x-2 px-8 py-2'>
+      <Input />
+      <div className='flex items-center'>
+        <span className="text-xl mx-10"><b>{location}</b></span>
+        <SearchInput setLocation={setLocation} />
+      </div>
     </div>
   )
 }

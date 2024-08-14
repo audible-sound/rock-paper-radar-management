@@ -4,6 +4,7 @@ import DeleteCommentModal from './DeleteCommentModal'
 import EditCommentModal from './EditCommentModal'
 
 const PersonalComments = () => {
+
     const manageComments = [
         {
             label: "Edit Comments",
@@ -31,13 +32,13 @@ const PersonalComments = () => {
         </div>
         <div className="flex items-center justify-between">
             <p className="">OMG I AGREE OMG OMG OMG</p>
-            <Dropdown
+             {/* <Dropdown <Dropdown
                 items={manageComments}
-            />
+            /> */}
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-  )
+    )
 }
 
 export default PersonalComments
