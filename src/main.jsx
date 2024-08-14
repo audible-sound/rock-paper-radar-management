@@ -15,10 +15,16 @@ import ViewPostPage from "./pages/User/PostsPage/ViewPostPage.jsx";
 import BlogPage from "./pages/Admin/BlogPage/BlogPage.jsx";
 import WriteBlogPage from "./pages/Admin/BlogPage/WriteBlogPage.jsx";
 import MapPage from "./pages/User/TravelPage/MapPage.jsx";
-import TravelItenary from "./pages/TravelPage/TravelItenary.jsx";
 import ViewStaffPage from "./pages/Admin/StaffPage/ViewStaffPage.jsx";
 import ViewUserGuide from "./pages/Admin/UserGuidePage/ViewUserGuide.jsx";
 import CreateUserGuide from "./pages/Admin/UserGuidePage/CreateUserGuide.jsx";
+import ViewBlogPage from "./pages/Admin/BlogPage/ViewBlogPage.jsx";
+import Dashboard from "./pages/Admin/Dashboard/Dashboard.jsx";
+import DashboardAccounts from "./pages/Admin/Dashboard/DashboardAccounts.jsx";
+import DashboardUsers from "./pages/Admin/Dashboard/DashboardUsers.jsx";
+import DashboardBans from "./pages/Admin/Dashboard/DashboardBans.jsx";
+import DashboardPosts from "./pages/Admin/Dashboard/DashboardPosts.jsx";
+import TravelItenary from "./pages/User/TravelPage/TravelItenary.jsx";
 
 const router = createBrowserRouter([
   {
@@ -42,8 +48,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/user/profile-public",
+    path: "/user/profile-public/:userId",
     element: <PublicProfile />,
+    loader: null, //load data before page render
+    action: null, // mutation whatever that is
     errorElement: <ErrorPage />,
   },
   {
@@ -83,27 +91,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/dashboard",
-    element: <BlogPage />,
+    element: <Dashboard />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/admin/dashboard-users",
-    element: <PostsPage />,
+    element: <DashboardUsers />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/admin/dashboard-bans",
-    element: <PostsPage />,
+    element: <DashboardBans />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/admin/dashboard-accounts",
-    element: <PostsPage />,
+    element: <DashboardAccounts />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/admin/dashboard-posts",
-    element: <PostsPage />,
+    element: <DashboardPosts />,
     errorElement: <ErrorPage />,
   },
   {
@@ -113,7 +121,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/blog-view",
-    element: <PublicProfile />,
+    element: <ViewBlogPage />,
     errorElement: <ErrorPage />,
   },
   {
@@ -146,6 +154,7 @@ const router = createBrowserRouter([
     element: <CreateUserGuide />,
     errorElement: <ErrorPage />,
   },
+ 
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

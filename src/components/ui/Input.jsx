@@ -1,21 +1,19 @@
 import { useFormContext } from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message'
 
-const Input = ({ right, left, rightB, placeholder, registerInput = "", required = {} }) => {
+const Input = ({left, placeholder, registerInput = "", required = "", inputValue = "", type = "text"}) => {
     const { register, formState: { errors } } = useFormContext()
 
     return (
-        <label className="form-control w-full max-w-md">
-            <div className="label">
-                <span className="label-text">{left}</span>
-                <span className="label-text-alt">{right}</span>
+        <div className="form-control w-full max-w-md">
+            <div className='flex justify-between w-full mb-2'>
+                <p className="label-text">{left}</p>
+                <ErrorMessage errors={errors} name={registerInput} as="p" className="text-red-600" />
             </div>
-            <input type="text" placeholder={placeholder} className="input input-bordered w-full max-w-md" {...registerInput ? register(registerInput, { required: required }) : ""} />
-            <div className="label">
-                {<ErrorMessage errors={errors} name={registerInput} as="p" />}
-                <span className="label-text-alt">{rightB}</span>
-            </div>
-        </label>
+            <label className="input input-bordered flex items-center gap-2">
+                <input type={type} className="grow" placeholder={placeholder} {...register(registerInput, { required: required })} defaultValue={inputValue} />
+            </label>
+        </div>
     )
 }
 

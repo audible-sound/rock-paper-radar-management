@@ -1,12 +1,14 @@
 # Rock Paper Radar
 
-Please install node.js and npm [here](stalling-node-js-and-npm)
+Please install Node.js and npm [here](https://nodejs.org/en/download/)
 
 ## Running It
-```bash
-git clone https://github.com/TalonExe/rock-paper-radar
+
 cd rock-paper-radar
 
 npm install
 npm run dev
+
+```
+
 ```

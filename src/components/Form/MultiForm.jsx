@@ -6,6 +6,7 @@ import storage from '../../config/firebaseConfig'
 import Cookies from 'js-cookie'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
+import userStore from '../../stores/userStore';
 
 import SignUpForm from './SignUpForm'
 import PersonalForm from './PersonalForm'
@@ -17,6 +18,7 @@ Pop-up to show error and success messages after submit.
 */
 
 const MultiForm = () => {
+    const setUsername = userStore((state) => state.setUsername);
     const signUpForm = useForm();
     const navigate = useNavigate();
     const onSubmit = async (formData) => {
@@ -58,8 +60,8 @@ const MultiForm = () => {
                     Cookies.set('token', accessToken, { expires: 30, path: '/' });
                     Cookies.set('username', data.username, { expires: 30, path: '/' });
                     Cookies.set('profilePictureUrl', data.profilePictureUrl, { expires: 30, path: '/' });
+                    setUsername(data.username);
                     navigate('/user/profile');
-
                 } catch (error) {
                     console.log(error);
                 }

@@ -6,14 +6,14 @@ const UserProtectedRoute = ({ children }) => {
   const checkLogin = userStore(state => state.checkLogin);
   const isLogin = userStore(state => state.isLogin);
   const navigate = useNavigate();
-  checkLogin();
   const location = useLocation();
   let { pathname } = location;
   if (pathname[pathname.length - 1] === '/') {
     pathname = pathname.slice(0, -1);
   }
   useEffect(() => {
-    const authPath = ['/', '/user', '/user/signin', '/user/signup'];
+    checkLogin();
+    const authPath = ['', '/', '/user', '/user/signin', '/user/signup'];
     if (authPath.includes(pathname)) {
       if (isLogin === true) {
         navigate('/user/profile', 'replace');
@@ -23,7 +23,7 @@ const UserProtectedRoute = ({ children }) => {
         navigate('/', 'replace');
       }
     }
-    }, [isLogin]);
+  }, []);
   return children;
 };
 

@@ -1,6 +1,4 @@
-
 const Select = ({options, defaultChoice}) => {
-    
     return (
         <select className="select select-bordered w-full max-w-xs">
             <option disabled selected>{defaultChoice}</option>

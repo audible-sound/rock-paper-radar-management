@@ -1,16 +1,16 @@
 import ProfileLayout from "../../../components/Layouts/ProfileLayout"
-import Posts from '../../../components/Posts/Posts'
+import PersonalPosts from '../../../components/Posts/PersonalPosts'
 import PersonalBar from '../../../components/Posts/PersonalBar'
-import UserProtedRoute from '../../../components/Navigation/UserProtectedRoute.jsx'
+import UserProtectedRoute from '../../../components/Navigation/UserProtectedRoute.jsx'
 
 const PersonalProfile = () => {
     return (
-        <UserProtedRoute>
+        <UserProtectedRoute>
             <ProfileLayout>
                 <PersonalBar />
-                <Posts />
+                <PersonalPosts />
             </ProfileLayout>
-        </UserProtedRoute>
+        </UserProtectedRoute>
     )
 }
 

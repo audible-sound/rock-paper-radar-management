@@ -1,21 +1,48 @@
 import profimg from "../../assets/images/Wavy-pic.jpg"
-import DotMenu from "../../assets/images/DotMenu.svg"
-import EditLogo from "../../assets/images/EditLogo.svg"
 import Cookies from 'js-cookie'
 import userStore from "../../stores/userStore"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { useSearchParams } from 'react-router-dom';
+import unsplashApi from "../../api/unsplashApi"
+import Dropdown from "../ui/Dropdown"
+import EditProfileModal from "./EditProfileModal";
 
 const ProfileSection = () => {
+    const manageList = [
+        {
+            label: "Edit Profile",
+            action: () => document.getElementById('editProfile').showModal(),
+            modal: <EditProfileModal />
+        }
+    ]
+
+    const [searchParams] = useSearchParams();
+    const usernameQuery = searchParams.get('u');
     const profilePictureUrl = userStore(state => state.profilePictureUrl);
     const username = userStore(state => state.username);
     const personalProfile = userStore(state => state.personalProfile);
     const getPersonalProfile = userStore(state => state.getPersonalProfile);
+    const [bannerPic, setBannerPic] = useState('');
+    const getBannerPic = async () => {
+        try {
+            const response = await unsplashApi.get('/photos/random?count=1');
+            const data = response.data[0].urls.regular;
+            setBannerPic(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     useEffect(() => {
-        getPersonalProfile();
-    }, [personalProfile]);
+        if (usernameQuery) {
+            return
+        } else {
+            getPersonalProfile();
+        }
+        getBannerPic();
+    }, []);
     return (
         <div className='flex flex-col bg-white w-full'>
-            <img src={profimg} alt="" className='object-cover h-32 min-w-0' />
+            <img src={(bannerPic === '') ? profimg : bannerPic} alt="" className='object-cover h-32 min-w-0' />
             <div className='flex flex-row items-center justify-between p-4'>
                 <div className='flex flex-row items-center'>
                     <div className='avatar'>
@@ -25,17 +52,16 @@ const ProfileSection = () => {
                         </div>
                     </div>
                     <div className='flex flex-col'>
-                        <span className='text-3xl font-bold mb-2'>{Cookies.get("username")}</span>
-                        <span className='text-xl text-[#ABABAB]'>Joined in 24/12/2024</span>
                         <span className='text-3xl font-bold mb-2'>{username}</span>
-                        <span className='text-xl text-[#ABABAB]'>Joined in {(personalProfile)? personalProfile.joinedDate : ''}</span>
+                        <span className='text-xl text-[#ABABAB]'>Joined in {(personalProfile) ? personalProfile.joinedDate : ''}</span>
                     </div>
                 </div>
 
                 <div className='flex flex-row items-center w-fit'>
-                    <img src={EditLogo} alt="" className='w-12 mr-4' />
-                    <span className='text-2xl mb-2'>100 Posts</span>
-                    <img src={DotMenu} alt="" className='w-12 ml-4' />
+                    <span className='text-2xl mb-2'>{(personalProfile) ? ((personalProfile.totalPosts === 1) ? `${personalProfile.totalPosts} Post` : `${personalProfile.totalPosts} Posts`) : `0 Posts`}</span>
+                    <Dropdown 
+                        items={manageList}
+                    />
                 </div>
             </div>
         </div>

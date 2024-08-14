@@ -1,20 +1,25 @@
-import Lucas from '../../assets/images/Lucas.jpg'
-import Wavy from '../../assets/images/Wavy-pic.jpg'
 import Badge from '../ui/Badge'
 import DotMenu from "../../assets/images/DotMenu.svg"
+import PersonalComments from './PersonalComments'
+import { useEffect } from 'react'
+import userStore from "../../stores/userStore"
 
-
-const ViewPostBody = () => {
+const ViewPostBody = ({ postId }) => {
+    const getPostDetails = userStore((state) => state.getPostDetails);
+    const postDetails = userStore((state) => state.postDetails);
+    useEffect(() => {
+        getPostDetails(postId);
+    }, []);
     return (
         <div className='flex flex-col w-full h-full bg-white'>
-            <div className='flex flex-row items-center border-solid border-2 px-8 py-2'>
+            <div className='flex flex-row items-center border-solid border-x-2 px-8 py-2'>
                 <div className="avatar">
                     <div className="ring-primary ring-offset-base-100 w-14 h-14 rounded-full ring ring-offset-2">
-                        <img src={Lucas} alt="" />
+                        <img src={(postDetails) ? postDetails.authorDetails.profilePictureUrl : ''} alt="" />
                     </div>
                 </div>
                 <div className='flex flex-row justify-between items-center w-full px-8 py-2'>
-                    <b className='text-lg'>Xiang Rong</b>
+                    <b className='text-lg'>{(postDetails) ? postDetails.authorDetails.username : ''}</b>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-10 w-10 text-black ml-auto"
@@ -28,39 +33,37 @@ const ViewPostBody = () => {
                             d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" />
                         <circle cx="12" cy="9" r="3" />
                     </svg>
-                    <b>Sandakan, Sabah, Malaysia</b>
+                    <b>{(postDetails) ? postDetails.post.location : ''}</b>
                 </div>
             </div>
-            <div className="flex flex-col w-full h-30 border-solid border-2">
-                <img src={Wavy} alt="" className="object-cover h-64" />
+            <div className="flex flex-col w-full h-30 border-solid border-x-2">
+                <img src={(postDetails) ? postDetails.post.pictureUrl : ''} alt="" className="object-cover h-fit" />
             </div>
 
-            <div className="flex flex-col w-full h-30 border-solid border-2">
-                <div className="flex flex-col w-full p-5 text-gray-400">
-                    Published On 24/12/2024
+            <div className="flex flex-col w-full h-30">
+                <div className="flex flex-row justify-between w-full py-5 px-5 text-gray-400 border-x-2">
+                    <b className='text-black text-2xl'>{(postDetails) ? postDetails.post.postTitle : ''}</b>
+                    <section>Published On {(postDetails) ? `${String(new Date(postDetails.post.createdAt).getDate()).padStart(2, '0')}/${String(new Date(postDetails.post.createdAt).getMonth() + 1).padStart(2, '0')}/${new Date(postDetails.post.createdAt).getFullYear()}` : ''}</section>
                 </div>
-
-                <div className="flex flex-col w-full h-30 p-5 border text-2xl">
-                    <b>Discover Sandakan</b>
-                </div>
-
-                <div className="flex flex-col w-full h-30 p-5 border text-2xl">
-                    <p className="text-base"><b>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi distinctio quos nihil voluptatum, ratione ullam dicta recusandae voluptas aperiam consectetur accusantium laborum aliquid dolores quis maxime aliquam consequatur rerum esse. Quis dolorem ex, amet quidem ea sapiente quibusdam explicabo saepe dolores. Suscipit molestias modi eum facere adipisci. Veritatis, corrupti commodi!</b>
+                <div className="flex flex-col w-full h-30 px-5 border-x-2 text-2xl">
+                    <p className="text-base">
+                        {(postDetails) ? postDetails.post.postContent : ''}
                     </p>
                     <div className="flex p-5">
-                        <Badge category="Hood" />
-                        <Badge category="Nature" />
-                        <Badge category="Wildlife" />
+                        {(!postDetails) ? '' : postDetails.post.PostTags.map((tag, index) => {
+                            return <Badge category={tag.name} key={index} />
+                        }
+                        )}
                     </div>
                 </div>
-                <div className="flex flex-row items-center w-full h-30 p-5 border text-2xl">
-                    <button className="btn w-14 h-14">
+                <div className="flex flex-row items-center w-full h-30 p-5 border-x-2 border-b-2 text-2xl">
+                    <button className="p-4 w-14 h-14 hover:pointer">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6 text-gray-500"
-                            fill="currentColor"
+                            className="h-7 w-7 text-gray-500"
+                            fill="white"
                             viewBox="0 0 24 24"
-                            stroke="currentColor">
+                            stroke="black">
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -69,9 +72,9 @@ const ViewPostBody = () => {
                         </svg>
                     </button>
                     <div className="px-5 text-lg">
-                        <b>100,000 Likes</b>
+                        <b>{(postDetails) ? postDetails.post.postLikes : ''} Likes</b>
                     </div>
-                    <button className="btn w-14 h-14">
+                    <div className='p-4'>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6 text-black"
@@ -84,13 +87,14 @@ const ViewPostBody = () => {
                                 strokeWidth="2"
                                 d="M4 4h16c1.104 0 2 .896 2 2v12c0 1.104-.896 2-2 2H6l-4 4v-4H4c-1.104 0-2-.896-2-2V6c0-1.104.896-2 2-2z" />
                         </svg>
-                    </button>
+
+                    </div>
                     <div className="px-5 text-lg">
                         <b>4,000 Comments</b>
                     </div>
                     <img src={DotMenu} alt="" className="w-8 ml-auto" />
                 </div>
-                <div className="flex flex-row items-center w-full h-30 p-5 border text-2xl ">
+                <div className="flex flex-row items-center w-full h-30 p-5 border-x-2 border-b-2 text-2xl ">
                     <input
                         type="text"
                         placeholder="Type a comment"
@@ -110,53 +114,9 @@ const ViewPostBody = () => {
                         </svg>
                     </button>
                 </div>
-
-
-                <div className='flex flex-row items-center w-full px-8 py-2'>
-                    <div className="avatar">
-                        <div className="ring-primary ring-offset-base-100 w-14 h-14 rounded-full ring ring-offset-2">
-                            <img src={Lucas} alt="" />
-                        </div>
-                    </div>
-                    <div className="p-5 flex-1">
-                        <div className="flex items-center">
-                            <b className="text-lg ">Xiang Rong</b>
-                            <p className="text-gray-400 ml-5">24/12/2024</p>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <p className="">OMG SO COOL!!!</p>
-                            <img src={DotMenu} alt="" className="w-8" />
-                        </div>
-                    </div>
-                </div>
-
-                <div className='flex flex-row items-center w-full px-8 py-2'>
-                    <div className="avatar">
-                        <div className="ring-primary ring-offset-base-100 w-14 h-14 rounded-full ring ring-offset-2">
-                            <img src={Lucas} alt="" />
-                        </div>
-                    </div>
-                    <div className="p-5 flex-1">
-                        <div className="flex items-center">
-                            <b className="text-lg ">Real Xiang Rong</b>
-                            <p className="text-gray-400 ml-5">24/12/2024</p>
-                        </div>
-                        <div className="flex items-center justify-between">
-                            <p className="">OMG I AGREE OMG OMG OMG</p>
-                            <img src={DotMenu} alt="" className="w-8" />
-                        </div>
-                    </div>
-                </div>
-
-
+                <PersonalComments />
             </div>
         </div>
-
-
-
-
-
-
     )
 }
 

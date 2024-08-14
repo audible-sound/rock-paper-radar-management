@@ -1,4 +1,3 @@
-import React from "react";
 import TravelCard from "./TravelCard";
 import travelBg from "../../assets/images/travel-pic.png";
 
