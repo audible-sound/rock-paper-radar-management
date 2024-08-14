@@ -6,79 +6,81 @@ import GarbageMarker from '../../../components/Travel/GarbageMarker';
 import CongestedMarker from '../../../components/Travel/CongestedMarker';
 import CongestedIcon from '../../../components/Travel/CongestedIcon';
 import MapLoader from '../../../components/Travel/MapLoader';
+import PhotogenicMarker from '../../../components/Travel/PhotogenicMarker';
+import PhotogenicIcon from '../../../components/Travel/PhotogenicIcon';
 
 const MapPage = () => {
-  const [cursor, setCursor] = useState({lng:0, lat:0})
+  const [cursor, setCursor] = useState({lng: 0, lat: 0})
   const [markers, setMarkers] = useState([])
-  const [addGarbage, setGarbage] = useState(false)
-  const [addTraffic, setTraffic] = useState(false)
-  const [addSmtg, setSmtg] = useState(false)
+  const [activeMarkerType, setActiveMarkerType] = useState(null)
   const [isDelete, setDelete] = useState(false)
   
-
   const handleClick = () => {
-    if (addGarbage) {
-      setMarkers([
-        ...markers, 
-        <GarbageMarker
-            size={20}
-            key={markers.length}
-            lat={cursor.lat}
-            lng={cursor.lng}
-          />
-        ])
-    }else if(addTraffic) {
-      setMarkers([
-        ...markers, 
-        <CongestedMarker
-            size={20}
-            key={markers.length}
-            lat={cursor.lat}
-            lng={cursor.lng}
-          />
-        ])
-    } else if (addSmtg) {
-      setMarkers([
-        ...markers, 
-        <GarbageMarker
-            size={20}
-            key={markers.length}
-            lat={cursor.lat}
-            lng={cursor.lng}
-          />
-        ])
+    if (activeMarkerType) {
+      const id = Date.now()
+      const newMarker = {
+        id,
+        type: activeMarkerType,
+        lat: cursor.lat,
+        lng: cursor.lng
+      }
+      setMarkers(prevMarkers => [...prevMarkers, newMarker])
+      setActiveMarkerType(null) // Reset after adding
     }
-    
+  }
+
+  const handleMarkerClick = (id) => {
+    if (isDelete) {
+      setMarkers(currentMarkers => currentMarkers.filter(marker => marker.id !== id))
+    }
+  }
+
+  const renderMarker = (marker) => {
+    const commonProps = {
+      key: marker.id,
+      size: 20,
+      lat: marker.lat,
+      lng: marker.lng,
+      onClick: () => handleMarkerClick(marker.id)
+    }
+    switch(marker.type) {
+      case 'garbage': return <GarbageMarker {...commonProps} />
+      case 'traffic': return <CongestedMarker {...commonProps} />
+      case 'camera': return <PhotogenicMarker {...commonProps} />
+      default: return null
+    }
   }
 
   return (
     <UserLayout>
-      <Header className={"flex flex-row justify-between items-center"}>
+      <Header className="flex flex-row justify-between items-center">
         <span className='text-2xl'>Map View</span>
         <div className='gap-4 flex'>
-          <button className={`${addGarbage ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
-          onClick={() => setGarbage((d) => !d)}
-          ><GarbageIcon size={40}/></button>
-          <button className={`${addTraffic ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
-          onClick={() => setTraffic((d) => !d)}
-          ><CongestedIcon size={40}/></button>
-          <button className={`${addSmtg ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2  font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
-          onClick={() => setSmtg((d) => !d)}
-          ><GarbageIcon size={40}/></button>
-          <button className='min-w-28 text-white my-2 bg-[#7091E6] font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer hover:bg-[#7091E6] active:bg-violet-700 focus:outline-none'
-          onClick={()=>setDelete(()=>!isDelete)}
+          {['garbage', 'traffic', 'camera'].map(type => (
+            <button
+              key={type}
+              className={`${activeMarkerType === type ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} text-white my-2 font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
+              onClick={() => setActiveMarkerType(activeMarkerType === type ? null : type)}
+            >
+              {type === 'garbage' && <GarbageIcon size={40}/>}
+              {type === 'traffic' && <CongestedIcon size={40}/>}
+              {type === 'camera' && <PhotogenicIcon size={40}/>}
+            </button>
+          ))}
+          <button
+            className={`${isDelete ? "bg-lime-400 hover:bg-lime-600" : "hover:bg-[#5079df] bg-[#7091E6]"} min-w-28 text-white my-2 font-semibold rounded-md p-2 text-center items-center justify-center cursor-pointer focus:outline-none`}
+            onClick={() => setDelete(d => !d)}
           >
             Remove Marker
           </button>
         </div>
-        
       </Header>
       
       <MapLoader 
         handleClick={handleClick}
         setCursor={setCursor}
         cursor={cursor}
-        markers={markers}
+        markers={markers.map(renderMarker)}
       />
     </UserLayout>
   );

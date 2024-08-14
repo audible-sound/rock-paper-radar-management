@@ -1,8 +1,8 @@
 
-const DeleteModal = () => {
+const DeleteCommentModal = () => {
   return (
     <>
-        <dialog id="deleteModal" className="modal">
+        <dialog id="deleteCommentModal" className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Warning!!!</h3>
             <p className="py-4">This action is irreversible, are you sure you want to continue?</p>
@@ -15,8 +15,7 @@ const DeleteModal = () => {
         </div>
         </dialog>
     </>
-    
   )
 }
 
-export default DeleteModal
+export default DeleteCommentModal
