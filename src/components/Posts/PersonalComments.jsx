@@ -2,21 +2,32 @@ import Dropdown from '../ui/Dropdown'
 import DeleteCommentModal from './DeleteCommentModal'
 import EditCommentModal from './EditCommentModal'
 import { Link } from 'react-router-dom'
+import userStore from '../../stores/userStore'
 
 const PersonalComments = ({ comment }) => {
     const date = new Date(comment.createdAt);
-    const manageComments = [
+    const actualUser = userStore((state) => state.username);
+    let manageComments = [
         {
-            label: "Edit Comments",
-            action: () => document.getElementById(`editCommentModal`).showModal(),
-            modal: <EditCommentModal />
+            label: "Edit Comment",
+            action: () => document.getElementById(`editCommentModal${comment.id}`).showModal(),
+            modal: <EditCommentModal commentId={comment.id} postId={comment.postId} comment={comment.commentContent} />
         },
         {
-            label: "Delete Comments",
-            action: () => document.getElementById(`deleteCommentModal`).showModal(),
-            modal: <DeleteCommentModal />
+            label: "Delete Comment",
+            action: () => document.getElementById(`deleteCommentModal${comment.id}`).showModal(),
+            modal: <DeleteCommentModal commentId={comment.id} postId={comment.postId} />
         },
     ]
+    if (comment.User.username !== actualUser) {
+        manageComments = [
+            {
+                label: "Report Comment",
+                action: () => document.getElementById(`reportCommentModal${comment.id}`).showModal(),
+                modal: <DeleteCommentModal commentId={comment.id} postId={comment.postId} />
+            }
+        ]
+    }
     return (
         <div className='flex flex-row items-center w-full px-8 py-2 border-x-2 border-b-2'>
             <Link to={`/user/profile-public?u=${comment.User.username}`}>
@@ -35,9 +46,9 @@ const PersonalComments = ({ comment }) => {
                 </div>
                 <div className="flex items-center justify-between">
                     <p className="">{comment.commentContent}</p>
-                    {/* <Dropdown items={manageComments} /> */}
                 </div>
             </div>
+            <Dropdown items={manageComments} />
         </div>
     )
 }

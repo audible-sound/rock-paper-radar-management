@@ -15,6 +15,7 @@ const Navbar = () => {
         Cookies.remove('username', { path: '/' });
         Cookies.remove('token', { path: '/' });
         Cookies.remove('profilePictureUrl', { path: '/' });
+        Cookies.remove('bannerPic', { path: '/' });
         checkLogin();
         logout();
         navigate('/', 'replace')
