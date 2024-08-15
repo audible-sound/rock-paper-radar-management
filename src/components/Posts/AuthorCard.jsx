@@ -28,6 +28,7 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
             modal: <DeletePostModal key={postId} id={postId} />
         })
     }
+
     return (
         <div className="card bg-base-100 shadow-xl w-80 m-4" key={postId}>
             <Link to={`/user/post-view?p=${postId}`}>
@@ -61,6 +62,7 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
                         </div>
                     </div>
                     <Dropdown items={list} />
+
                 </div>
                 <div className="card-actions justify-start">
                     {tags.slice(0, 3).map((tag, index) => (
