@@ -1,9 +1,12 @@
-import Badge from '../ui/Badge'
-import DotMenu from "../../assets/images/DotMenu.svg"
+import Badge from '../ui/Badge' 
 import PersonalComments from './PersonalComments'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import userStore from "../../stores/userStore"
 import { useNavigate } from 'react-router-dom'
+import EditPostModal from './EditPostModal'
+import DeletePostModal from './DeletePostModal'
+import Dropdown from '../ui/Dropdown'
+import ReportPostModal from './ReportPostModal'
 
 const ViewPostBody = ({ postId }) => {
     const getPostDetails = userStore((state) => state.getPostDetails);
@@ -14,8 +17,46 @@ const ViewPostBody = ({ postId }) => {
     const commentPost = userStore((state) => state.commentPost);
     const postComments = userStore((state) => state.postComments);
     const navigate = useNavigate();
+    const [manageList, setManageList] = useState([]);
+
     useEffect(() => {
         getPostDetails(postId);
+        console.log(postDetails);
+    },[]);
+
+    useEffect(() => {
+        if (postDetails) {  
+            setManageList([
+            {
+            label: "Edit Post",
+            action: () => document.getElementById(`editPost${postId}`).showModal(),
+            modal: <EditPostModal
+                key={postId}
+                id={postId}
+                title={postDetails.post.postTitle}
+                description={postDetails.post.postContent}
+            /> ,
+        },
+        {
+            label: "Delete Post",
+            action: () => document.getElementById(`deleteModal${postId}`).showModal(),
+            modal: <DeletePostModal
+                id={postId}
+            /> ,
+        },
+        {
+            label: "Report Post",
+            action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
+            modal: <ReportPostModal
+                id={postId}
+            /> ,
+        }
+    ])
+    }},[setManageList,postId]);
+
+
+
+    
         getPostComments(postId);
     }, [postId, getPostComments]);
 
@@ -121,6 +162,13 @@ const ViewPostBody = ({ postId }) => {
                     {postDetails?.authorDetails.username !== username && (
                         <img src={DotMenu} alt="" className="w-8 ml-auto" />
                     )}
+                    <div className="px-5 text-lg">
+                        <b>4,000 Comments</b>
+                    </div>
+                    <Dropdown 
+                        key={postId}
+                        items={manageList} 
+                    />
                 </div>
                 <form onSubmit={commentHandler} className="flex items-center w-full p-5 border-x-2 border-b-2">
                     <input

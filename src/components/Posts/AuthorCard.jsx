@@ -4,6 +4,7 @@ import ReadMore from "../ui/ReadMore";
 import Dropdown from "../ui/Dropdown";
 import EditPostModal from "./EditPostModal";
 import DeletePostModal from "./DeletePostModal";
+import ReportPostModal from "./ReportPostModal";
 import userStore from "../../stores/userStore";
 
 const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags }) => {
@@ -12,6 +13,19 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
         {
             label: "Delete Post",
             action: () => document.getElementById(`deleteModal${postId}`).showModal(),
+            modal: <DeletePostModal
+                id={postId}
+
+            /> ,
+        },
+        {
+            label: "Report Post",
+            action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
+            modal: <ReportPostModal
+                id={postId}
+            /> ,
+        },
+    ]
             modal: <DeletePostModal key={postId} id={postId} />
         },
         {
