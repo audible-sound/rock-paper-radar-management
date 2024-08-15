@@ -28,7 +28,7 @@ const EditPostModal = ({id, title, description}) => {
                     <span className='text-2xl'>Edit Form</span>
                     <Input 
                         left={"Full Name"} 
-                        registerinput={"fullName"}
+                        registerInput={"fullName"}
                         required={"This is required"}
                         inputValue={title}
                     />

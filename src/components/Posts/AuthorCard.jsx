@@ -6,29 +6,26 @@ import EditPostModal from "./EditPostModal";
 import DeletePostModal from "./DeletePostModal";
 
 const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags }) => {
-    // const manageList = [
-    //     {
-    //         label: "Edit Post",
-    //         action: () => {
-    //             document.getElementById(`editPost${id}`).showModal()                
-    //             setCurrTitle(title)                  
-    //             setCurrDescription(description)             
-    //         },
-    //         modal: <EditPostModal
-    //             key={id}
-    //             id={id}
-    //             title={currTitle}
-    //             description={currDescription}
-    //         /> ,
-    //     },
-    //     {
-    //         label: "Delete Post",
-    //         action: () => document.getElementById('deleteModal').showModal(),
-    //         modal: <DeleteModal
-    //             key={id}
-    //         /> ,
-    //     },
-    // ]
+    const manageList = [
+        {
+            label: "Edit Post",
+            action: () => document.getElementById(`editPost${postId}`).showModal(),
+            modal: <EditPostModal
+                key={postId}
+                id={postId}
+                title={postTitle}
+                description={postContent}
+            /> ,
+        },
+        {
+            label: "Delete Post",
+            action: () => document.getElementById(`deleteModal${postId}`).showModal(),
+            modal: <DeletePostModal
+                id={postId}
+
+            /> ,
+        },
+    ]
 
     return (
 
@@ -56,10 +53,10 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
                             <span className="text-sm text-[#ABABAB]">{`${String(createdAt.getDate()).padStart(2, '0')}/${String(createdAt.getMonth() + 1).padStart(2, '0')}/${createdAt.getFullYear()}`}</span>
                         </div>
                     </div>
-                    {/* <Dropdown
-                            key={id}
+                    <Dropdown
+                            key={postId}
                             items={manageList}
-                        /> */}
+                        />
                 </div>
                 <div className="card-actions justify-start">
                     {tags.map((tag, index) => {
