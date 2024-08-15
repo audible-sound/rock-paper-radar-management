@@ -1,9 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./assets/styles/index.css";
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
 import ErrorPage from "./components/Errors/ErrorPage.jsx";
 import PostsPage from "./pages/User/PostsPage/PostsPage.jsx";
 import PersonalProfile from "./pages/User/ProfilePage/PersonalProfile.jsx";
@@ -48,10 +46,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/user/profile-public/:userId",
+    path: "/user/profile-public",
     element: <PublicProfile />,
-    loader: null, //load data before page render
-    action: null, // mutation whatever that is
     errorElement: <ErrorPage />,
   },
   {

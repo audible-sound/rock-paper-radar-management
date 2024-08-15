@@ -1,5 +1,4 @@
 import profimg from "../../assets/images/Wavy-pic.jpg"
-import Cookies from 'js-cookie'
 import userStore from "../../stores/userStore"
 import { useEffect, useState } from "react"
 import { useSearchParams } from 'react-router-dom';
@@ -8,21 +7,28 @@ import Dropdown from "../ui/Dropdown"
 import EditProfileModal from "./EditProfileModal";
 
 const ProfileSection = () => {
-    const manageList = [
-        {
-            label: "Edit Profile",
-            action: () => document.getElementById('editProfile').showModal(),
-            modal: <EditProfileModal />
-        }
-    ]
-
+    const manageList = [{
+        label: "Edit Profile",
+        action: () => document.getElementById('editProfile').showModal(),
+        modal: <EditProfileModal />
+    }];
     const [searchParams] = useSearchParams();
     const usernameQuery = searchParams.get('u');
-    const profilePictureUrl = userStore(state => state.profilePictureUrl);
     const username = userStore(state => state.username);
-    const personalProfile = userStore(state => state.personalProfile);
     const getPersonalProfile = userStore(state => state.getPersonalProfile);
     const [bannerPic, setBannerPic] = useState('');
+    const profileDetails = userStore(state => state.profileDetails);
+    const getPublicProfile = userStore(state => state.getPublicProfile);
+    if (usernameQuery) {
+        // Change modal for report user
+        if (usernameQuery !== username) {
+            manageList[0] ={
+                label: "Report User",
+                action: () => document.getElementById('editProfile').showModal(),
+                modal: <EditProfileModal />
+            }
+        } 
+    }
     const getBannerPic = async () => {
         try {
             const response = await unsplashApi.get('/photos/random?count=1');
@@ -34,7 +40,7 @@ const ProfileSection = () => {
     }
     useEffect(() => {
         if (usernameQuery) {
-            return
+            getPublicProfile(usernameQuery);
         } else {
             getPersonalProfile();
         }
@@ -47,18 +53,17 @@ const ProfileSection = () => {
                 <div className='flex flex-row items-center'>
                     <div className='avatar'>
                         <div className='ring-primary ring-offset-base-100 w-24 rounded-full ring ring-offset-2 m-2 mr-8'>
-                            <img src={Cookies.get("profilePictureUrl")} alt="" />
-                            <img src={profilePictureUrl} alt="" />
+                            <img src={(profileDetails) ? profileDetails.profilePictureUrl : ''} alt="" />
                         </div>
                     </div>
                     <div className='flex flex-col'>
-                        <span className='text-3xl font-bold mb-2'>{username}</span>
-                        <span className='text-xl text-[#ABABAB]'>Joined in {(personalProfile) ? personalProfile.joinedDate : ''}</span>
+                        <span className='text-3xl font-bold mb-2'>{(profileDetails) ? profileDetails.username : ''}</span>
+                        <span className='text-xl text-[#ABABAB]'>Joined in {(profileDetails) ? profileDetails.joinedDate : ''}</span>
                     </div>
                 </div>
 
                 <div className='flex flex-row items-center w-fit'>
-                    <span className='text-2xl mb-2'>{(personalProfile) ? ((personalProfile.totalPosts === 1) ? `${personalProfile.totalPosts} Post` : `${personalProfile.totalPosts} Posts`) : `0 Posts`}</span>
+                    <span className='text-2xl mb-2'>{(profileDetails) ? ((profileDetails.totalPosts === 1) ? `${profileDetails.totalPosts} Post` : `${profileDetails.totalPosts} Posts`) : `0 Posts`}</span>
                     <Dropdown 
                         items={manageList}
                     />

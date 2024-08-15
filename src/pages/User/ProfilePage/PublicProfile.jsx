@@ -1,12 +1,12 @@
 import ProfileLayout from '../../../components/Layouts/ProfileLayout'
-import Posts from '../../../components/Posts/Posts'
-
+import UserProtectedRoute from '../../../components/Navigation/UserProtectedRoute'
+import PersonalPosts from '../../../components/Posts/PersonalPosts'
 
 const PublicProfile = () => {
     return (
         <UserProtectedRoute>
             <ProfileLayout>
-                {/* <Posts /> */}
+                <PersonalPosts />
             </ProfileLayout>
         </UserProtectedRoute>
     )
