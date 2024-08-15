@@ -8,7 +8,7 @@ import userStore from "../../stores/userStore";
 
 const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags }) => {
     const actualUser = userStore((state) => state.username);
-    const list = [
+    let list = [
         {
             label: "Delete Post",
             action: () => document.getElementById(`deleteModal${postId}`).showModal(),
@@ -22,11 +22,11 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
     ]
     // Create report post modal
     if (actualUser !== username) {
-        list.push({
-            label: "Report User",
+        list = [{
+            label: "Report Post",
             action: () => document.getElementById(`editModal${postId}`).showModal(),
             modal: <DeletePostModal key={postId} id={postId} />
-        })
+        }]
     }
     return (
         <div className="card bg-base-100 shadow-xl w-80 m-4" key={postId}>

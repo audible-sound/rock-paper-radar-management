@@ -1,17 +1,22 @@
 import profimg from "../../assets/images/Wavy-pic.jpg"
 import userStore from "../../stores/userStore"
 import { useEffect, useState } from "react"
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import unsplashApi from "../../api/unsplashApi"
 import Dropdown from "../ui/Dropdown"
+import Cookies from "js-cookie";
 import EditProfileModal from "./EditProfileModal";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const ProfileSection = () => {
+    const [isLoading, setIsLoading] = useState(true);
     const manageList = [{
         label: "Edit Profile",
         action: () => document.getElementById('editProfile').showModal(),
         modal: <EditProfileModal />
     }];
+    const location = useLocation();
+    const pathname = location.pathname;
     const [searchParams] = useSearchParams();
     const usernameQuery = searchParams.get('u');
     const username = userStore(state => state.username);
@@ -22,30 +27,46 @@ const ProfileSection = () => {
     if (usernameQuery) {
         // Change modal for report user
         if (usernameQuery !== username) {
-            manageList[0] ={
+            manageList[0] = {
                 label: "Report User",
                 action: () => document.getElementById('editProfile').showModal(),
-                modal: <EditProfileModal />
+                modal: <LoadingSpinner />
             }
-        } 
+        }
     }
     const getBannerPic = async () => {
-        try {
-            const response = await unsplashApi.get('/photos/random?count=1');
-            const data = response.data[0].urls.regular;
-            setBannerPic(data);
-        } catch (error) {
-            console.log(error);
+        if (!Cookies.get('bannerPic')) {
+            try {
+                const response = await unsplashApi.get('/photos/random?count=1');
+                const data = response.data[0].urls.regular;
+                Cookies.set('bannerPic', data);
+                setBannerPic(data);
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            setBannerPic(Cookies.get('bannerPic'));
         }
     }
     useEffect(() => {
-        if (usernameQuery) {
-            getPublicProfile(usernameQuery);
-        } else {
-            getPersonalProfile();
-        }
-        getBannerPic();
-    }, []);
+        const fetchData = async () => {
+            setIsLoading(true);
+            if (pathname) {
+                if (pathname === '/user/profile') {
+                    await getPersonalProfile();
+                }
+                await getBannerPic();
+            }
+            setIsLoading(false);
+        };
+
+        fetchData();
+    }, [usernameQuery, username, getPublicProfile, getPersonalProfile, pathname, location]);
+
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
+
     return (
         <div className='flex flex-col bg-white w-full'>
             <img src={(bannerPic === '') ? profimg : bannerPic} alt="" className='object-cover h-32 min-w-0' />
@@ -64,7 +85,7 @@ const ProfileSection = () => {
 
                 <div className='flex flex-row items-center w-fit'>
                     <span className='text-2xl mb-2'>{(profileDetails) ? ((profileDetails.totalPosts === 1) ? `${profileDetails.totalPosts} Post` : `${profileDetails.totalPosts} Posts`) : `0 Posts`}</span>
-                    <Dropdown 
+                    <Dropdown
                         items={manageList}
                     />
                 </div>

@@ -1,14 +1,26 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const EditCommentModal = ({comment=""}) => {
     const postEditForm = useForm()
+    const [isLoading, setIsLoading] = useState(true);
     // remove title and description props and fetch data directly with the postid directly
     //integration should be done here with useEffect to ensure maximum effectiveness
     
-    useEffect(() =>{
-        //fetch with id
-    }, [])
+    useEffect(() => {
+        const fetchCommentData = async () => {
+            setIsLoading(true);
+            //fetch with id
+            setIsLoading(false);
+        };
+
+        fetchCommentData();
+    }, []);
+
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
 
     const onSubmit = (data) => {
         console.log(data);

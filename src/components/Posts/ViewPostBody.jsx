@@ -1,9 +1,10 @@
 import Badge from '../ui/Badge'
 import DotMenu from "../../assets/images/DotMenu.svg"
 import PersonalComments from './PersonalComments'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import userStore from "../../stores/userStore"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const ViewPostBody = ({ postId }) => {
     const getPostDetails = userStore((state) => state.getPostDetails);
@@ -13,11 +14,24 @@ const ViewPostBody = ({ postId }) => {
     const getPostComments = userStore((state) => state.getPostComments);
     const commentPost = userStore((state) => state.commentPost);
     const postComments = userStore((state) => state.postComments);
+    const getPublicProfile = userStore((state) => state.getPublicProfile);
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        getPostDetails(postId);
-        getPostComments(postId);
-    }, [postId, getPostComments]);
+        const fetchPostDetails = async () => {
+            setIsLoading(true);
+            await getPostDetails(postId);
+            await getPostComments(postId);
+            setIsLoading(false);
+        };
+
+        fetchPostDetails();
+    }, [postId, getPostComments, getPostDetails]);
+
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
 
     const commentHandler = async (event) => {
         event.preventDefault();
@@ -40,25 +54,23 @@ const ViewPostBody = ({ postId }) => {
         }
     }
 
-    const redirectToProfile = () => {
-        if (postDetails && postDetails.authorDetails.username !== username) {
-            navigate(`/user/profile-public/?u=${postDetails?.authorDetails.username}`, { replace: true });
-        } else {
-            navigate('/user/profile', { replace: true });
-        }
-    }
-
     return (
         <div className='flex flex-col w-full h-full bg-white'>
             <div className='flex flex-row items-center border-solid border-x-2 px-8 py-4'>
-                <div className="flex items-center gap-4 cursor-pointer" onClick={redirectToProfile}>
+                <Link 
+                    to={postDetails?.authorDetails.username !== username 
+                        ? `/user/profile-public/?u=${postDetails?.authorDetails.username}`
+                        : '/user/profile'
+                    } 
+                    className="flex items-center gap-4"
+                >
                     <div className="avatar">
                         <div className="w-14 h-14 rounded-full ring ring-primary ring-offset-2">
                             <img src={postDetails?.authorDetails.profilePictureUrl} alt="" />
                         </div>
                     </div>
                     <b className='text-lg'>{postDetails?.authorDetails.username}</b>
-                </div>
+                </Link>
                 <div className='flex items-center ml-auto'>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-black mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M12 2a7 7 0 0 1 7 7c0 5-7 13-7 13S5 14 5 9a7 7 0 0 1 7-7z" />
@@ -129,7 +141,7 @@ const ViewPostBody = ({ postId }) => {
                         placeholder="Type a comment"
                         className="input input-bordered bg-[#E6E6E6] flex-grow mr-4"
                     />
-                    <button type="submit" className="btn btn-circle btn-primary">
+                    <button type="submit" className="btn btn-circle bg-[#7091E6] text-white">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
