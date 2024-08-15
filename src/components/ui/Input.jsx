@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message'
 
-const Input = ({left, placeholder, registerInput = "", required = "", inputValue = "", type = "text"}) => {
+const Input = ({ left = "", placeholder = "", registerInput = "", required = "", inputValue = "", type = "text" }) => {
     const { register, formState: { errors } } = useFormContext()
 
     return (
