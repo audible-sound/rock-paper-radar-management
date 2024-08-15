@@ -12,12 +12,14 @@ const userStore = create((set, get) => ({
     postDetails: null,
     profileDetails: null,
     postComments: null,
+    markers: null,
     setLogin: (value) => set({ isLogin: value }),
     setProfilePictureUrl: (value) => set({ profilePictureUrl: value }),
     setUsername: (value) => set({ username: value }),
     setPersonalProfile: (value) => set({ personalProfile: value }),
     setTotalPosts: (value) => set({ totalPosts: value }),
     setPostDetails: (value) => set({ postDetails: value }),
+    setMarkers: (value) => set({ markers: value }),
     logout: () => set(() => ({
         isLogin: false,
         profilePictureUrl: null,
@@ -28,6 +30,7 @@ const userStore = create((set, get) => ({
         postDetails: null,
         profileDetails: null,
         postComments: null,
+        markers: null,
     })),
     checkLogin: () => {
         if (Cookies.get("token") !== undefined) {
@@ -244,6 +247,41 @@ const userStore = create((set, get) => ({
             await mainAxios.put(`/comment/${commentId}`, {
                 commentContent: input.commentContent
             }, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    createMarker: async (input) => {
+        try {
+            await mainAxios.post('/markerData', {
+                type: input.type,
+                latitude: input.lat,
+                longitude: input.lng,
+                mapId: input.id
+            }, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getMarkers: async () => {
+        try {
+            const response = await mainAxios.get('/markerData');
+            set({ markers: response.data.markers });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    deleteMarker: async (id) => {
+        try {
+            await mainAxios.delete(`/markerData/${id}`, {
                 headers: {
                     authorization: Cookies.get('token'),
                 },
