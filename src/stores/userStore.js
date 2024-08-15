@@ -209,6 +209,24 @@ const userStore = create((set, get) => ({
         } catch (error) {
             console.log(error);
         }
+    },
+    updatePost: async (postId, input) => {
+        try {
+            await mainAxios.put(`/travelPost/${postId}`, {
+                pictureUrl: input.pictureUrl,
+                postTitle: input.postTitle,
+                postLocation: input.postLocation,
+                categories: input.tags,
+                postDescription: input.postContent
+            },
+                {
+                    headers: {
+                        authorization: Cookies.get('token'),
+                    },
+                });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }))
 

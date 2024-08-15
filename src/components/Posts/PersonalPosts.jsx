@@ -46,6 +46,7 @@ const PersonalPosts = () => {
                     pictureUrl={element.pictureUrl}
                     postContent={element.postContent}
                     createdAt={new Date(element.createdAt)}
+                    location={element.location}
                     tags={element.PostTags}
                     username={userProfile.username}
                     profilePictureUrl={userProfile.profilePictureUrl}

@@ -6,7 +6,7 @@ import EditPostModal from "./EditPostModal";
 import DeletePostModal from "./DeletePostModal";
 import userStore from "../../stores/userStore";
 
-const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags }) => {
+const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags, location }) => {
     const actualUser = userStore((state) => state.username);
     let list = [
         {
@@ -17,7 +17,7 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
         {
             label: "Edit Post",
             action: () => document.getElementById(`editModal${postId}`).showModal(),
-            modal: <EditPostModal key={postId} id={postId} />
+            modal: <EditPostModal key={postId} id={postId} postTitle={postTitle} postContent={postContent} tags={tags} pictureUrl={pictureUrl} location={location} />
         }
     ]
     // Create report post modal

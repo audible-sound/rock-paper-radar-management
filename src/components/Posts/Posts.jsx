@@ -70,7 +70,7 @@ const Posts = () => {
         <div>
             <UtilsBar onFilter={handleFilter} />
             <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 bg-opacity-50 '>
-                {filteredPosts.map(({ id, pictureUrl, postTitle, postContent, User, createdAt, PostTags }) => (
+                {filteredPosts.map(({ id, pictureUrl, postTitle, postContent, User, createdAt, PostTags, location }) => (
                     <AuthorCard
                         key={id}
                         postId={id}
@@ -81,6 +81,7 @@ const Posts = () => {
                         createdAt={new Date(createdAt)}
                         tags={PostTags}
                         profilePictureUrl={User.UserProfile.profilePictureUrl}
+                        location={location}
                     />
                 ))}
             </div>
