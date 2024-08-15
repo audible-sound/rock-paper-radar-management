@@ -27,15 +27,15 @@ const ViewPostBody = ({ postId }) => {
     useEffect(() => {
         if (postDetails) {  
             setManageList([
-            {
-            label: "Edit Post",
-            action: () => document.getElementById(`editPost${postId}`).showModal(),
-            modal: <EditPostModal
-                key={postId}
-                id={postId}
-                title={postDetails.post.postTitle}
-                description={postDetails.post.postContent}
-            /> ,
+                {
+                    label: "Edit Post",
+                    action: () => document.getElementById(`editPost${postId}`).showModal(),
+                modal: <EditPostModal
+                    key={postId}
+                    id={postId}
+                    title={postDetails.post.postTitle}
+                    description={postDetails.post.postContent}
+                /> ,
         },
         {
             label: "Delete Post",
@@ -56,7 +56,7 @@ const ViewPostBody = ({ postId }) => {
 
 
 
-    
+    useEffect(() => {
         getPostComments(postId);
     }, [postId, getPostComments]);
 
@@ -160,15 +160,12 @@ const ViewPostBody = ({ postId }) => {
                         <span className="font-bold">{(postComments) ? postComments.length : 0} {postComments?.length === 1 ? "Comment" : "Comments"}</span>
                     </div>
                     {postDetails?.authorDetails.username !== username && (
-                        <img src={DotMenu} alt="" className="w-8 ml-auto" />
+                        <Dropdown 
+                            key={postId}
+                            items={manageList} 
+                        />
                     )}
-                    <div className="px-5 text-lg">
-                        <b>4,000 Comments</b>
-                    </div>
-                    <Dropdown 
-                        key={postId}
-                        items={manageList} 
-                    />
+                    
                 </div>
                 <form onSubmit={commentHandler} className="flex items-center w-full p-5 border-x-2 border-b-2">
                     <input

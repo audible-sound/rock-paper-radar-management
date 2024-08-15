@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Header from "../../../components/ui/Header";
 import UserLayout from "../../../components/Layouts/UserLayout";
 import FAQ from "../../../components/FAQ/FAQ";
