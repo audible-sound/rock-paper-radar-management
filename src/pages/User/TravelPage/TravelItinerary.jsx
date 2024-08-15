@@ -2,14 +2,14 @@ import Header from "../../../components/ui/Header";
 import UserLayout from "../../../components/Layouts/UserLayout";
 import TravelList from "../../../components/Travel/TravelList";
 import { Link } from "react-router-dom";
-import PlusSign from '../../../assets/images/PlusSign.svg'
+import PlusSign from "../../../assets/images/PlusSign.svg";
 
 function TravelItinerary() {
   return (
     <UserLayout>
       <Header>
         <span className="text-2xl">
-          <b>Travel Itenary</b>
+          <b>Travel Itinerary</b>
         </span>
 
         <Link
