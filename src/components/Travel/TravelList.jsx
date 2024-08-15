@@ -1,49 +1,46 @@
 import TravelCard from "./TravelCard";
-import travelBg from "../../assets/images/travel-pic.png";
+import { useEffect, useState } from "react";
+import userStore from "../../stores/userStore";
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const TravelList = () => {
-  const dummyData = [
-    {
-      id: 1,
-      image: travelBg,
-      title: "the walk of faith",
-      location: "Sandakan, Malaysia",
-      duration: "15 minutes",
-      tags: ["Hood", "Nature", "Wildlife"],
-    },
-    {
-      id: 2,
-      image: travelBg,
-      title: "the walk of faith",
-      location: "Sandakan, Malaysia",
-      duration: "15 minutes",
-      tags: ["Hood", "Nature", "Wildlife"],
-    },
-    {
-      id: 3,
-      image: travelBg,
-      title: "the walk of faith",
-      location: "Sandakan, Malaysia",
-      duration: "15 minutes",
-      tags: ["Hood", "Nature", "Wildlife"],
-    },
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+  const getUserTravelPlans = userStore((state) => state.getUserTravelPlans);
+  const travelPlans = userStore((state) => state.travelPlans);
+
+  useEffect(() => {
+    const fetchTravelPlans = async () => {
+      setIsLoading(true);
+      try {
+        await getUserTravelPlans();
+      } catch (error) {
+        console.error("Error fetching travel plans:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTravelPlans();
+  }, [getUserTravelPlans]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="grid-cols-1 bg-opacity-50 ">
-      {dummyData.map(({ id, image, title, location, duration, tags }) => {
-        return (
-          <TravelCard
-            key={id}
-            image={image}
-            title={title}
-            location={location}
-            duration={duration}
-            tags={tags}
-            hoverable
-          />
-        );
-      })}
+      {travelPlans?.map(({ id, pictureUrl, title, location, duration, TravelTags }) => (
+        <TravelCard
+          key={id}
+          image={pictureUrl}
+          title={title}
+          location={location}
+          duration={duration}
+          tags={TravelTags}
+          id={id}
+          hoverable
+        />
+      ))}
     </div>
   );
 };

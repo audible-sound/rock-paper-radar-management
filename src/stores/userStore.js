@@ -13,6 +13,7 @@ const userStore = create((set, get) => ({
     profileDetails: null,
     postComments: null,
     markers: null,
+    travelPlans: null,
     setLogin: (value) => set({ isLogin: value }),
     setProfilePictureUrl: (value) => set({ profilePictureUrl: value }),
     setUsername: (value) => set({ username: value }),
@@ -282,6 +283,67 @@ const userStore = create((set, get) => ({
     deleteMarker: async (id) => {
         try {
             await mainAxios.delete(`/markerData/${id}`, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    postTravelPlan: async (input) => {
+        try {
+            const response = await mainAxios.post('/travelPlan', {
+                title: input.title,
+                duration: input.duration,
+                location: input.location,
+                categories: input.tags,
+                pictureUrl: input.pictureUrl
+            }, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+    getUserTravelPlans: async () => {
+        try {
+            const response = await mainAxios.get('/travelPlan/user', {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+            set({ travelPlans: response.data.travelPlans });
+            return response.data.travelPlans;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+    deleteTravelPlan: async (id) => {
+        try {
+            await mainAxios.delete(`/travelPlan/${id}`, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    editTravelPlan: async (id, input) => {
+        try {
+            await mainAxios.put(`/travelPlan/${id}`, {
+                title: input.title,
+                duration: input.duration,
+                location: input.location,
+                categories: input.categories,
+                pictureUrl: input.pictureUrl
+            }, {
                 headers: {
                     authorization: Cookies.get('token'),
                 },
