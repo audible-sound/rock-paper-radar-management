@@ -9,12 +9,14 @@ import logoutIcon from '../../assets/images/LogoutIcon.svg'
 const Navbar = () => {
     const checkLogin = userStore(state => state.checkLogin);
     const profilePictureUrl = userStore(state => state.profilePictureUrl);
+    const logout = userStore(state => state.logout);
     const navigate = useNavigate();
     const removeCookie = () => {
         Cookies.remove('username', { path: '/' });
         Cookies.remove('token', { path: '/' });
         Cookies.remove('profilePictureUrl', { path: '/' });
         checkLogin();
+        logout();
         navigate('/', 'replace')
     }
     return (

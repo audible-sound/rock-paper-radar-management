@@ -3,11 +3,13 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 import { useNavigate } from 'react-router-dom';
 import mainAxios from '../../../api/mainAxios'
+import userStore from '../../../stores/userStore';
 import UserProtedRoute from '../../../components/Navigation/UserProtectedRoute.jsx'
 import Cookies from 'js-cookie'
 
 const SignInPage = () => {
   const signInForm = useForm();
+  const signIn = userStore(state => state.signIn);
   const navigate = useNavigate();
   const onSubmit = async (formData) => {
     try {
@@ -16,6 +18,7 @@ const SignInPage = () => {
       Cookies.set('token', accessToken, { expires: 30, path: '/' });
       Cookies.set('username', data.username, { expires: 30, path: '/' });
       Cookies.set('profilePictureUrl', data.profilePictureUrl, { expires: 30, path: '/' });
+      signIn(data);
       navigate('/user/profile');
     } catch (error) {
       console.log(error);

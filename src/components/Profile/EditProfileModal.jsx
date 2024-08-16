@@ -5,6 +5,7 @@ import Input from "../ui/Input"
 import { useState, useEffect } from "react"
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import storage from '../../config/firebaseConfig'
+import LoadingSpinner from "../ui/LoadingSpinner";
 
 const EditProfileModal = () => {
     const profileForm = useForm();
@@ -13,8 +14,11 @@ const EditProfileModal = () => {
     const getPublicProfile = userStore((state) => state.getPublicProfile);
     const updateProfile = userStore((state) => state.updateProfile);
     const getUserPosts = userStore((state) => state.getUserPosts);
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         const fetchProfileData = async () => {
+            setIsLoading(true);
             try {
                 const profileData = await getPublicProfile(username);
                 const year = new Date(profileData.birthDate).getFullYear();
@@ -33,10 +37,15 @@ const EditProfileModal = () => {
             } catch (error) {
                 console.error("Error fetching profile data:", error);
             }
+            setIsLoading(false);
         };
 
         fetchProfileData();
     }, [getPublicProfile, profileForm, username]);
+
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
 
     const onSubmit = async (data) => {
         // Handle form submission

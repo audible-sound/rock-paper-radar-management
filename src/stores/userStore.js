@@ -7,7 +7,7 @@ const userStore = create((set, get) => ({
     profilePictureUrl: Cookies.get('profilePictureUrl'),
     username: Cookies.get('username'),
     personalProfile: null,
-    userPosts: [],
+    userPosts: null,
     profilePosts: null,
     postDetails: null,
     profileDetails: null,
@@ -18,6 +18,17 @@ const userStore = create((set, get) => ({
     setPersonalProfile: (value) => set({ personalProfile: value }),
     setTotalPosts: (value) => set({ totalPosts: value }),
     setPostDetails: (value) => set({ postDetails: value }),
+    logout: () => set(() => ({
+        isLogin: false,
+        profilePictureUrl: null,
+        username: null,
+        personalProfile: null,
+        userPosts: null,
+        profilePosts: null,
+        postDetails: null,
+        profileDetails: null,
+        postComments: null,
+    })),
     checkLogin: () => {
         if (Cookies.get("token") !== undefined) {
             set({ isLogin: true });
@@ -113,7 +124,7 @@ const userStore = create((set, get) => ({
             });
             return data;
         } catch (error) {
-            console.log(error);
+            console.error(`Error fetching profile for username: ${username}`, error);
         }
     },
     updateProfile: async (input) => {
@@ -180,6 +191,21 @@ const userStore = create((set, get) => ({
                 }
             });
             set({ postComments: response.data.data });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    signIn: (data) => {
+        set({
+            isLogin: true,
+            username: data.username,
+            profilePictureUrl: data.profilePictureUrl
+        });
+    },
+    getCommunityPosts: async () => {
+        try {
+            const response = await mainAxios.get('/travelPost/');
+            set({ communityPosts: response.data.data });
         } catch (error) {
             console.log(error);
         }

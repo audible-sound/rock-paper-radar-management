@@ -7,7 +7,8 @@ import DeletePostModal from "./DeletePostModal";
 import ReportPostModal from "./ReportPostModal";
 
 const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags }) => {
-    const manageList = [
+    const actualUser = userStore((state) => state.username);
+    let list = [
         {
             label: "Edit Post",
             action: () => document.getElementById(`editPost${postId}`).showModal(),
@@ -34,6 +35,14 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
             /> ,
         },
     ]
+    // Create report post modal
+    if (actualUser !== username) {
+        list = [{
+            label: "Report Post",
+            action: () => document.getElementById(`editModal${postId}`).showModal(),
+            modal: <DeletePostModal key={postId} id={postId} />
+        }]
+    }
 
     return (
 
@@ -63,7 +72,7 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
                     </div>
                     <Dropdown
                             key={postId}
-                            items={manageList}
+                            items={list}
                         />
                 </div>
                 <div className="card-actions justify-start">
