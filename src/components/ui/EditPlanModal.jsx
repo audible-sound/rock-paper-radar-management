@@ -1,46 +1,49 @@
 import { FormProvider, useForm } from 'react-hook-form'
-import { useState } from 'react';
-import Input from '../ui/Input'
-import FileInput from '../ui/FileInput'
-import SearchInput from '../ui/SearchInput'
-import BadgeSelect from '../ui/BadgeSelect'
+import { useState, useEffect } from 'react'
+import Input from './Input'
+import SearchInput from './SearchInput'
+import BadgeSelect from './BadgeSelect'
 import userStore from '../../stores/userStore'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import storage from '../../config/firebaseConfig'
 
-const EditPostModal = ({ id, postTitle, postContent, tags, pictureUrl, location }) => {
-    const tagValues = tags.map(tag => tag.name);
-    const [badges, setBadges] = useState(tagValues || []);
-    const [img, setImg] = useState(pictureUrl || null);
+const EditPlanModal = ({ id, planTitle, tags, pictureUrl, location, duration }) => {
+    const [badges, setBadges] = useState(tags.map(tag => tag.name) || []);
+    const [_, setImg] = useState(pictureUrl || null);
     const [imgName, setImgName] = useState("");
     const [currentLocation, setCurrentLocation] = useState(location || "");
     const [imagePreview, setImagePreview] = useState(pictureUrl || null);
 
-    const postEditForm = useForm({
+    const [hours, setHours] = useState(Math.floor(duration / 60));
+    const [minutes, setMinutes] = useState(duration % 60);
+
+    const planEditForm = useForm({
         defaultValues: {
-            postTitle: postTitle || "",
-            postDescription: postContent || "",
-            postPic: []
+            planTitle: planTitle || "",
+            planPic: [],
+            durationHours: hours,
+            durationMinutes: minutes
         }
     });
 
-    const updatePost = userStore((state) => state.updatePost);
-    const getUserPosts = userStore((state) => state.getUserPosts);
+    const editTravelPlan = userStore((state) => state.editTravelPlan);
+    const getUserTravelPlans = userStore((state) => state.getUserTravelPlans);
     const username = userStore((state) => state.username);
 
     const onSubmit = async (data) => {
         try {
+            const totalMinutes = (parseInt(data.durationHours) || 0) * 60 + (parseInt(data.durationMinutes) || 0);
             const updatedData = {
-                postTitle: data.postTitle,
-                postContent: data.postDescription,
-                postLocation: currentLocation,
-                tags: badges,
-                pictureUrl: pictureUrl // Use the existing pictureUrl by default
+                title: data.planTitle,
+                duration: totalMinutes,
+                location: data.location,
+                categories: badges,
+                pictureUrl: pictureUrl
             };
 
-            if (data.postPic && data.postPic.length > 0) {
-                const image = data.postPic[0];
-                const storageRef = ref(storage, `userPosts/${username}/${new Date().toUTCString() + imgName}`);
+            if (data.planPic && data.planPic.length > 0) {
+                const image = data.planPic[0];
+                const storageRef = ref(storage, `userPlans/${username}/${new Date().toUTCString() + imgName}`);
                 const uploadTask = uploadBytesResumable(storageRef, image);
                 
                 await new Promise((resolve, reject) => {
@@ -56,11 +59,11 @@ const EditPostModal = ({ id, postTitle, postContent, tags, pictureUrl, location 
                 });
             }
 
-            await updatePost(id, updatedData);
-            await getUserPosts(username);
-            document.getElementById(`editModal${id}`).close();
+            await editTravelPlan(id, updatedData);
+            await getUserTravelPlans();
+            document.getElementById(`editPlanModal${id}`).close();
         } catch (error) {
-            console.error("Error updating post:", error);
+            console.error("Error updating plan:", error);
         }
     }
 
@@ -69,22 +72,24 @@ const EditPostModal = ({ id, postTitle, postContent, tags, pictureUrl, location 
     };
 
     const handleModalClose = () => {
-        postEditForm.reset();
-        setBadges(tagValues || []);
+        planEditForm.reset();
+        setBadges(tags.map(tag => tag.name) || []);
         setImg(pictureUrl || null);
         setImgName("");
         setCurrentLocation(location || "");
+        setHours(Math.floor(duration / 60));
+        setMinutes(duration % 60);
     };
 
     return (
-        <FormProvider {...postEditForm}>
-            <dialog id={`editModal${id}`} className="modal" onClose={handleModalClose}>
+        <FormProvider {...planEditForm}>
+            <dialog id={`editPlanModal${id}`} className="modal" onClose={handleModalClose}>
                 <div className="modal-box w-11/12 max-w-6xl h-5/6 overflow-y-auto p-8 absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     <form method="dialog">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-4 top-4">✕</button>
                     </form>
-                    <form className='flex flex-col space-y-8' onSubmit={postEditForm.handleSubmit(onSubmit)}>
-                        <h3 className='text-3xl font-bold text-center mb-6'>Edit Post</h3>
+                    <form className='flex flex-col space-y-8' onSubmit={planEditForm.handleSubmit(onSubmit)}>
+                        <h3 className='text-3xl font-bold text-center mb-6'>Edit Travel Plan</h3>
 
                         <div className='bg-gray-100 p-6 rounded-lg'>
                             <h4 className='text-xl font-semibold mb-4'>Basic Information</h4>
@@ -93,9 +98,9 @@ const EditPostModal = ({ id, postTitle, postContent, tags, pictureUrl, location 
                                     <Input
                                         left="Title"
                                         placeholder="Enter Title"
-                                        registerInput="postTitle"
+                                        registerInput="planTitle"
                                         required="*required"
-                                        inputValue={postTitle}
+                                        inputValue={planTitle}
                                     />
                                 </div>
                                 <div className='w-1/2 flex items-center justify-end gap-10'>
@@ -112,7 +117,7 @@ const EditPostModal = ({ id, postTitle, postContent, tags, pictureUrl, location 
                                     <input
                                         type="file"
                                         accept="image/*"
-                                        {...postEditForm.register("postPic", {
+                                        {...planEditForm.register("planPic", {
                                             onChange: (e) => {
                                                 const file = e.target.files[0];
                                                 if (file) {
@@ -157,21 +162,30 @@ const EditPostModal = ({ id, postTitle, postContent, tags, pictureUrl, location 
                         </div>
 
                         <div className='bg-gray-100 p-6 rounded-lg'>
-                            <h4 className='text-xl font-semibold mb-4'>Description</h4>
-                            <textarea
-                                {...postEditForm.register("postDescription")}
-                                className='textarea textarea-bordered w-full h-40'
-                                placeholder="Enter post description"
-                                defaultValue={postContent}
-                            />
+                            <h4 className='text-xl font-semibold mb-4'>Duration</h4>
+                            <div className="flex space-x-4">
+                                <Input
+                                    left="Hours"
+                                    placeholder="Enter Hours"
+                                    registerInput="durationHours"
+                                    type="number"
+                                    inputValue={hours}
+                                />
+                                <Input
+                                    left="Minutes"
+                                    placeholder="Enter Minutes"
+                                    registerInput="durationMinutes"
+                                    type="number"
+                                    inputValue={minutes}
+                                />
+                            </div>
                         </div>
-                        <button type='submit' className='btn bg-[#7091E6] w-full mt-6 text-white' onClick={() => postEditForm.handleSubmit(onSubmit)()}>Submit</button>
+                        <button type='submit' className='btn bg-[#7091E6] w-full mt-6 text-white' onClick={() => planEditForm.handleSubmit(onSubmit)()}>Submit</button>
                     </form>
                 </div>
             </dialog>
         </FormProvider>
     )
-
 }
 
-export default EditPostModal
+export default EditPlanModal

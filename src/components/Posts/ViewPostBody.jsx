@@ -125,8 +125,8 @@ const ViewPostBody = ({ postId }) => {
                 </div>
             </div>
 
-            <div className="w-full border-solid border-x-2">
-                <img src={postDetails?.post.pictureUrl} alt="" className="object-cover w-full" />
+            <div className="w-full border-solid border-x-2 max-h-[500px] overflow-hidden">
+                <img src={postDetails?.post.pictureUrl} alt="" className="object-contain w-full h-full" />
             </div>
 
             <div className="flex flex-col w-full">
