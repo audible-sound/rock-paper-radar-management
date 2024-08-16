@@ -26,11 +26,12 @@ import TravelItinerary from "./pages/User/TravelPage/TravelItinerary.jsx";
 import ViewFAQ from "./pages/User/FAQPage/ViewFAQ.jsx"
 import AdminSignInPage from "./pages/Admin/Authentication/AdminSignUpPage.jsx";
 import FeedbackPage from "./pages/User/Feedback/FeedbackPage.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <SignInPage />,
+    element: <LandingPage />,
     errorElement: <ErrorPage />
   },
   {

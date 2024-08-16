@@ -20,6 +20,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'sign-in-bg': "url('/src/assets/images/signInBg.jpg')",
+        'landing-bg': "url('/src/assets/images/RoadtripBg.jpg')",
       }
     }
   },
