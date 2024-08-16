@@ -6,6 +6,7 @@ import searchIcon from '../../assets/images/search-icon.svg'
 import CalendarIcon from '../../assets/images/CalendarIcon.svg'
 import logoutIcon from '../../assets/images/LogoutIcon.svg'
 import FAQIcon from '../../assets/images/FAQIcon.svg'
+import FeedbackIcon from '../../assets/images/FeedbackIcon.svg'
 
 const Navbar = () => {
     const checkLogin = userStore(state => state.checkLogin);
@@ -52,6 +53,11 @@ const Navbar = () => {
                     <li className='mb-2'>
                         <Link to="/user/faq-view" className="tooltip tooltip-right pt-2 pb-2" data-tip="FAQ">
                             <img src={FAQIcon} alt="" className='w-8' />
+                        </Link>
+                    </li>
+                    <li className='mb-2'>
+                        <Link to="/user/feedback" className="tooltip tooltip-right pt-2 pb-2" data-tip="FAQ">
+                            <img src={FeedbackIcon} alt="" className='w-8' />
                         </Link>
                     </li>
                 </div>
