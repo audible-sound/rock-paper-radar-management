@@ -103,6 +103,7 @@ const EditPostModal = ({ id, post }) => {
             </dialog>
         </FormProvider>
     )
+
 }
 
 export default EditPostModal
