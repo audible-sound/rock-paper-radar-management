@@ -25,6 +25,7 @@ import DashboardPosts from "./pages/Admin/Dashboard/DashboardPosts.jsx";
 import TravelItinerary from "./pages/User/TravelPage/TravelItinerary.jsx";
 import ViewFAQ from "./pages/User/FAQPage/ViewFAQ.jsx"
 import AdminSignInPage from "./pages/Admin/Authentication/AdminSignUpPage.jsx";
+import FeedbackPage from "./pages/User/Feedback/FeedbackPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,11 @@ const router = createBrowserRouter([
   {
     path: "/user/travel-itinerary",
     element: <TravelItinerary />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/user/feedback",
+    element: <FeedbackPage />,
     errorElement: <ErrorPage />,
   },
   {
