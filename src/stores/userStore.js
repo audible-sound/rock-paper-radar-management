@@ -209,6 +209,48 @@ const userStore = create((set, get) => ({
         } catch (error) {
             console.log(error);
         }
+    },
+    updatePost: async (postId, input) => {
+        try {
+            await mainAxios.put(`/travelPost/${postId}`, {
+                pictureUrl: input.pictureUrl,
+                postTitle: input.postTitle,
+                postLocation: input.postLocation,
+                categories: input.tags,
+                postDescription: input.postContent
+            },
+                {
+                    headers: {
+                        authorization: Cookies.get('token'),
+                    },
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    deleteComment: async (commentId) => {
+        try {
+            await mainAxios.delete(`/comment/${commentId}`, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    editComment: async (commentId, input) => {
+        try {
+            await mainAxios.put(`/comment/${commentId}`, {
+                commentContent: input.commentContent
+            }, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }))
 

@@ -6,19 +6,9 @@ import EditPostModal from "./EditPostModal";
 import DeletePostModal from "./DeletePostModal";
 import ReportPostModal from "./ReportPostModal";
 
-const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags }) => {
+const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags, location }) => {
     const actualUser = userStore((state) => state.username);
     let list = [
-        {
-            label: "Edit Post",
-            action: () => document.getElementById(`editPost${postId}`).showModal(),
-            modal: <EditPostModal
-                key={postId}
-                id={postId}
-                title={postTitle}
-                description={postContent}
-            /> ,
-        },
         {
             label: "Delete Post",
             action: () => document.getElementById(`deleteModal${postId}`).showModal(),
@@ -28,6 +18,10 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
             /> ,
         },
         {
+            label: "Edit Post",
+            action: () => document.getElementById(`editModal${postId}`).showModal(),
+            modal: <EditPostModal key={postId} id={postId} postTitle={postTitle} postContent={postContent} tags={tags} pictureUrl={pictureUrl} location={location} />
+        }
             label: "Report Post",
             action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
             modal: <ReportPostModal

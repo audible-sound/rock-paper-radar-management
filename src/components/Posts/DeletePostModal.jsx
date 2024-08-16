@@ -10,7 +10,10 @@ const DeletePostModal = ({ id }) => {
       await deletePost(id);
       await getUserPosts(username);
       await getPersonalProfile();
-      document.getElementById(`deleteModal${id}`).close();
+      const modalElement = document.getElementById(`deleteModal${id}`);
+      if (modalElement) {
+        modalElement.close();
+      }
     } catch (error) {
       console.log(error);
     }
