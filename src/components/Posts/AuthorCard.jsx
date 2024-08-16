@@ -5,6 +5,7 @@ import Dropdown from "../ui/Dropdown";
 import EditPostModal from "./EditPostModal";
 import DeletePostModal from "./DeletePostModal";
 import ReportPostModal from "./ReportPostModal";
+import userStore from "../../stores/userStore";
 
 const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, createdAt, profilePictureUrl, tags, location }) => {
     const actualUser = userStore((state) => state.username);
@@ -21,7 +22,8 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
             label: "Edit Post",
             action: () => document.getElementById(`editModal${postId}`).showModal(),
             modal: <EditPostModal key={postId} id={postId} postTitle={postTitle} postContent={postContent} tags={tags} pictureUrl={pictureUrl} location={location} />
-        }
+        },
+        {
             label: "Report Post",
             action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
             modal: <ReportPostModal
