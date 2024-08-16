@@ -24,6 +24,7 @@ import DashboardBans from "./pages/Admin/Dashboard/DashboardBans.jsx";
 import DashboardPosts from "./pages/Admin/Dashboard/DashboardPosts.jsx";
 import TravelItinerary from "./pages/User/TravelPage/TravelItinerary.jsx";
 import ViewFAQ from "./pages/User/FAQPage/ViewFAQ.jsx"
+import AdminSignInPage from "./pages/Admin/Authentication/AdminSignUpPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -89,7 +90,7 @@ const router = createBrowserRouter([
   
   {
     path: "/admin",
-    element: <SignInPage />,
+    element: <AdminSignInPage />,
     errorElement: <ErrorPage />,
   },
   {
