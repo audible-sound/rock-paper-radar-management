@@ -1,10 +1,13 @@
-import Badge from '../ui/Badge'
-import DotMenu from "../../assets/images/DotMenu.svg"
+import Badge from '../ui/Badge' 
 import PersonalComments from './PersonalComments'
 import { useEffect, useState } from 'react'
 import userStore from "../../stores/userStore"
 import { useNavigate, Link } from 'react-router-dom'
 import LoadingSpinner from "../ui/LoadingSpinner";
+import EditPostModal from './EditPostModal'
+import DeletePostModal from './DeletePostModal'
+import Dropdown from '../ui/Dropdown'
+import ReportPostModal from './ReportPostModal'
 
 const ViewPostBody = ({ postId }) => {
     const getPostDetails = userStore((state) => state.getPostDetails);
@@ -32,6 +35,48 @@ const ViewPostBody = ({ postId }) => {
     if (isLoading) {
         return <LoadingSpinner />;
     }
+    const [manageList, setManageList] = useState([]);
+
+    useEffect(() => {
+        getPostDetails(postId);
+        console.log(postDetails);
+    },[]);
+
+    useEffect(() => {
+        if (postDetails) {  
+            setManageList([
+                {
+                    label: "Edit Post",
+                    action: () => document.getElementById(`editPost${postId}`).showModal(),
+                modal: <EditPostModal
+                    key={postId}
+                    id={postId}
+                    title={postDetails.post.postTitle}
+                    description={postDetails.post.postContent}
+                /> ,
+        },
+        {
+            label: "Delete Post",
+            action: () => document.getElementById(`deleteModal${postId}`).showModal(),
+            modal: <DeletePostModal
+                id={postId}
+            /> ,
+        },
+        {
+            label: "Report Post",
+            action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
+            modal: <ReportPostModal
+                id={postId}
+            /> ,
+        }
+    ])
+    }},[setManageList,postId]);
+
+
+
+    useEffect(() => {
+        getPostComments(postId);
+    }, [postId, getPostComments]);
 
     const commentHandler = async (event) => {
         event.preventDefault();
@@ -131,8 +176,12 @@ const ViewPostBody = ({ postId }) => {
                         <span className="font-bold">{(postComments) ? postComments.length : 0} {postComments?.length === 1 ? "Comment" : "Comments"}</span>
                     </div>
                     {postDetails?.authorDetails.username !== username && (
-                        <img src={DotMenu} alt="" className="w-8 ml-auto" />
+                        <Dropdown 
+                            key={postId}
+                            items={manageList} 
+                        />
                     )}
+                    
                 </div>
                 <form onSubmit={commentHandler} className="flex items-center w-full p-5 border-x-2 border-b-2">
                     <input
