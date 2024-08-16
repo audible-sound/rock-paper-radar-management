@@ -20,6 +20,7 @@ const ViewPostBody = ({ postId }) => {
     const getPublicProfile = userStore((state) => state.getPublicProfile);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
+    const [manageList, setManageList] = useState([]);
 
     useEffect(() => {
         const fetchPostDetails = async () => {
@@ -32,51 +33,40 @@ const ViewPostBody = ({ postId }) => {
         fetchPostDetails();
     }, [postId, getPostComments, getPostDetails]);
 
-    if (isLoading) {
-        return <LoadingSpinner />;
-    }
-    const [manageList, setManageList] = useState([]);
-
-    useEffect(() => {
-        getPostDetails(postId);
-        console.log(postDetails);
-    },[]);
-
     useEffect(() => {
         if (postDetails) {  
             setManageList([
                 {
                     label: "Edit Post",
                     action: () => document.getElementById(`editPost${postId}`).showModal(),
-                modal: <EditPostModal
-                    key={postId}
-                    id={postId}
-                    title={postDetails.post.postTitle}
-                    description={postDetails.post.postContent}
-                /> ,
-        },
-        {
-            label: "Delete Post",
-            action: () => document.getElementById(`deleteModal${postId}`).showModal(),
-            modal: <DeletePostModal
-                id={postId}
-            /> ,
-        },
-        {
-            label: "Report Post",
-            action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
-            modal: <ReportPostModal
-                id={postId}
-            /> ,
+                    modal: <EditPostModal
+                        key={postId}
+                        id={postId}
+                        title={postDetails.post.postTitle}
+                        description={postDetails.post.postContent}
+                    /> ,
+                },
+                {
+                    label: "Delete Post",
+                    action: () => document.getElementById(`deleteModal${postId}`).showModal(),
+                    modal: <DeletePostModal
+                        id={postId}
+                    /> ,
+                },
+                {
+                    label: "Report Post",
+                    action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
+                    modal: <ReportPostModal
+                        id={postId}
+                    /> ,
+                }
+            ]);
         }
-    ])
-    }},[setManageList,postId]);
+    }, [postId, postDetails]);
 
-
-
-    useEffect(() => {
-        getPostComments(postId);
-    }, [postId, getPostComments]);
+    if (isLoading) {
+        return <LoadingSpinner />;
+    }
 
     const commentHandler = async (event) => {
         event.preventDefault();
@@ -86,7 +76,7 @@ const ViewPostBody = ({ postId }) => {
             await getPostComments(postId);
             event.target.reset();
         } catch (error) {
-            console.log(error);
+            console.error("Error posting comment:", error);
         }
     }
 
@@ -95,7 +85,7 @@ const ViewPostBody = ({ postId }) => {
             await likePost(postId);
             await getPostDetails(postId);
         } catch (error) {
-            console.log(error);
+            console.error("Error liking post:", error);
         }
     }
 
@@ -138,12 +128,12 @@ const ViewPostBody = ({ postId }) => {
                     <p className="text-base mb-4">{postDetails?.post.postContent}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                         {postDetails?.post.PostTags.map((tag, index) => (
-                            <Badge category={tag.name} key={index} />
+                            <Badge category={tag.name} key={tag.id || index} />
                         ))}
                     </div>
                 </div>
                 <div className="flex items-center w-full p-5 border-x-2 border-b-2">
-                    <button className="flex items-center mr-6" onClick={likeHandler}>
+                    <button className="flex items-center mr-6" onClick={likeHandler} aria-label="Like post">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6 mr-2"
@@ -183,7 +173,7 @@ const ViewPostBody = ({ postId }) => {
                     )}
                     
                 </div>
-                <form onSubmit={commentHandler} className="flex items-center w-full p-5 border-x-2 border-b-2">
+                <form onSubmit={(e) => { e.preventDefault(); commentHandler(e); }} className="flex items-center w-full p-5 border-x-2 border-b-2">
                     <input
                         type="text"
                         name="commentInput"
