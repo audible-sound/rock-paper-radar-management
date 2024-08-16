@@ -3,8 +3,7 @@ import UserLayout from "../../../components/Layouts/UserLayout";
 import TravelList from "../../../components/Travel/TravelList";
 import PlusSign from '../../../assets/images/PlusSign.svg'
 import CreateTravelPlanModal from "../../../components/Travel/CreateTravelPlanModal";
-import { Link } from "react-router-dom";
-import PlusSign from "../../../assets/images/PlusSign.svg";
+// import { Link } from "react-router-dom";
 
 function TravelItinerary() {
   return (
@@ -30,5 +29,4 @@ function TravelItinerary() {
   );
 }
 
-export default TravelItenary;
 export default TravelItinerary;
