@@ -29,6 +29,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import AdminSignInPage from "./pages/Admin/Authentication/AdminSignInPage.jsx";
 import UserBlogPage from "./pages/User/BlogPage/UserBlogPage.jsx";
 import FeedbackManagementPage from "./pages/Admin/FeedbackManagement/FeedbackManagementPage.jsx";
+import AddStaffModal from "./components/Staff/AddStaffModal.jsx";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: "/admin/profile",
+    element: <PersonalProfile />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/admin/dashboard",
     element: <Dashboard />,
     errorElement: <ErrorPage />,
@@ -175,6 +181,11 @@ const router = createBrowserRouter([
   {
     path: "/admin/feedback-management",
     element: <FeedbackManagementPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/add-staff-account",
+    element: <AddStaffModal />,
     errorElement: <ErrorPage />,
   },
  

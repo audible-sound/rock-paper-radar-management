@@ -2,25 +2,23 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 import { useNavigate } from 'react-router-dom';
 import mainAxios from '../../../api/mainAxios'
-import userStore from '../../../stores/userStore';
+import staffStore from '../../../stores/staffStore';
 import Cookies from 'js-cookie'
 
 const AdminSignInPage = () => {
   const signInForm = useForm();
-  const signIn = userStore(state => state.signIn);
+  const signIn = staffStore(state => state.signIn);
   const navigate = useNavigate();
-
-  //caution got ai generated code here delete it or use at ur own discretion
   const onSubmit = async (formData) => {
     try {
       const response = await mainAxios.post('/admin/signin', formData);
       const { data, accessToken } = response.data;
-      Cookies.set('adminToken', accessToken, { expires: 30, path: '/' });
-      Cookies.set('adminUsername', data.username, { expires: 30, path: '/' });
+      Cookies.set('token', accessToken, { expires: 30, path: '/' });
+      Cookies.set('username', data.username, { expires: 30, path: '/' });
       signIn(data);
       navigate('/admin/dashboard');
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

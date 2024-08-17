@@ -1,7 +1,7 @@
 import AdminLayout from "../../../components/Layouts/AdminLayout"
 import AddStaffModal from "../../../components/Staff/AddStaffModal"
 import Header from "../../../components/ui/Header"
-import Table from "../../../components/ui/Table"
+import Table from "./Table"
 
 const ViewStaffPage = () =>{
   return (
