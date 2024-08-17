@@ -1,37 +1,9 @@
 import BlogCard from "./BlogCard"
-import bg from "../../assets/images/Wavy-pic.jpg"
 import { useState, useEffect } from "react"
 import staffStore from "../../stores/staffStore"
 import LoadingSpinner from "../ui/LoadingSpinner"
 
 const Blogs = () => {
-  const dummyData = [{
-    id: 1,
-    image: bg,
-    title: "the walk of faith",
-    description: "lorem ipsum dfe efsfdafasfa sdfas fsafsdfas dssdfsf",
-    username: "Lucas Monroe",
-    date: "12/3/2028",
-    link: ""
-}, {
-    id: 2,
-    image: bg,
-    title: "the walk ofsffs faith",
-    description: "lorem ipsum dfe efsfdafasfa sdfas fsafsdfas dssdfsf",
-    username: "Lucas Monroe",
-    date: "12/3/2028",
-    link: ""
-}, {
-    id: 3,
-    image: bg,
-    title: "the walk of sdfsdafsdfsdf",
-    description: "lorem ipsum dfe efsfdafasfa sdfas fsafsdfas dssdfsf",
-    username: "Lucas Monroe",
-    date: "12/3/2028",
-    link: ""
-},
-]
-
     const getBlogs = staffStore((state) => state.getBlogs);
     const blogs = staffStore((state) => state.blogs);
     const [isLoading, setIsLoading] = useState(true);
