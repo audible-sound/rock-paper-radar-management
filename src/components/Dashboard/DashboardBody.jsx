@@ -6,8 +6,11 @@ const DashboardBody = () => {
         <div className='flex flex-col w-full h-full'>
         <div className='flex flex-row items-center border bg-white px-5 py-2'>
             <div className='join'>
-            <button className="btn btn-primary w-40 px-10">Monthly</button>
-            <button className="btn btn-primary w-40 px-10">Yearly</button>
+                <div className="join">
+                    <input className="join-item btn" type="radio" name="options" aria-label="Monthly" />
+                    <input className="join-item btn" type="radio" name="options" aria-label="Yearly" />
+                    <input className="join-item btn" type="radio" name="options" aria-label="All Time" />
+                </div>
             </div>
             </div>
             <div className='flex justify-center p-5 w-full'>

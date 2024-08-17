@@ -10,6 +10,10 @@ const FeedbackManagementBody = () => {
 
   return (
     <div>
+        <div className="join">
+        <input className="join-item btn" type="radio" name="options" aria-label="Feedback" />
+        <input className="join-item btn" type="radio" name="options" aria-label="Bug Report" />
+      </div>
       <Table />
     </div>
   );
