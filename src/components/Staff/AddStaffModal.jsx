@@ -1,20 +1,34 @@
+import { useState } from 'react';
 import Input from '../ui/Input'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import staffStore from '../../stores/staffStore';
 import mainAxios from '../../api/mainAxios';
+import storage from '../../config/firebaseConfig';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import SignUpForm from './SignUpForm';
+// import PersonalForm from './PersonalForm';
+// import ProfileForm from './ProfileForm';
+
+const [page, setPage] = useState(1);
+
+const FormTitles = ["Sign Up", "Personal Information", "Profile"];
+
+const PageDisplay = () => {
+    if(page === 1){
+        return <SignUpForm />
+    }else if(page === 2){
+        // return <PersonalForm />
+    }else if(page === 3){
+        // return <ProfileForm />
+    }
+}
 
 const AddStaffModal = () => {
     const staffForm = useForm()
     const navigate = useNavigate();
     const onSubmit = async (formData) => {
         try{
-            const response = await mainAxios.post('admin/registerStaff', formData)
-            const {data, accessToken} = response.data;
-            Cookies.set('token', accessToken, { expires: 30, path: '/' });
-            Cookies.set('username', data.username, { expires: 30, path: '/' });
-            Cookies.set('profilePictureUrl', data.profilePictureUrl, { expires: 30, path: '/' });
+            await mainAxios.post('admin/registerStaff', formData)
             // TODO display some sort of message saying account created successfully
             // TODO display any errors that are returned from the server as well
         } catch (error) {
@@ -32,44 +46,6 @@ const AddStaffModal = () => {
                 </form>
                 <form className='flex flex-col justify-center items-center' {...staffForm} onSubmit={staffForm.handleSubmit(onSubmit)}>
                     <span className='text-2xl'>Add New Staff</span>
-                    {/* TODO figure out how to do multi page like user register */}
-                    <Input 
-                        left={"Username"} 
-                        registerInput={"username"}
-                        placeholder={"Enter your username"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Full Name"} 
-                        registerInput={"fullName"}
-                        placeholder={"Enter your full name"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Password"} 
-                        registerInput={"password"}
-                        placeholder={"Enter your password"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Re-type Password"} 
-                        registerInput={"confirmPassword"}
-                        placeholder={"Enter your password again"}
-                        required={"This is required"}
-                    />
-                    {/* TODO change below to radio buttons */}
-                    <Input 
-                        left={"User Type"} 
-                        registerInput={"userType"}
-                        placeholder={"Either 'staff' or 'admin'"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Email"} 
-                        registerInput={"email"}
-                        placeholder={"Enter your email"}
-                        required={"This is required"}
-                    />
                     {/* TODO change below to date input */}
                     <Input 
                         left={"Birth Date"} 
