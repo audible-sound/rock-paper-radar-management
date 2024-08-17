@@ -6,7 +6,7 @@ import BlogIcon from "../../assets/images/BlogIcon.svg"
 import StaffIcon from "../../assets/images/StaffIcon.svg"
 import StatsIcon from "../../assets/images/StatsIcon.svg"
 import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg"
-
+import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg"
 
 const Navbar = () => {
 
@@ -41,6 +41,11 @@ const Navbar = () => {
                     <li>
                         <Link to="/admin/user-guide" className="tooltip tooltip-right pt-2 pb-2" data-tip="User Guide">
                             <img src={WriteBlogIcon} alt="" className='w-10' />
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/admin/feedback-management" className="tooltip tooltip-right pt-2 pb-2" data-tip="Feedback Management">
+                            <img src={FeedbackManagementIcon} alt="" className='w-10' />
                         </Link>
                     </li>
                 </div>

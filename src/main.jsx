@@ -28,6 +28,7 @@ import FeedbackPage from "./pages/User/Feedback/FeedbackPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import AdminSignInPage from "./pages/Admin/Authentication/AdminSignInPage.jsx";
 import UserBlogPage from "./pages/User/BlogPage/UserBlogPage.jsx";
+import FeedbackManagementPage from "./pages/Admin/FeedbackManagement/FeedbackManagementPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -169,6 +170,11 @@ const router = createBrowserRouter([
   {
     path: "/admin/user-guide-create",
     element: <CreateUserGuide />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/feedback-management",
+    element: <FeedbackManagementPage />,
     errorElement: <ErrorPage />,
   },
  
