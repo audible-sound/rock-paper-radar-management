@@ -4,14 +4,14 @@ const DashboardAccountsBody = () => {
     return (
         // the background's height stops growing so i just put this for now bg-[#7091E6] bg-opacity-100 
         <div className='w-full h-full'> 
-        <div className='card bg-base-100 mx-8 my-10 flex flex-col bg-white'>
+        <div className='card mx-8 my-10 flex flex-col bg-white'>
             <div>
                 <h2 className="text-2xl font-bold mt-5 text-center">Total Account Created</h2>
                 <BarChart />
             </div>
         </div>
-            <div className='card bg-base-100 mx-8 mt-4 mb-5 flex flex-col bg-white'>
-                <div className='card bg-base-100 mx-8 pb-8 mt-4 flex flex-col bg-white'>
+            <div className='card mx-8 mt-4 mb-5 flex flex-col bg-white'>
+                <div className='card mx-8 pb-8 mt-4 flex flex-col bg-white'>
                 <div className="overflow-x-auto rounded-lg">
                     <table className="table">
                         {/* head */}

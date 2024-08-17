@@ -1,4 +1,3 @@
-import React from "react";
 import "./ArrowStyle.css";
 
 const UserGuideSection = ({ section, content = [], onSelect }) => {

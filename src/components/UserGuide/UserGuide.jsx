@@ -1,4 +1,3 @@
-import React from "react";
 import UserGuideSection from "./UserGuideSection";
 
 const UserGuide = ({ onSelect }) => {
@@ -104,10 +103,6 @@ const UserGuide = ({ onSelect }) => {
       ],
     },
   ];
-
-  const handleSelect = (item) => {
-    setSelectedContent(item);
-  };
 
   return (
     <div>

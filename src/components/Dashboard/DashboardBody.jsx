@@ -6,8 +6,8 @@ const DashboardBody = () => {
         <div className='flex flex-col w-full h-full'>
         <div className='flex flex-row items-center border bg-white px-5 py-2'>
             <div className='join'>
-            <div className="btn btn-primary w-40 px-10">Monthly</div>
-            <div className="btn btn-primary w-40 px-10">Yearly</div>
+            <button className="btn btn-primary w-40 px-10">Monthly</button>
+            <button className="btn btn-primary w-40 px-10">Yearly</button>
             </div>
             </div>
             <div className='flex justify-center p-5 w-full'>

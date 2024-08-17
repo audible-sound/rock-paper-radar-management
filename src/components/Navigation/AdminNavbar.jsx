@@ -12,7 +12,7 @@ const Navbar = () => {
 
     return (
         <div className='flex flex-col h-full'>
-            <ul className="fixed menu bg-base-100 h-dvh p-0 pt-8 justify-between">
+            <ul className="fixed menu bg-base-100 h-dvh p-0 pt-8 justify-between z-50">
                 <div>
                     <li>
                         <Link to="/admin/profile" className='tooltip tooltip-right pt-4 pb-4 ' data-tip="Profile">
@@ -24,22 +24,22 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/dashboard" className="tooltip tooltip-right pt-2 pb-2" data-tip="Posts">
+                        <Link to="/admin/dashboard" className="tooltip tooltip-right pt-2 pb-2" data-tip="Dashboard">
                             <img src={StatsIcon} alt="" className='w-8' />
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/blogs" className="tooltip tooltip-right pt-2 pb-2" data-tip="Travel Plan">
+                        <Link to="/admin/blogs" className="tooltip tooltip-right pt-2 pb-2" data-tip="Blogs">
                             <img src={BlogIcon} alt="" className='w-10' />
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/staff-view" className="tooltip tooltip-right pt-2 pb-2" data-tip="Travel Plan">
+                        <Link to="/admin/staff-view" className="tooltip tooltip-right pt-2 pb-2" data-tip="Staff">
                             <img src={StaffIcon} alt="" className='w-10' />
                         </Link>
                     </li>
                     <li>
-                        <Link to="/admin/user-guide" className="tooltip tooltip-right pt-2 pb-2" data-tip="Travel Plan">
+                        <Link to="/admin/user-guide" className="tooltip tooltip-right pt-2 pb-2" data-tip="User Guide">
                             <img src={WriteBlogIcon} alt="" className='w-10' />
                         </Link>
                     </li>

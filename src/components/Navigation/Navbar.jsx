@@ -7,6 +7,7 @@ import CalendarIcon from '../../assets/images/CalendarIcon.svg'
 import logoutIcon from '../../assets/images/LogoutIcon.svg'
 import FAQIcon from '../../assets/images/FAQIcon.svg'
 import FeedbackIcon from '../../assets/images/FeedbackIcon.svg'
+import BlogIcon from "../../assets/images/BlogIcon.svg"
 
 const Navbar = () => {
     const checkLogin = userStore(state => state.checkLogin);
@@ -20,11 +21,11 @@ const Navbar = () => {
         Cookies.remove('bannerPic', { path: '/' });
         checkLogin();
         logout();
-        navigate('/', 'replace')
+        navigate('/user', 'replace')
     }
     return (
         <div className='flex flex-col h-full'>
-            <ul className="fixed menu bg-base-100 h-dvh p-0 pt-8 justify-between">
+            <ul className="fixed menu bg-base-100 h-dvh p-0 pt-8 justify-between z-50">
                 <div>
                     <li className='mb-2'>
                         <Link to="/user/profile" className='tooltip tooltip-right pt-4 pb-4 ' data-tip="Profile">
@@ -41,7 +42,7 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li className='mb-2'>
-                        <Link to="/user/map-view" className="tooltip tooltip-right pt-2 pb-2" data-tip="Posts">
+                        <Link to="/user/map-view" className="tooltip tooltip-right pt-2 pb-2" data-tip="Map View">
                             <img src={Mapicon} alt="" className='w-8' />
                         </Link>
                     </li>
@@ -56,8 +57,13 @@ const Navbar = () => {
                         </Link>
                     </li>
                     <li className='mb-2'>
-                        <Link to="/user/feedback" className="tooltip tooltip-right pt-2 pb-2" data-tip="FAQ">
+                        <Link to="/user/feedback" className="tooltip tooltip-right pt-2 pb-2" data-tip="Feedback">
                             <img src={FeedbackIcon} alt="" className='w-8' />
+                        </Link>
+                    </li>
+                    <li className='mb-2'>
+                        <Link to="/user/blogs" className="tooltip tooltip-right pt-2 pb-2" data-tip="Blogs">
+                            <img src={BlogIcon} alt="" className='w-8' />
                         </Link>
                     </li>
                 </div>

@@ -23,17 +23,20 @@ const AddStaffModal = () => {
                     <span className='text-2xl'>Add New Staff</span>
                     <Input 
                         left={"Full Name"} 
-                        registerinput={"fullName"}
+                        registerInput={"fullName"}
+                        placeholder={"Enter your full name"}
                         required={"This is required"}
                     />
                     <Input 
                         left={"Email"} 
-                        registerinput={"email"}
+                        registerInput={"email"}
+                        placeholder={"Enter your email"}
                         required={"This is required"}
                     />
                     <Input 
                         left={"Password"} 
-                        registerinput={"password"}
+                        registerInput={"password"}
+                        placeholder={"Enter your password"}
                         required={"This is required"}
                     />
                     <button type='submit' className='btn w-full' onClick={() => staffForm.trigger()}>Submit</button>

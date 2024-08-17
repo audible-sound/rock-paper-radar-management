@@ -24,9 +24,10 @@ import DashboardBans from "./pages/Admin/Dashboard/DashboardBans.jsx";
 import DashboardPosts from "./pages/Admin/Dashboard/DashboardPosts.jsx";
 import TravelItinerary from "./pages/User/TravelPage/TravelItinerary.jsx";
 import ViewFAQ from "./pages/User/FAQPage/ViewFAQ.jsx"
-import AdminSignInPage from "./pages/Admin/Authentication/AdminSignUpPage.jsx";
 import FeedbackPage from "./pages/User/Feedback/FeedbackPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
+import AdminSignInPage from "./pages/Admin/Authentication/AdminSignInPage.jsx";
+import UserBlogPage from "./pages/User/BlogPage/UserBlogPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +68,11 @@ const router = createBrowserRouter([
   {
     path: "/user/feedback",
     element: <FeedbackPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/user/blogs",
+    element: <UserBlogPage />,
     errorElement: <ErrorPage />,
   },
   {

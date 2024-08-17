@@ -2,7 +2,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Typography,
 } from "@material-tailwind/react";
 import Chart from "react-apexcharts";
 
@@ -117,7 +116,7 @@ export default function Example() {
           <div>Total User</div>
           <div>3000</div>
         </div>
-          <a className="link link-primary flex px-10 py-5 justify-end">Learn More</a>
+          <a className="link link-primary flex px-10 py-5 justify-end">View All</a>
     </Card>
     
   );
