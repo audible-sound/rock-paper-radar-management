@@ -9,7 +9,6 @@ import StatsIcon from "../../assets/images/StatsIcon.svg";
 import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg";
 import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg";
 import staffStore from '../../stores/staffStore';
-import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 
