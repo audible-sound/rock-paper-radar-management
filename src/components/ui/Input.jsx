@@ -21,7 +21,7 @@ const Input = ({
 
     const { register, formState: { errors } } = useFormContext()
 
-    if(type == "text" || type == "email" || type == "password" || type == "date"){
+    if(type == "text" || type == "email" || type == "password" || type == "date" || type == "number"){
         return (
             <div className="form-control w-full max-w-md">
                 <div className='flex justify-between w-full mb-2'>

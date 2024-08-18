@@ -28,6 +28,7 @@ const EditBlogModal = ({blogId}) => {
                 <form className='flex flex-col justify-center items-center' {...editBlogForm} onSubmit={editBlogForm.handleSubmit(onSubmit)}>
                     <span className='text-2xl'>Edit Form</span>
                     <Input 
+                        type={"text"}
                         left={"Full Name"} 
                         registerInput={"fullName"}
                         required={"This is required"}

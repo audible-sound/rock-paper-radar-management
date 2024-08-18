@@ -91,6 +91,7 @@ const EditPostModal = ({ id, postTitle, postContent, tags, pictureUrl, location 
                             <div className='flex justify-between items-center'>
                                 <div className='w-1/2'>
                                     <Input
+                                        type="text"
                                         left="Title"
                                         placeholder="Enter Title"
                                         registerInput="postTitle"
