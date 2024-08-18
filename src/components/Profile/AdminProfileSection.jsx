@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import profimg from "../../assets/images/Wavy-pic.jpg"
 import { useLocation, useSearchParams } from 'react-router-dom';
-import userStore from '../../stores/userStore';
+import staffStore from '../../stores/staffStore';
 import unsplashApi from '../../api/unsplashApi';
 import Cookies from 'js-cookie';
 import LoadingSpinner from '../ui/LoadingSpinner';
-import EditProfileModal from './EditProfileModal';
+import AdminEditProfileModal from './AdminEditProfileModal';
 import Dropdown from '../ui/Dropdown';
 
 const AdminProfileSection = () => {
@@ -14,17 +14,17 @@ const AdminProfileSection = () => {
     const manageList = [{
         label: "Edit Profile",
         action: () => document.getElementById('editProfile').showModal(),
-        modal: <EditProfileModal />
+        modal: <AdminEditProfileModal />
     }];
     const location = useLocation();
     const pathname = location.pathname;
     const [searchParams] = useSearchParams();
     const usernameQuery = searchParams.get('u');
-    const username = userStore(state => state.username);
-    const getPersonalProfile = userStore(state => state.getPersonalProfile);
+    const username = staffStore(state => state.username);
+    const getPersonalProfile = staffStore(state => state.getPersonalProfile);
     const [bannerPic, setBannerPic] = useState('');
-    const profileDetails = userStore(state => state.profileDetails);
-    const getPublicProfile = userStore(state => state.getPublicProfile);
+    const profileDetails = staffStore(state => state.profileDetails);
+    const getPublicProfile = staffStore(state => state.getPublicProfile);
     if (usernameQuery) {
         // Change modal for report user
         if (usernameQuery !== username) {

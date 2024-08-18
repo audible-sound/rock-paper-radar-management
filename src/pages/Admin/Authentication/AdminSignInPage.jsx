@@ -15,6 +15,7 @@ const AdminSignInPage = () => {
       const { data, accessToken } = response.data;
       Cookies.set('token', accessToken, { expires: 30, path: '/' });
       Cookies.set('username', data.username, { expires: 30, path: '/' });
+      Cookies.set('profilePictureUrl', data.pictureUrl, { expires: 30, path: '/' });
       signIn(data);
       //TODO ADD IF STATEMENT TO CHECK IF USER IS ADMIN OR EMPLOYEE
       //TODO REDIRECT TO ADMIN DASHBOARD IF USER IS ADMIN

@@ -31,7 +31,6 @@ const PersonalForm = () => {
                     error = 'You must be at least 5 years old';
                 }
                 break
-            //TODO - LIST OF COUNTRIES - IF NOT IN LIST OF COUNTRY, THROW ERROR
             case 'country':
                 if (!countries.includes(value)) {
                     error = 'Please select a valid country from the list';

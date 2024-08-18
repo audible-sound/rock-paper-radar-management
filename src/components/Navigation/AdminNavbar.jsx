@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import face from "../../assets/images/Lucas.jpg";
 import logoutIcon from '../../assets/images/LogoutIcon.svg';
 import BlogIcon from "../../assets/images/BlogIcon.svg";
 import StaffIcon from "../../assets/images/StaffIcon.svg";
@@ -13,7 +12,7 @@ import staffStore from '../../stores/staffStore';
 const Navbar = () => {
 
     const checkLogin = staffStore(state => state.checkLogin);
-    const profilePictureUrl = staffStore(state => state.profilePictureUrl);
+    const profilePictureUrl = Cookies.get('profilePictureUrl');
     const logout = staffStore(state => state.logout);
     const navigate = useNavigate();
     const removeCookie = () => {
