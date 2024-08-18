@@ -8,15 +8,24 @@ import StaffIcon from "../../assets/images/StaffIcon.svg"
 import StatsIcon from "../../assets/images/StatsIcon.svg"
 import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg"
 import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg"
+import staffStore from '../../stores/staffStore';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-    const navigate = useNavigate()
-    const handleLogout = () => {
-        Cookies.remove('token');
-        Cookies.remove('username');
-        navigate('/');
-    }
 
+    const checkLogin = staffStore(state => state.checkLogin);
+    const profilePictureUrl = staffStore(state => state.profilePictureUrl);
+    const logout = staffStore(state => state.logout);
+    const navigate = useNavigate();
+    const removeCookie = () => {
+        Cookies.remove('username', { path: '/' });
+        Cookies.remove('token', { path: '/' });
+        Cookies.remove('profilePictureUrl', { path: '/' });
+        Cookies.remove('bannerPic', { path: '/' });
+        checkLogin();
+        logout();
+        navigate('/admin', 'replace')
+    }
     return (
         <div className='flex flex-col h-full'>
             <ul className="fixed menu bg-base-100 h-dvh p-0 pt-8 justify-between z-50">
@@ -25,7 +34,7 @@ const Navbar = () => {
                         <Link to="/admin/profile" className='tooltip tooltip-right pt-4 pb-4 ' data-tip="Profile">
                             <div className='avatar'>
                                 <div className='ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2'>
-                                    <img src={face} alt="" />
+                                    <img src={profilePictureUrl} alt="" />
                                 </div>
                             </div>
                         </Link>
@@ -58,11 +67,7 @@ const Navbar = () => {
                 </div>
 
                 <li>
-                    <Link 
-                    to="/" 
-                    className='tooltip tooltip-right pt-2 pb-2 mb-8' 
-                    data-tip="Log Out"
-                    onClick={handleLogout}>
+                    <Link className='tooltip tooltip-right pt-2 pb-2 mb-8' data-tip="Log Out" onClick={removeCookie}>
                         <img src={logoutIcon} alt="" className='w-10' />
                     </Link>
                 </li>
