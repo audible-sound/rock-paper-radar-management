@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom'
-import Cookies from 'js-cookie'
-import { useNavigate } from 'react-router-dom'
-import face from "../../assets/images/Lucas.jpg"
-import logoutIcon from '../../assets/images/LogoutIcon.svg'
-import BlogIcon from "../../assets/images/BlogIcon.svg"
-import StaffIcon from "../../assets/images/StaffIcon.svg"
-import StatsIcon from "../../assets/images/StatsIcon.svg"
-import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg"
-import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg"
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+import face from "../../assets/images/Lucas.jpg";
+import logoutIcon from '../../assets/images/LogoutIcon.svg';
+import BlogIcon from "../../assets/images/BlogIcon.svg";
+import StaffIcon from "../../assets/images/StaffIcon.svg";
+import StatsIcon from "../../assets/images/StatsIcon.svg";
+import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg";
+import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg";
 import staffStore from '../../stores/staffStore';
 import { useNavigate } from 'react-router-dom';
 
