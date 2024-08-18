@@ -156,6 +156,7 @@ const EditProfileModal = () => {
                                     />
                                 </div>
                                 <Input
+                                    type="text"
                                     left={"Country"}
                                     placeholder={"Enter Country"}
                                     registerInput={"country"}
@@ -163,6 +164,7 @@ const EditProfileModal = () => {
                                     inputValue={profileForm.watch("country")}
                                 />
                                 <Input
+                                    type="text"
                                     left={"Phone Number"}
                                     placeholder={"Enter Phone Number"}
                                     registerInput={"phoneNumber"}

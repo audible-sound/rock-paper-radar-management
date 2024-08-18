@@ -92,6 +92,7 @@ const CreateTravelPlanModal = () => {
                             <h4 className="text-xl font-semibold mb-4">Basic Information</h4>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <Input
+                                    type="text"
                                     left="Title"
                                     placeholder="Enter title"
                                     registerInput="title"
