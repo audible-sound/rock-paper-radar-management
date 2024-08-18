@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-
+import Cookies from 'js-cookie'
+import { useNavigate } from 'react-router-dom'
 import face from "../../assets/images/Lucas.jpg"
 import logoutIcon from '../../assets/images/LogoutIcon.svg'
 import BlogIcon from "../../assets/images/BlogIcon.svg"
@@ -9,6 +10,12 @@ import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg"
 import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg"
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const handleLogout = () => {
+        Cookies.remove('token');
+        Cookies.remove('username');
+        navigate('/');
+    }
 
     return (
         <div className='flex flex-col h-full'>
@@ -50,9 +57,12 @@ const Navbar = () => {
                     </li>
                 </div>
 
-
                 <li>
-                    <Link to="/signin" className='tooltip tooltip-right pt-2 pb-2 mb-8' data-tip="Log Out">
+                    <Link 
+                    to="/" 
+                    className='tooltip tooltip-right pt-2 pb-2 mb-8' 
+                    data-tip="Log Out"
+                    onClick={handleLogout}>
                         <img src={logoutIcon} alt="" className='w-10' />
                     </Link>
                 </li>
