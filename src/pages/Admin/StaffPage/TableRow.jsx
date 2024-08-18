@@ -7,7 +7,7 @@ import Dropdown from "../../../components/ui/Dropdown"
 // TODO need modals for edit and delete staff
 // TODO modify Link to to actual staff profile
 
-const TableRow = ({staffId, image, name, country, userType, jobTitle, joinedDate}) => {
+const TableRow = ({staffId, image, name, country, userType, joinedDate}) => {
 
     const items = [
         {

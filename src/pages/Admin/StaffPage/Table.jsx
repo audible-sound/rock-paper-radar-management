@@ -22,8 +22,6 @@ const Table = () => {
     fetchEmployees();
   }, [getEmployees]);
 
-  console.log(employees);
-
   if(isLoading){ return <LoadingSpinner />};
 
   return (
@@ -48,7 +46,7 @@ const Table = () => {
       employees.map((employee) => (
         <TableRow
           staffId={employee.staffId}
-          image={employee.image}
+          image={employee.staffProfile.pictureUrl}
           name={employee.fullName}
           country={employee.country}
           userType={employee.userType}

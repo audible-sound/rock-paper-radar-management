@@ -57,7 +57,8 @@ const LandingPage = () => {
       </main>
 
       <footer className="bg-blue-800 text-white text-center py-4 mt-16">
-        <p>&copy; 2023 Rock Paper Radar. All rights reserved.</p>
+        <Link to="/admin" className="bg-green-600 text-white font-bold py-3 px-6 rounded-full hover:bg-green-700 transition duration-300 inline-block">Employee Login Portal</Link>
+        <p>&copy; 2023 Rock Paper Radar. All rights reserved.</p> 
       </footer>
     </div>
   );
