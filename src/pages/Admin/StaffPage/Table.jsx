@@ -45,6 +45,7 @@ const Table = () => {
     {
       employees.map((employee) => (
         <TableRow
+          key={employee.staffId}
           staffId={employee.staffId}
           image={employee.staffProfile.pictureUrl}
           name={employee.fullName}
