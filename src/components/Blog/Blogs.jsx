@@ -30,17 +30,12 @@ const Blogs = () => {
 return (
     <div>
         <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 bg-opacity-50 '>
-            {blogs.map(({ id, image, title, description, username, date, link }) => {
+            {blogs.map(({ id, blogPicture, blogTitle, blogContent}) => {
                 return (<BlogCard
-                    key={id}
                     blogId={id}
-                    image={image}
-                    title={title}
-                    description={description}
-                    username={username}
-                    date={date}
-                    link={link}
-                    hoverable
+                    image={blogPicture}
+                    title={blogTitle}
+                    description={blogContent}
                 />)
             }
 

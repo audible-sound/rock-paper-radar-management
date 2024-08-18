@@ -1,24 +1,85 @@
-import Input from '../ui/Input'
+import { useState } from 'react';
+import {Link} from 'react-router-dom';
 import { FormProvider, useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-import staffStore from '../../stores/staffStore';
 import mainAxios from '../../api/mainAxios';
+import storage from '../../config/firebaseConfig';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import SignUpForm from './SignUpForm';
+import PersonalForm from './PersonalForm';
+import ProfileForm from './ProfileForm';
+import Cookies from 'js-cookie';
+
+//TODO - ADD FINAL PAGE TO MODAL - STAFF ADDED SUCCESSFULLY OR STG
 
 const AddStaffModal = () => {
     const staffForm = useForm()
-    const navigate = useNavigate();
     const onSubmit = async (formData) => {
         try{
-            const response = await mainAxios.post('admin/registerStaff', formData)
-            const {data, accessToken} = response.data;
-            Cookies.set('token', accessToken, { expires: 30, path: '/' });
-            Cookies.set('username', data.username, { expires: 30, path: '/' });
-            Cookies.set('profilePictureUrl', data.profilePictureUrl, { expires: 30, path: '/' });
-            // TODO display some sort of message saying account created successfully
-            // TODO display any errors that are returned from the server as well
+            const{
+                username,
+                fullName,
+                password,
+                confirmPassword,
+                userType,
+                email,
+                birthDate,
+                gender,
+                country,
+                phoneNumber,
+                description,
+                profilePicture
+            } = formData;
+
+            const image = profilePicture[0];
+            const storageRef = ref(storage, `profilePictures/${new Date().toUTCString() + image.name}`);
+            const uploadTask = uploadBytesResumable(storageRef, image);
+            uploadTask.on('state_changed', null, error => {
+                console.log(error);
+            }, async () => {
+                try{
+                    const imageUrl = await getDownloadURL(uploadTask.snapshot.ref);
+                    await mainAxios.post('admin/registerStaff', {
+                        username,
+                        fullName,
+                        password,
+                        confirmPassword,
+                        userType,
+                        email,
+                        birthDate,
+                        gender,
+                        country,
+                        phoneNumber,
+                        profileDescription: description,
+                        pictureUrl: imageUrl
+                    }, {
+                        headers: {
+                            'Authorization': Cookies.get('token'),
+                        }
+                    });
+
+                    if(response.status === 200 || response.status === 201){
+                        document.getElementById('my_modal_1').close();
+                        window.location.reload();
+                    }else{
+                        console.log('Unexpected response status: ', response.status);
+                    }
+                }catch(error){
+                    console.log('Error posting data:', error);
+                }
+            })
         } catch (error) {
-            console.error(error);
+            console.error('Error in form submission:', error);
+        }
+    }
+    const [page, setPage] = useState(1);
+    const FormTitles = ["Register Staff", "Personal Information", "Profile"];
+    const PageDisplay = () => {
+        if(page === 1){
+            return <SignUpForm />
+        }else if(page === 2){
+            return <PersonalForm />
+        }else if(page === 3){
+            return <ProfileForm />
         }
     }
 
@@ -31,85 +92,35 @@ const AddStaffModal = () => {
                     <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                 </form>
                 <form className='flex flex-col justify-center items-center' {...staffForm} onSubmit={staffForm.handleSubmit(onSubmit)}>
-                    <span className='text-2xl'>Add New Staff</span>
-                    {/* TODO figure out how to do multi page like user register */}
-                    <Input 
-                        left={"Username"} 
-                        registerInput={"username"}
-                        placeholder={"Enter your username"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Full Name"} 
-                        registerInput={"fullName"}
-                        placeholder={"Enter your full name"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Password"} 
-                        registerInput={"password"}
-                        placeholder={"Enter your password"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Re-type Password"} 
-                        registerInput={"confirmPassword"}
-                        placeholder={"Enter your password again"}
-                        required={"This is required"}
-                    />
-                    {/* TODO change below to radio buttons */}
-                    <Input 
-                        left={"User Type"} 
-                        registerInput={"userType"}
-                        placeholder={"Either 'staff' or 'admin'"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Email"} 
-                        registerInput={"email"}
-                        placeholder={"Enter your email"}
-                        required={"This is required"}
-                    />
-                    {/* TODO change below to date input */}
-                    <Input 
-                        left={"Birth Date"} 
-                        registerInput={"birthDate"}
-                        placeholder={"Enter your birth date"}
-                        required={"This is required"}
-                    />
-                    {/* TODO change below to radio buttons */}
-                    <Input 
-                        left={"Gender"} 
-                        registerInput={"gender"}
-                        placeholder={"Enter your gender"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Country"} 
-                        registerInput={"country"}
-                        placeholder={"Enter your country"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Phone Number"} 
-                        registerInput={"phoneNumber"}
-                        placeholder={"Enter your phone number"}
-                        required={"This is required"}
-                    />
-                    <Input 
-                        left={"Profile Description"} 
-                        registerInput={"profileDescription"}
-                        placeholder={"Enter your profile description"}
-                        required={"This is required"}
-                    />
-                    {/* TODO change below to file input */}
-                    <Input 
-                    left={"Profile Picture"} 
-                    registerInput={"pictureUrl"}
-                    placeholder={"Enter your profile picture url"}
-                    required={"This is required"}
-                    />
-                    <button type='submit' className='btn w-full' onClick={() => staffForm.trigger()}>Submit</button>
+                <div className="w-full flex flex-col justify-center items-center mb-2 pt-6">
+                        <h3 className="text-center text-4xl font-bold mb-4">{FormTitles[page - 1]}</h3>
+                        <p className="text-base font-light mt-1 mb-2">Step {page} of {FormTitles.length}</p>
+                    </div>
+                    <div className='flex flex-col justify-center items-center w-full mb-8'>
+                        {PageDisplay()}
+                    </div>
+                    <div className='w-full flex flex-row justify-center gap-20'>
+                        <Link className='btn min-w-28' onClick={() => {
+                            setPage((currPage) => currPage - 1)
+                        }} disabled={page === 1}>
+                            Previous
+                        </Link>
+                        {
+                            page === FormTitles.length ?
+                                <input
+                                    type='submit'
+                                    className='btn max-w-28'
+                                    value='Submit' /> :
+                                <a
+                                    className='btn min-w-28'
+                                    onClick={() => {
+                                        if (page < 3) {
+                                            staffForm.trigger().then((res) => res ? setPage((currPage) => currPage + 1) : setPage(page))
+                                        }
+                                    }}
+                                >Next</a>
+                        }
+                    </div>
                 </form>
             </div>
         </dialog>
