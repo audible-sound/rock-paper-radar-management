@@ -29,7 +29,7 @@ const BlogCard = ({blogId, image, title, description}) => {
                 <figure>
                     <img
                         src={image}
-                        alt="Shoes" />
+                        alt="Blog Image" />
                 </figure>
                 </Link>
                 <div className="card-body flex flex-col">
