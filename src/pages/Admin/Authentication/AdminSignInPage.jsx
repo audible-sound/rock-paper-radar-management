@@ -15,7 +15,11 @@ const AdminSignInPage = () => {
       const { data, accessToken } = response.data;
       Cookies.set('token', accessToken, { expires: 30, path: '/' });
       Cookies.set('username', data.username, { expires: 30, path: '/' });
+      Cookies.set('profilePictureUrl', data.pictureUrl, { expires: 30, path: '/' });
       signIn(data);
+      //TODO ADD IF STATEMENT TO CHECK IF USER IS ADMIN OR EMPLOYEE
+      //TODO REDIRECT TO ADMIN DASHBOARD IF USER IS ADMIN
+      //TODO REDIRECT TO EMPLOYEE DASHBOARD IF USER IS EMPLOYEE
       navigate('/admin/dashboard');
     } catch (error) {
       console.error(error);
@@ -33,8 +37,8 @@ const AdminSignInPage = () => {
           <form className="w-1/2 h-full bg-white flex flex-col p-20 justify-center items-center" onSubmit={signInForm.handleSubmit(onSubmit)}>
             <div className="w-full flex flex-col max-w-[300px]">
               <div className="w-full flex flex-col mb-2">
-                <h3 className="text-5xl font-bold mb-4">Admin Login</h3>
-                <p className="text-base mb-2">Sign into your admin account</p>
+                <h3 className="text-5xl font-bold mb-4">Employee Login</h3>
+                <p className="text-base mb-2">Sign into your employee account</p>
               </div>
               <div className="w-full flex flex-col">
                 <div className='flex justify-between w-full mt-2'>

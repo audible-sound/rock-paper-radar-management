@@ -1,6 +1,12 @@
 import { FormProvider, useForm } from "react-hook-form"
 import FileInput from "../ui/FileInput"
 import Input from "../ui/Input"
+import { useState } from "react"
+import { ref, uploadBytesResumable } from "firebase/storage"
+import storage from "../../config/firebaseConfig"
+import staffStore from "../../stores/staffStore"
+import { useNavigate } from "react-router-dom"
+
 import Lucas from '../../assets/images/Lucas.jpg'
 
 const CreateBlogBody = () => {
@@ -11,6 +17,7 @@ const CreateBlogBody = () => {
             <form onSubmit={methods.handleSubmit((data) => console.log(data))} className='flex flex-col w-full h-full'>
                 <div className='flex flex-row justify-between items-center bg-white border-solid border-2 px-8 py-2'>
                     <Input 
+                        type="text"
                         left="Title" 
                         placeholder="Enter a Title" 
                         registerInput="blogTitle"
