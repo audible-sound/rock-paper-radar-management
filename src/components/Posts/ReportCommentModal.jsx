@@ -1,7 +1,7 @@
 const ReportCommentModal = ({commentId, postId }) => {
   return (
     <>
-        <dialog id={`reportCommentModal${commentId}`} className="modal">
+        <dialog id={`reportCommentModal${commentId}${postId}`} className="modal">
         <div className="modal-box">
             <h3 className="font-bold text-lg">Warning!!!</h3>
             <p className="py-4">Precaution: please do not simply report post or we will take action on you as well for misconduct.</p>
