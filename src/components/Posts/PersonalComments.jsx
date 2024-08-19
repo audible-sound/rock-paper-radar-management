@@ -3,6 +3,7 @@ import DeleteCommentModal from './DeleteCommentModal'
 import EditCommentModal from './EditCommentModal'
 import { Link } from 'react-router-dom'
 import userStore from '../../stores/userStore'
+import ReportCommentModal from './ReportCommentModal'
 
 const PersonalComments = ({ comment }) => {
     const date = new Date(comment.createdAt);
@@ -24,7 +25,7 @@ const PersonalComments = ({ comment }) => {
             {
                 label: "Report Comment",
                 action: () => document.getElementById(`reportCommentModal${comment.id}`).showModal(),
-                modal: <DeleteCommentModal commentId={comment.id} postId={comment.postId} />
+                modal: <ReportCommentModal commentId={comment.id} postId={comment.postId} />
             }
         ]
     }

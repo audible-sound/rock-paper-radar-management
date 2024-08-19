@@ -22,7 +22,7 @@ const Table = () => {
     fetchEmployees();
   }, [getEmployees]);
 
-  if(isLoading){ return <LoadingSpinner />};
+  if(isLoading){ return <LoadingSpinner />}
 
   return (
     <div className="overflow-x-auto bg-white h-full w-full flex flex-col justify-start p-6 items-center">
