@@ -1,9 +1,32 @@
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
-const BlogUtilBar = () => {
+const BlogUtilBar = ({ onFilter }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [sortBy, setSortBy] = useState('');
+
+    const handleFilter = () => {
+        onFilter({
+            searchTerm,
+            sortBy
+        })
+    }
+
+    const isProfile = useLocation().pathname.includes('profile');
+    if(isProfile){
+        return null;
+    }
+    
   return (
     <div className='flex flex-row bg-white border-solid border-2 p-4'>
             <div className="form-control">
-                <input type="text" placeholder="Search Blog" className="input input-bordered w-24 md:w-auto pl-12  mr-10 border-primary" />
+                <input 
+                type="text" 
+                placeholder="Search Blog" 
+                className="input input-bordered w-24 md:w-auto pl-12  mr-10 border-primary" 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <div className="search-icon relative bottom-12">
                     <button className="btn btn-ghost btn-circle absolute">
                         <svg
@@ -21,22 +44,17 @@ const BlogUtilBar = () => {
                     </button>
                 </div>
             </div>
-            <select className="select select-primary w-full max-w-xs float-right ml-auto ">
-                <option disabled selected>Select Category</option>
-                <option>Category1</option>
-                <option>Category2</option>
-                <option>Category3</option>
-                <option>Category4</option>
+            <div className="w-full max-w-xs float-right ml-auto"></div>
+            <select 
+                className="select select-primary w-full max-w-xs float-right ml-10"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+            >
+                <option value="">Sort By</option>
+                <option value="Latest">Latest</option>
+                <option value="Oldest">Oldest</option>
             </select>
-
-            <select className="select select-primary w-full max-w-xs float-right ml-10">
-                <option disabled selected>Sort By</option>
-                <option>Test1</option>
-                <option>Test2</option>
-                <option>Test3</option>
-                <option>Test4</option>
-            </select>
-            <button className="btn btn-primary ml-5">Filter</button>
+            <button className="btn btn-primary ml-5" onClick={handleFilter}>Filter</button>
 
         </div>
 

@@ -1,18 +1,18 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import logoutIcon from '../../assets/images/LogoutIcon.svg'
-import BlogIcon from "../../assets/images/BlogIcon.svg"
-import StaffIcon from "../../assets/images/StaffIcon.svg"
-import StatsIcon from "../../assets/images/StatsIcon.svg"
-import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg"
-import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg"
-import staffStore from '../../stores/staffStore';
 import { useNavigate } from 'react-router-dom';
+import logoutIcon from '../../assets/images/LogoutIcon.svg';
+import BlogIcon from "../../assets/images/BlogIcon.svg";
+import StaffIcon from "../../assets/images/StaffIcon.svg";
+import StatsIcon from "../../assets/images/StatsIcon.svg";
+import WriteBlogIcon from "../../assets/images/WriteBlogIcon.svg";
+import FeedbackManagementIcon from "../../assets/images/FeedbackManagementIcon.svg";
+import staffStore from '../../stores/staffStore';
 
 const Navbar = () => {
 
     const checkLogin = staffStore(state => state.checkLogin);
-    const profilePictureUrl = staffStore(state => state.profilePictureUrl);
+    const profilePictureUrl = Cookies.get('profilePictureUrl');
     const logout = staffStore(state => state.logout);
     const navigate = useNavigate();
     const removeCookie = () => {
@@ -63,7 +63,6 @@ const Navbar = () => {
                         </Link>
                     </li>
                 </div>
-
 
                 <li>
                     <Link className='tooltip tooltip-right pt-2 pb-2 mb-8' data-tip="Log Out" onClick={removeCookie}>

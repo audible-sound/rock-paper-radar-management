@@ -4,7 +4,7 @@ const Dropdown = ({ items }) => {
     return (
         <div className="dropdown dropdown-left dropdown-end">
             <div tabIndex={0} className="p-8 hover:cursor-pointer">
-                <img src={DotMenu} alt="Menu" width="32px" className=""/>
+                <img src={DotMenu} alt="Menu" width="32px" className="min-w-[32px] min-h-[32px]"/>
             </div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 {items.map((item) => (

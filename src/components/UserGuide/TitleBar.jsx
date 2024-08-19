@@ -10,7 +10,7 @@ const TitleBar = () => {
     <div className="flex flex-col w-full h-full">
       <div className="flex flex-row justify-between items-center bg-white border-solid border-2 px-6 py-4">
         <div className="w-1/3 px-2">
-          <Input left="Title" placeholder="Enter a Title" />
+          <Input type="text" left="Title" placeholder="Enter a Title" />
         </div>
 
         <div className="flex flex-row pl-7 pr-2 place-content-end pb-2">

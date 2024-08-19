@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form"
 import { ErrorMessage } from "@hookform/error-message"
-import userStore from "../../stores/userStore"
+import staffStore from "../../stores/staffStore"
 import Input from "../ui/Input"
 import { useState, useEffect } from "react"
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
@@ -9,12 +9,23 @@ import LoadingSpinner from "../ui/LoadingSpinner";
 
 const EditProfileModal = () => {
     const profileForm = useForm();
-    const username = userStore((state) => state.username);
+    const username = staffStore((state) => state.username);
     const [imagePreview, setImagePreview] = useState(null);
-    const getPublicProfile = userStore((state) => state.getPublicProfile);
-    const updateProfile = userStore((state) => state.updateProfile);
-    const getUserPosts = userStore((state) => state.getUserPosts);
+    const getPublicProfile = staffStore((state) => state.getPublicProfile);
+    const updateProfile = staffStore((state) => state.updateProfile);
+    const getMyBlogs = staffStore((state) => state.getMyBlogs);
     const [isLoading, setIsLoading] = useState(true);
+    const [countries, setCountries] = useState([])
+
+    useEffect(() => {
+        fetch('https://restcountries.com/v3.1/all?fields=name')
+            .then(response => response.json())
+            .then(data => {
+                const countryNames = data.map(country => country.name.common).sort()
+                setCountries(countryNames)
+            })
+            .catch(error => console.error('Error fetching countries:', error))
+    }, [])
 
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -26,12 +37,12 @@ const EditProfileModal = () => {
                 const day = String(new Date(profileData.birthDate).getDate()).padStart(2, '0');
                 const birthDate = `${year}-${month}-${day}`;
                 profileForm.reset({
-                    birthDate,
+                    birthDate: birthDate,
                     gender: profileData.gender,
                     email: profileData.email,
                     country: profileData.country,
                     phoneNumber: profileData.phoneNumber,
-                    description: profileData.profileDescription
+                    description: profileData.description
                 });
                 setImagePreview(profileData.profilePictureUrl);
             } catch (error) {
@@ -50,6 +61,9 @@ const EditProfileModal = () => {
     const onSubmit = async (data) => {
         // Handle form submission
         try {
+            // if(data.description == profileForm.watch("description")){
+            //     data.description = profileForm.watch("description");
+            // }
             if (data.profilePicture && data.profilePicture[0]) {
                 const image = data.profilePicture[0];
                 setImagePreview(URL.createObjectURL(image));
@@ -69,7 +83,7 @@ const EditProfileModal = () => {
                             profileDescription: data.description,
                             profilePictureUrl: imageUrl
                         });
-                        await getUserPosts(username);
+                        await getMyBlogs(username);
                         await getPublicProfile(username);
                         document.getElementById('editProfile').close();
                     } catch (error) {
@@ -87,7 +101,7 @@ const EditProfileModal = () => {
                     profileDescription: data.description,
                     profilePictureUrl: imagePreview
                 });
-                await getUserPosts(username);
+                await getMyBlogs(username);
                 await getPublicProfile(username);
                 document.getElementById('editProfile').close();
             }
@@ -155,17 +169,18 @@ const EditProfileModal = () => {
                                         inputValue={profileForm.watch("email")}
                                     />
                                 </div>
-                                <Input
-                                    type="text"
-                                    left={"Country"}
-                                    placeholder={"Enter Country"}
+                                <Input 
+                                    type="select"
+                                    left={"Country"} 
                                     registerInput={"country"}
+                                    options={countries.map(country => ({ value: country, label: country}))}
+                                    placeholder={"Enter your country of origin"}
                                     required={"This is required"}
                                     inputValue={profileForm.watch("country")}
                                 />
                                 <Input
-                                    type="text"
                                     left={"Phone Number"}
+                                    type={"text"}
                                     placeholder={"Enter Phone Number"}
                                     registerInput={"phoneNumber"}
                                     required={"This is required"}
@@ -211,7 +226,7 @@ const EditProfileModal = () => {
                                 </label>
                                 <textarea
                                     className="textarea textarea-bordered h-24"
-                                    placeholder="Enter Description"
+                                    placeholder={profileForm.watch("description")} //AAAAAAAAAAAAAAAAAAAAAAAAA
                                     {...profileForm.register("description", { required: "Description is required" })}
                                     value={profileForm.watch("description")}
                                 ></textarea>

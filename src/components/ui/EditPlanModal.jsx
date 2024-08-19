@@ -96,6 +96,7 @@ const EditPlanModal = ({ id, planTitle, tags, pictureUrl, location, duration }) 
                             <div className='flex justify-between items-center'>
                                 <div className='w-1/2'>
                                     <Input
+                                        type="text"
                                         left="Title"
                                         placeholder="Enter Title"
                                         registerInput="planTitle"
