@@ -23,20 +23,15 @@ const AuthorCard = ({ postId, postTitle, pictureUrl, username, postContent, crea
             action: () => document.getElementById(`editModal${postId}`).showModal(),
             modal: <EditPostModal key={postId} id={postId} postTitle={postTitle} postContent={postContent} tags={tags} pictureUrl={pictureUrl} location={location} />
         },
-        {
-            label: "Report Post",
-            action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
-            modal: <ReportPostModal
-                id={postId}
-            /> ,
-        },
     ]
     // Create report post modal
     if (actualUser !== username) {
         list = [{
             label: "Report Post",
-            action: () => document.getElementById(`editModal${postId}`).showModal(),
-            modal: <DeletePostModal key={postId} id={postId} />
+            action: () => document.getElementById(`reportPostModal${postId}`).showModal(),
+            modal: <ReportPostModal
+                id={postId}
+            /> ,
         }]
     }
 
