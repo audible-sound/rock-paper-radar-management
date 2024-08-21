@@ -26,8 +26,8 @@ const ViewPostPage = () => {
 
   return (
     <UserLayout>
-      <Header>
-        <BackButton to="/user/posts" />
+      <Header className='flex flex-row items-center gap-6'>
+        <BackButton to="/user/posts"  />
         <span className='text-2xl'><b>Posts</b></span>
       </Header>
       <ViewPostBody postId={postId} />
