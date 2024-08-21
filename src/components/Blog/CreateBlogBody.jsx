@@ -36,24 +36,24 @@ const CreateBlogBody = () => {
                         <span className="text-lg mb-8">Upload Pictures</span>
                         <div className='flex flex-row items-center'>
                             <div className="avatar mr-4">
-                                <div className="w-16 rounded">
-                                    <img src={Lucas} alt="" />
+                                <div className="w-16 rounded boder-solid border-1">
+                                    <img src={null} alt="" />
                                 </div>
                             </div>
 
-                            <span>Image.jpg</span>
+                            <span></span>
                         </div>
                     </div>
                 </div>
 
 
 
-                <div className='flex flex-col bg-white justify-start border-solid border-2 h-full pt-4'>
-                    <div className='flex flex-row justify-between items-center px-8'>
+                <div className='flex flex-col bg-white justify-start border-solid border-2 h-[100%] pt-4 flex-grow  '>
+                    <div className='flex flex-row justify-between items-center px-8 '>
                         <span className="text-xl">Description</span>
                         <button className="btn text-white bg-[#7091E6]">Publish</button>
                     </div>
-                    <textarea name="" id="" className="textarea bg-[#E6E6E6] h-full mx-8 my-4" placeholder="Type a description"></textarea>
+                    <textarea name="" id="" className="textarea bg-[#E6E6E6] h-full mx-8 my-4 flex-grow" placeholder="Type a description"></textarea>
                 </div>
             </form>
         </FormProvider>
