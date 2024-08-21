@@ -3,21 +3,25 @@ import ReadMore from "../ui/ReadMore"
 import Dropdown from "../ui/Dropdown"
 import DeleteBlogModal from "./DeleteBlogModal"
 import EditBlogModal from "./EditBlogModal"
+import Cookies from "js-cookie"
 
-const BlogCard = ({blogId, image, title, description}) => {
-
+const BlogCard = ({blogId, image, title, description, username, isStaff = false}) => {
+    const currentUser = Cookies.get("username");
     const items = [
         {
             label: "Edit Blog",
             action: () => document.getElementById(`editBlog${blogId}`).showModal(),
-            modal: <DeleteBlogModal
-                        blogId={blogId}
+            modal: <EditBlogModal
+                        id={blogId}
+                        blogTitle={title}
+                        blogContent={description}
+                        pictureUrl={image}
                     />
         },
         {
             label: "Delete Blog",
             action: () => document.getElementById(`deleteBlog${blogId}`).showModal(),
-            modal: <EditBlogModal
+            modal: <DeleteBlogModal
                         blogId={blogId}
                     />
         },
@@ -25,9 +29,10 @@ const BlogCard = ({blogId, image, title, description}) => {
 
   return (
             <div className="card bg-base-100 mx-8 mt-4 shadow-xl max-h-[500px]">    
-            <Link to="/admin/blog-view">
+            <Link to={`/blog/blog-view/${blogId}`}>
                 <figure>
                     <img
+                        className="" //AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                         src={image}
                         alt="Blog Image" />
                 </figure>
@@ -36,10 +41,13 @@ const BlogCard = ({blogId, image, title, description}) => {
                     <div className="flex justify-between">
                        <h2 className="card-title">
                         {title}
-                    </h2> 
+                    </h2> {
+                        isStaff && username === currentUser &&
                         <Dropdown
                             items={items}
                         />
+                    }
+                        
                     </div>
                     
                     <ReadMore>{description}</ReadMore>

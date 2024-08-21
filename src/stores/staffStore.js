@@ -137,7 +137,7 @@ const staffStore = create((set, get) => ({
     getBlogs: async () => {
         try {
             const response = await mainAxios.get('/blog/');
-            set({ blogs: response.data.data });
+            set({ blogs: response.data.blogs });
         } catch (error) {
             console.log(error);
         }
@@ -153,7 +153,34 @@ const staffStore = create((set, get) => ({
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+    updateBlog: async (blogId, input) => {
+        try {
+            await mainAxios.put(`/blog/${blogId}`, {
+                blogPicture: input.pictureUrl,
+                blogTitle: input.blogTitle,
+                blogContent: input.blogContent
+            },
+                {
+                    headers: {
+                        authorization: Cookies.get('token'),
+                    },
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    deleteBlog: async (blogId) => {
+        try {
+            await mainAxios.delete(`/blog/${blogId}`, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
 }))
 
 export default staffStore;
