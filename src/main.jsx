@@ -143,7 +143,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/admin/blog-view",
+    path: "/blog/blog-view/:blogId",
     element: <ViewBlogPage />,
     errorElement: <ErrorPage />,
   },

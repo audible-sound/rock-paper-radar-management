@@ -1,5 +1,6 @@
 import BlogCard from "./BlogCard"
 import { useState, useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import staffStore from "../../stores/staffStore"
 import LoadingSpinner from "../ui/LoadingSpinner"
 import BlogUtilBar from "./BlogUtilBar"
@@ -10,6 +11,8 @@ const Blogs = ({isPersonalProfile = false}) => {
     const blogs = staffStore((state) => state.blogs);
     const [filteredBlogs, setFilteredPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const location = useLocation();
+    const isStaff = location.pathname.includes("/admin");
 
     useEffect(() => {
         const fetchBlogs = async () => {
@@ -69,16 +72,17 @@ return (
     <div>
         <BlogUtilBar onFilter={handleFilter}/>
         <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 bg-opacity-50 '>
-            {filteredBlogs.map(({ id, blogPicture, blogTitle, blogContent}) => {
+            {filteredBlogs.map(({ id, blogPicture, blogTitle, blogContent, username}) => {
                 return (<BlogCard
                     blogId={id}
                     image={blogPicture}
                     title={blogTitle}
                     description={blogContent}
+                    isStaff={isStaff}
+                    username={username}
                 />)
+            })
             }
-
-            )}
         </div>
     </div>
 
