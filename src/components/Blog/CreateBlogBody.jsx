@@ -44,7 +44,7 @@ const CreateBlogBody = () => {
                             authorization: Cookies.get('token'),
                         }
                     });
-                    navigate('/admin/blogs');
+                    navigate(-1);
                 } catch (error) {
                     console.log(error);
                 }

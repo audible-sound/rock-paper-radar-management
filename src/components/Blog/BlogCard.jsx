@@ -32,6 +32,7 @@ const BlogCard = ({blogId, image, title, description, username, isStaff = false}
             <Link to={`/blog/blog-view/${blogId}`}>
                 <figure>
                     <img
+                        className="" //AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
                         src={image}
                         alt="Blog Image" />
                 </figure>

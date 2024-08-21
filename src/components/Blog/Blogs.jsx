@@ -72,14 +72,14 @@ return (
     <div>
         <BlogUtilBar onFilter={handleFilter}/>
         <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 bg-opacity-50 '>
-            {filteredBlogs.map(({ id, blogPicture, blogTitle, blogContent, username}) => {
+            {filteredBlogs.map(({ id, blogPicture, blogTitle, blogContent, staff}) => {
                 return (<BlogCard
                     blogId={id}
                     image={blogPicture}
                     title={blogTitle}
                     description={blogContent}
                     isStaff={isStaff}
-                    username={username}
+                    username={staff.username}
                 />)
             })
             }

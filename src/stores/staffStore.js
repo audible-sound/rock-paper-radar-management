@@ -137,7 +137,7 @@ const staffStore = create((set, get) => ({
     getBlogs: async () => {
         try {
             const response = await mainAxios.get('/blog/');
-            set({ blogs: response.data.data });
+            set({ blogs: response.data.blogs });
         } catch (error) {
             console.log(error);
         }
