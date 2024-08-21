@@ -4,6 +4,7 @@ import Header from '../../../components/ui/Header'
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import LoadingSpinner from "../../../components/ui/LoadingSpinner";
+import BackButton from '../../../components/ui/BackButton';
 
 const ViewPostPage = () => {
   const [searchParams] = useSearchParams();
@@ -26,6 +27,7 @@ const ViewPostPage = () => {
   return (
     <UserLayout>
       <Header>
+        <BackButton to="/user/posts" />
         <span className='text-2xl'><b>Posts</b></span>
       </Header>
       <ViewPostBody postId={postId} />
