@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom"
 import Dropdown from "../../../components/ui/Dropdown"
-// import DeleteStaffModal from "./DeleteStaffModal"
-// import EditStaffModal from "./EditStaffModal"
-
-// code created with reference to src/components/Blog/BlogCard.jsx
-// TODO need modals for edit and delete staff
+import DeleteStaffModal from "./DeleteStaffModal"
+import EditStaffModal from "./EditStaffModal"
 // TODO modify Link to to actual staff profile
 
-const TableRow = ({staffId, image, name, country, userType, joinedDate}) => {
+const TableRow = ({staffId, image, name, country, userType, joinedDate, onDelete, onEdit}) => {
 
     const items = [
         {
@@ -21,12 +18,11 @@ const TableRow = ({staffId, image, name, country, userType, joinedDate}) => {
     ]
 
     return(
+        <>
         <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
+        <td>
+          <div className="text-center font-bold">{staffId}</div>
+        </td>
         <td>
           <Link to={`/admin/staff-view/${staffId}`}>
           <div className="flex items-center gap-3">
@@ -56,6 +52,9 @@ const TableRow = ({staffId, image, name, country, userType, joinedDate}) => {
           </button>
         </th>
         </tr>
+        <DeleteStaffModal staffId={staffId} staffName={name} onDelete={onDelete}/>
+        <EditStaffModal staffId={staffId} staffName={name} userType={userType} onEdit={onEdit}/>
+        </>
     )
 }
 

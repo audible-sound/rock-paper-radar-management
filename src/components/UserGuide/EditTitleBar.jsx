@@ -6,9 +6,10 @@ import mainAxios from "../../api/mainAxios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
-const TitleBar = () => {
+const TitleBar = ({ id }) => {
   const [sections, setSections] = useState([]);
   const [isAdding, setIsAdding] = useState(false);
+  const [guideData, setGuideData] = useState(null);
   const navigate = useNavigate();
 
   const userGuideForm = useForm({
@@ -27,8 +28,23 @@ const TitleBar = () => {
           mainAxios.get('userguide/sections')
         ]);
         const transformedSections = sectionsResponse.data.data.map(item => ({
-          name: item.section,
-        }))
+          name: item.section})
+        )
+        const dataResponse = await mainAxios.get(`userguide/${id}`, {
+          headers: {
+            Authorization: Cookies.get('token')
+          }
+        });
+        const responseData = dataResponse.data.data[0];
+        setGuideData(responseData);
+        
+        userGuideForm.reset({
+          title: responseData.title,
+          userType: responseData.forUserType,
+          description: responseData.content,
+          userGuideSection: responseData.section
+        });
+
         setSections(transformedSections);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -36,22 +52,15 @@ const TitleBar = () => {
     };
 
     fetchData();
-  }, []);
-
+  }, [id, userGuideForm]);
 
   const onSubmit = async (data) => {
-    const {
-      title, 
-      userType, 
-      description, 
-      userGuideSection
-    } = data;
     try{
-      await mainAxios.post('/userguide', {
-        title,
-        forUserType: userType,
-        content: description,
-        section: userGuideSection
+      await mainAxios.put(`/userguide/${id}`, {
+        title: data.title,
+        forUserType: data.userType,
+        content: data.description,
+        section: data.userGuideSection
       }, {
         headers: {
           Authorization: Cookies.get('token')
@@ -60,7 +69,7 @@ const TitleBar = () => {
     }catch(error){
       console.log(error);
     }finally{
-      navigate('/admin/user-guide');
+      navigate(-1);
     }
   }
 
@@ -73,7 +82,7 @@ const TitleBar = () => {
           <Input 
           type="text" 
           left="Title" 
-          placeholder="Enter a Title" 
+          placeholder={guideData?.title || "Enter a Title"}
           registerInput="title" 
           required="true"
           />
@@ -83,7 +92,7 @@ const TitleBar = () => {
           <Input 
           type="select" 
           left="For user type" 
-          placeholder="Select user type" 
+          placeholder={guideData?.forUserType || "Select user type"}
           registerInput="userType" 
           required={true}
           options={['Normal User', 'Employee']}
@@ -94,7 +103,7 @@ const TitleBar = () => {
           <Input 
           type="select" 
           left="Choose Section" 
-          placeholder="Select Section" 
+          placeholder={guideData?.section || "Select Section"}
           registerInput="userGuideSection" 
           required={true}
           options={sections.map(section => section.name)}
@@ -133,7 +142,7 @@ const TitleBar = () => {
         <textarea
           name="description"
           className="textarea bg-[#E6E6E6] h-full mx-8 my-4"
-          placeholder="Type a description"
+          placeholder={guideData?.content || "Type a description"}
           {...userGuideForm.register("description", { required: "*required" })}
         >
         </textarea>

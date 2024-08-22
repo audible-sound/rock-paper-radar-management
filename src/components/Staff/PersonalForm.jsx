@@ -70,7 +70,7 @@ const PersonalForm = () => {
                 required={"This is required"}
             />
             <Input 
-                type="select"
+                type="selectCountry"
                 left={"Country"} 
                 registerInput={"country"}
                 options={countries.map(country => ({ value: country, label: country}))}

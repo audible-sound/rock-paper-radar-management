@@ -29,6 +29,7 @@ import LandingPage from "./pages/LandingPage.jsx";
 import AdminSignInPage from "./pages/Admin/Authentication/AdminSignInPage.jsx";
 import UserBlogPage from "./pages/User/BlogPage/UserBlogPage.jsx";
 import FeedbackManagementPage from "./pages/Admin/FeedbackManagement/FeedbackManagementPage.jsx";
+import EditUserGuide from "./components/UserGuide/EditUserGuide.jsx";
 
 const router = createBrowserRouter([
   {
@@ -143,7 +144,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/admin/blog-view",
+    path: "/blog/blog-view/:blogId",
     element: <ViewBlogPage />,
     errorElement: <ErrorPage />,
   },
@@ -175,6 +176,11 @@ const router = createBrowserRouter([
   {
     path: "/admin/user-guide-create",
     element: <CreateUserGuide />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/user-guide-edit/:id",
+    element: <EditUserGuide />,
     errorElement: <ErrorPage />,
   },
   {

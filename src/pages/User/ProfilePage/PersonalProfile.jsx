@@ -5,10 +5,21 @@ import {useLocation} from 'react-router-dom'
 import UserProtectedRoute from '../../../components/Navigation/UserProtectedRoute.jsx'
 import EmployeeProtectedRoute from '../../../components/Navigation/EmployeeProtectedRoute.jsx'
 import Blogs from '../../../components/Blog/Blogs'
+import { useEffect } from 'react'
+import staffStore from "../../../stores/staffStore.js"
 
 const PersonalProfile = () => {
     const location = useLocation();
     const isEmployee = location.pathname.includes('admin') || location.pathname.includes('staff');
+    const getMyBlogs = staffStore((state) => state.getMyBlogs);
+
+    useEffect(() => {
+        const fetchMyBlogs = async () => {
+            await getMyBlogs();
+        }
+        fetchMyBlogs();
+    }, [getMyBlogs])
+
     if(isEmployee){
         return (
             <EmployeeProtectedRoute>

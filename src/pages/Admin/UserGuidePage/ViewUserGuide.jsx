@@ -12,6 +12,10 @@ const ViewUserGuide = ({ isUser }) => {
 
   const Layout = isUser ? UserLayout : AdminLayout;
 
+  const handleDelete = (deletedId) => {
+    setSelectedContent(prevContent => prevContent.filter(item => item.id !== deletedId));
+  };
+
   return (
     <Layout>
       <Header>
@@ -34,7 +38,7 @@ const ViewUserGuide = ({ isUser }) => {
       <div className="flex flex-row bg-white h-screen">
         <UserGuide onSelect={setSelectedContent} />
         {console.log("Selected Content in ViewUserGuide:", selectedContent)}
-        <UserGuideContent content={selectedContent || []} />
+        <UserGuideContent content={selectedContent || []} onDelete={handleDelete} />
       </div>
     </Layout>
   );
