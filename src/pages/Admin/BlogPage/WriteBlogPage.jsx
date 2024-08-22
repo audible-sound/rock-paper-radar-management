@@ -6,7 +6,7 @@ const WriteBlogPage = () => {
     return (
         <AdminLayout>
             <Header>
-                <span className='text-2xl'><b>Write Posts</b></span>
+                <span className='text-2xl'><b>Write Blog</b></span>
             </Header>
             <CreateBlogBody />
         </AdminLayout>
