@@ -53,6 +53,18 @@ const staffStore = create((set, get) => ({
             console.error(error);
         }
     },
+    deleteStaff: async (staffId) => {
+        try {
+          await mainAxios.delete(`/staff/${staffId}`, {
+            headers: {
+              authorization: Cookies.get('token'),
+            },
+          });
+        } catch (error) {
+          console.error('Error deleting staff:', error);
+          throw error;
+        }
+      },
     getPersonalProfile: async () => {
         try {
             const response = await mainAxios.get('/staff/personalProfile', {

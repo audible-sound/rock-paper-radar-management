@@ -56,13 +56,8 @@ const AddStaffModal = () => {
                             'Authorization': Cookies.get('token'),
                         }
                     });
-
-                    if(response.status === 200 || response.status === 201){
-                        document.getElementById('my_modal_1').close();
-                        window.location.reload();
-                    }else{
-                        console.log('Unexpected response status: ', response.status);
-                    }
+                    document.getElementById('my_modal_1').close();
+                    window.location.reload();
                 }catch(error){
                     console.log('Error posting data:', error);
                 }

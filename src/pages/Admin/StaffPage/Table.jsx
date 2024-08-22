@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import LoadingSpinner from "../../../components/ui/LoadingSpinner";
 import TableRow from "./TableRow";
 
-const Table = () => {
+const Table = ({onEdit}) => {
   const getEmployees = staffStore(state => state.getEmployees);
   const employees = staffStore(state => state.employees);
   const [isLoading, setIsLoading] = useState(true);
@@ -22,6 +22,10 @@ const Table = () => {
     fetchEmployees();
   }, [getEmployees]);
 
+  const handleDeleteStaff = async () => {
+    await getEmployees();
+  };
+
   if(isLoading){ return <LoadingSpinner />}
 
   return (
@@ -30,11 +34,7 @@ const Table = () => {
     {/* head */}
     <thead className="bg-blue-400">
       <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
+        <th>StaffID</th>
         <th>Name</th>
         <th>Job</th>
         <th>Joined Date</th>
@@ -45,14 +45,16 @@ const Table = () => {
     {
       employees.map((employee) => (
         <TableRow
-          key={employee.staffId}
-          staffId={employee.staffId}
+          key={employee.id}
+          staffId={employee.id}
           image={employee.staffProfile.pictureUrl}
           name={employee.fullName}
           country={employee.country}
           userType={employee.userType}
           jobTitle={employee.jobTitle}
           joinedDate={employee.createdAt}
+          onDelete={handleDeleteStaff}
+          onEdit={onEdit}
         />
       ))
     }

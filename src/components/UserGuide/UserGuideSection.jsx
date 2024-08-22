@@ -7,7 +7,7 @@ const UserGuideSection = ({ section, content = [], onSelect }) => {
       <div className="collapse collapse-arrow">
         <input type="radio" name="user-guide-accordion" defaultChecked />
         <div className="collapse-title text-xl font-medium active:font-bold text-balance pl-11">
-          {section}
+          <span>{section}</span>
         </div>
 
         <div className="collapse-content text-slate-500">

@@ -1,7 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { useState } from 'react';
 import Input from '../ui/Input'
-import FileInput from '../ui/FileInput'
 import staffStore from '../../stores/staffStore'
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import storage from '../../config/firebaseConfig'
