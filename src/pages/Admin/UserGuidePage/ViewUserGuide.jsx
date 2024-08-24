@@ -19,21 +19,23 @@ const ViewUserGuide = ({ isUser }) => {
   return (
     <Layout>
       <Header>
-        <span className="text-2xl">
-          <b>User Guide</b>
+        <div className="flex justify-between items-center">
+          <span className="text-2xl">
+            <b>User Guide</b>
+          </span>
           {!isUser && (
             <Link
               to="/admin/user-guide-create"
-              className="btn ml-4 text-white bg-[#7091E6] float-right"
+              className="btn text-white bg-[#7091E6]"
             >
               <img
                 src={PlusSign}
-                className="w-6 h-6 float-left mt-1 mr-1 fill-white"
+                className="w-6 h-6 inline-block mr-1 fill-white"
               />
               Add User Guide
             </Link>
           )}
-        </span>
+        </div>
       </Header>
       <div className="flex flex-row bg-white h-screen">
         <UserGuide onSelect={setSelectedContent} />

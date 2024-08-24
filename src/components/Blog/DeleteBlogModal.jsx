@@ -10,6 +10,7 @@ const DeleteBlogModal = ({blogId}) => {
         try {
             await deleteBlog(blogId);
             await getBlogs(username);
+            document.getElementById(`deleteBlog${blogId}`).close();
         } catch (error) {
             console.log(error);
         }
