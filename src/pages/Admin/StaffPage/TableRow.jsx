@@ -37,7 +37,7 @@ const TableRow = ({staffId, image, name, country, userType, joinedDate, onDelete
           </div>
         </td>
         <td>
-          <span className="badge badge-ghost badge-sm">{userType}</span>
+          <span className="badge badge-ghost text-base">{userType.charAt(0).toUpperCase() + userType.slice(1)}</span>
         </td>
         <td>{joinedDate}</td>
         <th>
