@@ -1,10 +1,11 @@
+const Header = ({ children }) => {
+  return (
+    <header className="bg-white shadow-md p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        {children}
+      </div>
+    </header>
+  );
+};
 
-const Header = ({ children, className }) => {
-    return (
-        <div className={'w-full bg-white border-solid border-2 p-4 ' + className}>
-            {children}
-        </div>
-    )
-}
-
-export default Header
+export default Header;
