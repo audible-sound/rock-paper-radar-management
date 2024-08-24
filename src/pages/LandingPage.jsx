@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Header from '../components/ui/Header';
+import LandingHeader from '../components/ui/landingPageHeader';
 import Subsection from '../components/ui/Subsection';
 import land1 from '../assets/images/land1.jpg';
 import land2 from '../assets/images/land2.jpg';
@@ -8,12 +8,7 @@ import land3 from '../assets/images/land3.jpg';
 const LandingPage = () => {
   return (
     <div className="min-h-screen w-screen">
-      <Header>
-        <span className="text-3xl font-bold text-blue-600">Rock Paper Radar</span>
-        <Link to="/user/signin" className="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-          Login
-        </Link>
-      </Header>
+      <LandingHeader />
       
       <main className="w-full">
       <section className="relative text-right flex flex-col items-end justify-center mb-16 bg-landing-bg bg-cover bg-center bg-no-repeat h-screen p-16 w-full">
