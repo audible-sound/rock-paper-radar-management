@@ -13,14 +13,29 @@ const FeedbackPage = () => {
   //on submit has ai generated code so beware
   const onSubmit = async (data) => {
     try {
-      await mainAxios.post('/feedback', {
-        ...data,
-        feedbackType,
-      }, {
-        headers: {
-          authorization: Cookies.get('token'),
-        }
-      });
+      switch (feedbackType) {
+        case 'normal':
+          await mainAxios.post('/feedback', {
+            ...data,
+            feedbackType,
+          }, {
+            headers: {
+              authorization: Cookies.get('token'),
+            }
+          });
+          break;
+        case 'bug':
+          await mainAxios.post('/bugreport', {
+            ...data,
+            feedbackType,
+          }, {
+            headers: {
+              authorization: Cookies.get('token'),
+            }
+          });
+          break;
+      }
+
       alert('Feedback submitted successfully!');
       feedbackForm.reset();
     } catch (error) {

@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom"
 import Dropdown from "../../../components/ui/Dropdown"
 import DeleteStaffModal from "./DeleteStaffModal"
 import EditStaffModal from "./EditStaffModal"
-// TODO modify Link to to actual staff profile
 
 const TableRow = ({staffId, image, name, country, userType, joinedDate, onDelete, onEdit}) => {
 
@@ -24,7 +22,6 @@ const TableRow = ({staffId, image, name, country, userType, joinedDate, onDelete
           <div className="text-center font-bold">{staffId}</div>
         </td>
         <td>
-          <Link to={`/admin/staff-view/${staffId}`}>
           <div className="flex items-center gap-3">
             <div className="avatar">
               <div className="mask mask-squircle h-12 w-12">
@@ -38,7 +35,6 @@ const TableRow = ({staffId, image, name, country, userType, joinedDate, onDelete
               <div className="text-sm opacity-50">{country}</div>
             </div>
           </div>
-          </Link>
         </td>
         <td>
           <span className="badge badge-ghost badge-sm">{userType}</span>

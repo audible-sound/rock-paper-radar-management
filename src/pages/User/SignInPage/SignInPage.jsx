@@ -75,6 +75,9 @@ const SignInPage = () => {
                 <Link to="/user/signup" className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center fle x items-center justify-center">
                   Sign Up
                 </Link>
+                <Link to="/" className="w-full text-[#7091E6] my-2 bg-white font-semibold border-2 border-[#7091E6] rounded-md p-2 text-center flex items-center justify-center">
+                  Go back to landing page
+                </Link>
               </div>
             </div>
           </form>
