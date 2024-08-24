@@ -32,6 +32,7 @@ import FeedbackManagementPage from "./pages/Admin/FeedbackManagement/FeedbackMan
 import EditUserGuide from "./components/UserGuide/EditUserGuide.jsx";
 import FeedbackSingleView from "./components/Feedback/FeedbackSingleView.jsx";
 import BugReportSingleView from "./components/Feedback/BugReportSingleView.jsx";
+import ReportManagementPage from "./pages/Admin/ReportManagement/ReportManagementPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -153,6 +154,11 @@ const router = createBrowserRouter([
   {
     path: "/admin/blog-create",
     element: <WriteBlogPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/admin/report-management",
+    element: <ReportManagementPage />,
     errorElement: <ErrorPage />,
   },
   {
