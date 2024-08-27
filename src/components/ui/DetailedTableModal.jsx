@@ -42,7 +42,7 @@ const DetailedTableModal = ({ isOpen, onClose, data, type }) => {
                     </table>
                 </div>
             );
-        } else if (['active', 'banned'].includes(type)) {
+        } else if (['active'].includes(type)) {
             const users = Array.isArray(data) ? data.flatMap(item => item.users || []) : (data.users || []);
             return (
                 <div className="max-h-96 overflow-y-auto">
@@ -62,7 +62,7 @@ const DetailedTableModal = ({ isOpen, onClose, data, type }) => {
                             {users.map((user, index) => (
                                 <tr key={index}>
                                     <td>{user.id}</td>
-                                    <td><img src={user.profilePictureUrl} alt="Profile" className="w-10 h-10 rounded-full"/></td>
+                                    <td><img src={user.profilePicture} alt="Profile" className="w-10 h-10 rounded-full"/></td>
                                     <td>{user.username}</td>
                                     <td>{user.email}</td>
                                     <td>{user.gender}</td>
@@ -130,19 +130,51 @@ const DetailedTableModal = ({ isOpen, onClose, data, type }) => {
                     </table>
                 </div>
             );
+        } else if (type === 'banned') {
+            return (
+                <div className="max-h-96 overflow-y-auto">
+                    <table className="table w-full">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Profile Picture</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Joined Date</th>
+                                <th>Banned Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {Object.entries(data).flatMap(([month, users]) =>
+                                users.map((user, index) => (
+                                    <tr key={`${month}-${index}`}>
+                                        <td>{user.id}</td>
+                                        <td><img src={user.profilePictureUrl} alt="Profile" className="w-10 h-10 rounded-full"/></td>
+                                        <td>{user.username}</td>
+                                        <td>{user.email}</td>
+                                        <td>{new Date(user.joinedDate).toLocaleDateString()}</td>
+                                        <td>{new Date(user.bannedDate).toLocaleDateString()}</td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            );
         } else {
+            console.log(data)
             return (
                 <table className="table w-full">
                     <thead>
                         <tr>
-                            <th>Date</th>
+                            <th>Tag</th>
                             <th>Count</th>
                         </tr>
                     </thead>
                     <tbody>
                         {Array.isArray(data) && data.map((item, index) => (
                             <tr key={index}>
-                                <td>{new Date(item.month || item.year || item.createdAt).toLocaleDateString()}</td>
+                                <td>{item.name}</td>
                                 <td>{item.count}</td>
                             </tr>
                         ))}

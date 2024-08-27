@@ -19,6 +19,9 @@ import CreateUserGuide from './pages/admin/CreateUserGuide';
 import ViewUserGuide from './pages/admin/ViewUserGuide';
 import UserPosts from './pages/admin/UserPosts';
 import ViewPostPage from './pages/admin/PostPage';
+import StaffUserGuide from './pages/staff/StaffUserGuide';
+import ReportManagementPage from './pages/staff/ReportManagementPage';
+import StaffPostPage from './pages/staff/PostPage';
 
 function App() {
   return (
@@ -95,6 +98,11 @@ function App() {
               <Feedback />
             </ProtectedRoute>
           } />
+          <Route path="/staff/user-guide" element={
+            <ProtectedRoute requiredRole="staff">
+              <StaffUserGuide />
+            </ProtectedRoute>
+          } />
           <Route path="/admin/user-guide" element={
             <ProtectedRoute requiredRole="admin">
               <ViewUserGuide isUser={false} />
@@ -113,6 +121,16 @@ function App() {
           <Route path="/admin/post-view" element={
             <ProtectedRoute requiredRole="admin">
               <ViewPostPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/staff/report-management" element={
+            <ProtectedRoute requiredRole="staff">
+              <ReportManagementPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/staff/post-view" element={
+            <ProtectedRoute requiredRole="staff">
+              <StaffPostPage />
             </ProtectedRoute>
           } />
           <Route path="*" element={<NotFound />} />

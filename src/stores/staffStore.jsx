@@ -18,6 +18,9 @@ const staffStore = create((set, get) => ({
     blogs: null,
     communityPosts: null,
     postDetails: null,
+    reportComment: null,
+    reportUser: null,
+    reportPost: null,
     setLogin: (value) => set({ isLogin: value }),
     setProfilePictureUrl: (value) => set({ profilePictureUrl: value }),
     setUsername: (value) => set({ username: value }),
@@ -228,6 +231,98 @@ const staffStore = create((set, get) => ({
             console.log(error);
         }
     },
+    getReportComment: async () => {
+        try {
+            const response = await mainAxios.get(`/staff/reportComment`, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                }
+            });
+            set({ reportComment: response.data.data});
+        } catch (error) {
+            set({ reportComment: error });
+        }
+    },
+    getReportUser: async () => {
+        try {
+            const response = await mainAxios.get(`/staff/reportUser`, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                }
+            });
+            set({ reportUser: response.data.data});
+        } catch (error) {
+            set({ reportUser: error });
+        }
+    },
+    getReportPost: async () => {
+        try {
+            const response = await mainAxios.get(`/staff/reportPost`, {
+                headers: {
+                    authorization: Cookies.get('token'),
+                }
+            });
+            console.log(response);
+            set({ reportPost: response.data.data});
+        } catch (error) {
+            set({ reportPost: error });
+        }
+    },
+    updateReportPostState: async (state) => {
+        try {
+            const response = await mainAxios.put(`/staff/reportPost`,
+                {
+                    state: state.state,
+                    reportId: state.reportId
+                },
+                {
+                headers: {
+                    authorization: Cookies.get('token'),
+                }
+            });
+            console.log(response);
+            set({ reportPost: response.data.data});
+        } catch (error) {
+            set({ reportPost: error });
+        }
+    },
+    updateReportCommentState: async (state) => {
+        try {
+            console.log(state, "============ axios");
+            const response = await mainAxios.put(`/staff/reportComment`,
+                {
+                    state: state.state,
+                    reportId: state.reportId
+                },
+                {
+                headers: {
+                    authorization: Cookies.get('token'),
+                }
+            });
+            console.log(response);
+            set({ reportPost: response.data.data});
+        } catch (error) {
+            set({ reportPost: error });
+        }
+    },
+    updateReportUserState: async (state) => {
+        try {
+            const response = await mainAxios.put(`/staff/reportUser`,
+                {
+                    state: state.state,
+                    reportId: state.reportId
+                },
+                {
+                headers: {
+                    authorization: Cookies.get('token'),
+                }
+            });
+            console.log(response);
+            set({ reportPost: response.data.data});
+        } catch (error) {
+            set({ reportPost: error });
+        }
+    }
 }))
 
 export default staffStore;
